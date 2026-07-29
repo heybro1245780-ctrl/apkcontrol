@@ -627,194 +627,9 @@
         </div>
     </div>
 
-    <!-- Quick Actions Toolbar & Search -->
-    <div class="toolbar">
-        <div class="preset-bar">
-            <button class="preset-btn rage" onclick="applyPreset('rage')">⚡ Rage Mode</button>
-            <button class="preset-btn legit" onclick="applyPreset('legit')">🛡️ Legit Mode</button>
-            <button class="preset-btn reset" onclick="applyPreset('off')">🛑 Disable All</button>
-        </div>
-        <div class="search-box">
-            <input type="text" id="search-input" placeholder="🔍 Search features..." oninput="filterFeatures()">
-        </div>
-    </div>
+    <!-- Remote Admin Dashboard Container -->
+    <div class="dashboard-grid" style="grid-template-columns: 1fr; max-width: 800px; margin: 0 auto 24px auto;">
 
-    <!-- Dashboard Feature Cards -->
-    <div class="dashboard-grid">
-
-        <!-- Combat & Targeting Card -->
-        <div class="card" data-category="combat">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="card-title-icon">🎯</span> Combat & Targeting
-                </div>
-                <span class="badge-count">7 Features</span>
-            </div>
-
-            <div class="feature-item" data-name="aimbot lock">
-                <div class="feature-info">
-                    <span class="feature-name">Aimbot Lock</span>
-                    <span class="feature-code">CODE: 501</span>
-                </div>
-                <label class="switch"><input type="checkbox" id="code-501"
-                        onchange="sendFeature(501, this.checked)"><span class="slider"></span></label>
-            </div>
-
-            <div class="feature-item" data-name="silent aim aimkill">
-                <div class="feature-info">
-                    <span class="feature-name">Silent Aim / AimKill</span>
-                    <span class="feature-code">CODE: 502</span>
-                </div>
-                <label class="switch"><input type="checkbox" id="code-502"
-                        onchange="sendFeature(502, this.checked)"><span class="slider"></span></label>
-            </div>
-
-            <div class="feature-item" data-name="target all enemies">
-                <div class="feature-info">
-                    <span class="feature-name">Target All Enemies</span>
-                    <span class="feature-code">CODE: 528</span>
-                </div>
-                <label class="switch"><input type="checkbox" id="code-528"
-                        onchange="sendFeature(528, this.checked)"><span class="slider"></span></label>
-            </div>
-
-            <div class="feature-item" data-name="safe aimkill">
-                <div class="feature-info">
-                    <span class="feature-name">Safe AimKill</span>
-                    <span class="feature-code">CODE: 512</span>
-                </div>
-                <label class="switch"><input type="checkbox" id="code-512"
-                        onchange="sendFeature(512, this.checked)"><span class="slider"></span></label>
-            </div>
-
-            <div class="feature-item" data-name="down aimkill">
-                <div class="feature-info">
-                    <span class="feature-name">Down AimKill</span>
-                    <span class="feature-code">CODE: 504</span>
-                </div>
-                <label class="switch"><input type="checkbox" id="code-504"
-                        onchange="sendFeature(504, this.checked)"><span class="slider"></span></label>
-            </div>
-
-            <div class="feature-item" data-name="dive kill">
-                <div class="feature-info">
-                    <span class="feature-name">Dive Kill New</span>
-                    <span class="feature-code">CODE: 5660</span>
-                </div>
-                <label class="switch"><input type="checkbox" id="code-5660"
-                        onchange="sendFeature(5660, this.checked)"><span class="slider"></span></label>
-            </div>
-
-            <div class="feature-item" data-name="aim body lock">
-                <div class="feature-info">
-                    <span class="feature-name">Aim Body Lock</span>
-                    <span class="feature-code">CODE: 500</span>
-                </div>
-                <label class="switch"><input type="checkbox" id="code-500"
-                        onchange="sendFeature(500, this.checked)"><span class="slider"></span></label>
-            </div>
-        </div>
-
-        <!-- Exploits & Movement Card -->
-        <div class="card" data-category="movement">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="card-title-icon">⚡</span> Exploits & Movement
-                </div>
-                <span class="badge-count">5 Features</span>
-            </div>
-
-            <div class="feature-item" data-name="invisible player football">
-                <div class="feature-info">
-                    <span class="feature-name">Invisible Player / Football</span>
-                    <span class="feature-code">CODE: 513</span>
-                </div>
-                <label class="switch"><input type="checkbox" id="code-513"
-                        onchange="sendFeature(513, this.checked)"><span class="slider"></span></label>
-            </div>
-
-            <div class="feature-item" data-name="80 unit teleport fly">
-                <div class="feature-info">
-                    <span class="feature-name">80-Unit Teleport Fly</span>
-                    <span class="feature-code">CODE: 5659</span>
-                </div>
-                <label class="switch"><input type="checkbox" id="code-5659"
-                        onchange="sendFeature(5659, this.checked)"><span class="slider"></span></label>
-            </div>
-
-            <div class="feature-item" data-name="speed hack extension">
-                <div class="feature-info">
-                    <span class="feature-name">Speed Hack Extension</span>
-                    <span class="feature-code">CODE: 1060</span>
-                </div>
-                <label class="switch"><input type="checkbox" id="code-1060"
-                        onchange="sendFeature(1060, this.checked)"><span class="slider"></span></label>
-            </div>
-
-            <div class="feature-item" data-name="auto jump">
-                <div class="feature-info">
-                    <span class="feature-name">Auto Jump</span>
-                    <span class="feature-code">CODE: 522</span>
-                </div>
-                <label class="switch"><input type="checkbox" id="code-522"
-                        onchange="sendFeature(522, this.checked)"><span class="slider"></span></label>
-            </div>
-
-            <div class="feature-item" data-name="ghost mode">
-                <div class="feature-info">
-                    <span class="feature-name">Ghost Player Mode</span>
-                    <span class="feature-code">CODE: 505</span>
-                </div>
-                <label class="switch"><input type="checkbox" id="code-505"
-                        onchange="sendFeature(505, this.checked)"><span class="slider"></span></label>
-            </div>
-        </div>
-
-        <!-- ESP & Visuals Card -->
-        <div class="card" data-category="visuals">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="card-title-icon">👁️</span> Visuals & ESP
-                </div>
-                <span class="badge-count">4 Features</span>
-            </div>
-
-            <div class="feature-item" data-name="wallhack esp box">
-                <div class="feature-info">
-                    <span class="feature-name">2D Box ESP</span>
-                    <span class="feature-code">CODE: 101</span>
-                </div>
-                <label class="switch"><input type="checkbox" id="code-101"
-                        onchange="sendFeature(101, this.checked)"><span class="slider"></span></label>
-            </div>
-
-            <div class="feature-item" data-name="esp line tracer">
-                <div class="feature-info">
-                    <span class="feature-name">Line Tracer ESP</span>
-                    <span class="feature-code">CODE: 102</span>
-                </div>
-                <label class="switch"><input type="checkbox" id="code-102"
-                        onchange="sendFeature(102, this.checked)"><span class="slider"></span></label>
-            </div>
-
-            <div class="feature-item" data-name="health bar esp">
-                <div class="feature-info">
-                    <span class="feature-name">Health Bar ESP</span>
-                    <span class="feature-code">CODE: 103</span>
-                </div>
-                <label class="switch"><input type="checkbox" id="code-103"
-                        onchange="sendFeature(103, this.checked)"><span class="slider"></span></label>
-            </div>
-
-            <div class="feature-item" data-name="distance skeleton esp">
-                <div class="feature-info">
-                    <span class="feature-name">Distance & Name ESP</span>
-                    <span class="feature-code">CODE: 104</span>
-                </div>
-                <label class="switch"><input type="checkbox" id="code-104"
-                        onchange="sendFeature(104, this.checked)"><span class="slider"></span></label>
-            </div>
-        </div>
 
         <!-- Remote Admin Authority Card -->
         <div class="card" data-category="admin">
@@ -827,16 +642,19 @@
 
             <!-- APK STOP / START MAINTENANCE CONTROLS -->
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px;">
-                <button class="admin-action-btn btn-crash" style="background: linear-gradient(135deg, #dc2626, #991b1b);" onclick="controlApkService('stop')">
+                <button class="admin-action-btn btn-crash"
+                    style="background: linear-gradient(135deg, #dc2626, #991b1b);" onclick="controlApkService('stop')">
                     🛑 STOP APK
                 </button>
-                <button class="admin-action-btn btn-freeze" style="background: linear-gradient(135deg, #10b981, #059669);" onclick="controlApkService('start')">
+                <button class="admin-action-btn btn-freeze"
+                    style="background: linear-gradient(135deg, #10b981, #059669);" onclick="controlApkService('start')">
                     ▶️ START APK
                 </button>
             </div>
 
             <div class="msg-box" style="margin-top: 4px; margin-bottom: 12px;">
-                <input type="text" id="maintenance-msg" value="Update APK Please Wait" placeholder="Maintenance message for APK users...">
+                <input type="text" id="maintenance-msg" value="Update APK Please Wait"
+                    placeholder="Maintenance message for APK users...">
             </div>
 
             <button class="admin-action-btn btn-crash" onclick="sendFeature(9999, 1)">
@@ -882,23 +700,23 @@
         function getDefaultWsUrl() {
             const stored = localStorage.getItem('custom_ws_url');
             if (stored && stored.trim() !== '') {
+                // Clean legacy stored URL if it incorrectly has :8080 on HTTPS domain
+                if (stored.startsWith('wss://') && stored.includes(':8080')) {
+                    const cleaned = stored.replace(':8080', '');
+                    localStorage.setItem('custom_ws_url', cleaned);
+                    return cleaned;
+                }
                 return stored.trim();
             }
 
-            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-            let host = window.location.host;
-
-            // If hosted as a raw file or without host port in dev, default to port 8080
-            if (!host || window.location.protocol === 'file:') {
+            if (!window.location.host || window.location.protocol === 'file:') {
                 return 'ws://localhost:8080';
             }
-            if (!host.includes(':') && window.location.port === '') {
-                // If running on custom static domain without port specified, append standard socket path or :8080
-                return `${protocol}//${window.location.hostname}:8080`;
-            }
 
-            return `${protocol}//${host}`;
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            return `${protocol}//${window.location.host}`;
         }
+
 
         function initDashboard() {
             const urlInput = document.getElementById('custom-ws-url');
