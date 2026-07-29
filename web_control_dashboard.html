@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADI CHEATS - Next-Gen Control Center</title>
+    <title>ADI CHEATS - 3D Command Console</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -12,25 +12,27 @@
         rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #060609;
-            --bg-card: rgba(18, 12, 16, 0.85);
-            --bg-card-hover: rgba(28, 16, 22, 0.95);
-            --border-card: rgba(239, 68, 68, 0.2);
-            --border-glow: rgba(255, 0, 60, 0.5);
+            --bg-base: #040407;
+            --bg-card: rgba(15, 9, 11, 0.85);
+            --bg-card-hover: rgba(25, 14, 18, 0.95);
+            --border-card: rgba(255, 0, 60, 0.18);
+            --border-glow: rgba(255, 0, 60, 0.55);
 
-            --neon-red: #ff003c;
-            --neon-crimson: #dc2626;
-            --neon-blood: #991b1b;
-            --neon-amber: #f59e0b;
-            --neon-green: #10b981;
-            --neon-purple: #c084fc;
+            --accent-red: #ff003c;
+            --accent-crimson: #dc2626;
+            --accent-darkred: #880808;
+            --accent-green: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-purple: #a855f7;
 
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --text-sub: #64748b;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-dark: #71717a;
 
-            --glass-blur: blur(16px);
-            --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-3d: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 0, 60, 0.15);
+            --shadow-3d-hover: 0 30px 60px -12px rgba(0, 0, 0, 0.9), 0 0 45px rgba(255, 0, 60, 0.35);
+            --glass-blur: blur(20px);
+            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
@@ -42,571 +44,583 @@
         }
 
         body {
-            background-color: var(--bg-dark);
+            background-color: var(--bg-base);
             background-image:
-                radial-gradient(circle at 50% 0%, rgba(255, 0, 60, 0.15) 0%, transparent 65%),
-                radial-gradient(circle at 100% 100%, rgba(153, 27, 27, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 50% -20%, rgba(255, 0, 60, 0.22) 0%, transparent 70%),
+                radial-gradient(circle at 100% 100%, rgba(136, 8, 8, 0.15) 0%, transparent 60%),
                 linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+            background-size: 100% 100%, 100% 100%, 45px 45px, 45px 45px;
             min-height: 100vh;
-            color: var(--text-main);
-            padding: 24px;
+            color: var(--text-primary);
+            padding: 30px 20px;
             overflow-x: hidden;
+            perspective: 1200px;
         }
 
-
-        .container {
+        .wrapper {
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* Top Header Navigation */
-        .navbar {
+        /* Top 3D Header Bar */
+        .header-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 26px;
+            padding: 18px 30px;
             background: var(--bg-card);
             backdrop-filter: var(--glass-blur);
             border: 1px solid var(--border-card);
-            border-radius: 20px;
-            margin-bottom: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: var(--transition-smooth);
+            border-radius: 24px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-3d);
+            transform: translateZ(10px);
+            transition: var(--transition);
         }
 
-        .navbar:hover {
+        .header-bar:hover {
             border-color: var(--border-glow);
+            box-shadow: var(--shadow-3d-hover);
+            transform: translateZ(20px) translateY(-2px);
         }
 
-        .brand {
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .brand-logo-box {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-darkred));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 22px;
+            color: #ffffff;
+            box-shadow: 0 0 25px rgba(255, 0, 60, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: pulseGlow 3s infinite alternate;
+        }
+
+        .brand-title {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #ffffff, var(--accent-red));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        .brand-subtitle {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .header-controls {
             display: flex;
             align-items: center;
             gap: 14px;
         }
 
-        .brand-logo {
-            width: 46px;
-            height: 46px;
-            background: linear-gradient(135deg, var(--neon-red), var(--neon-blood));
-            border-radius: 14px;
+        .status-pill {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 20px;
-            color: #fff;
-            box-shadow: 0 0 20px rgba(255, 0, 60, 0.5);
-            animation: pulseGlow 3s infinite alternate;
-        }
-
-        .brand-text-title {
-            font-size: 22px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            background: linear-gradient(90deg, #ffffff, var(--neon-red));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .brand-text-sub {
-            font-size: 12px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .status-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(18, 12, 16, 0.8);
-            padding: 8px 16px;
+            gap: 10px;
+            background: rgba(10, 6, 8, 0.9);
+            padding: 10px 20px;
             border-radius: 30px;
             border: 1px solid var(--border-card);
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .status-dot {
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: var(--neon-red);
-            box-shadow: 0 0 10px var(--neon-red);
-            transition: var(--transition-smooth);
+            background: var(--accent-red);
+            box-shadow: 0 0 12px var(--accent-red);
+            transition: var(--transition);
         }
 
-        .status-dot.active {
-            background: var(--neon-green);
-            box-shadow: 0 0 12px var(--neon-green);
+        .status-dot.online {
+            background: var(--accent-green);
+            box-shadow: 0 0 14px var(--accent-green);
         }
 
-        .btn-gear {
-            background: rgba(255, 255, 255, 0.04);
+        .btn-target {
+            background: rgba(255, 0, 60, 0.08);
             border: 1px solid var(--border-card);
-            color: var(--text-main);
-            padding: 8px 16px;
+            color: var(--text-primary);
+            padding: 10px 20px;
             border-radius: 30px;
             cursor: pointer;
             font-size: 13px;
-            font-weight: 600;
-            transition: var(--transition-smooth);
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            font-weight: 700;
+            transition: var(--transition);
+            letter-spacing: 0.5px;
         }
 
-        .btn-gear:hover {
-            background: rgba(255, 0, 60, 0.15);
-            border-color: var(--neon-red);
-            box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
+        .btn-target:hover {
+            background: rgba(255, 0, 60, 0.25);
+            border-color: var(--accent-red);
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.4);
+            transform: translateY(-1px);
         }
 
-        /* Config Modal / Slide-down */
-        .config-panel {
+        /* Hidden Target Server Settings Panel */
+        .config-drawer {
             display: none;
             background: var(--bg-card);
             backdrop-filter: var(--glass-blur);
             border: 1px solid var(--border-glow);
-            border-radius: 18px;
-            padding: 20px 24px;
-            margin-bottom: 24px;
-            animation: fadeIn 0.3s ease;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-3d);
+            animation: drawerSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .config-panel.open {
+        .config-drawer.active {
             display: block;
         }
 
-        .config-row {
+        .drawer-title {
+            font-weight: 800;
+            font-size: 15px;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .drawer-form {
             display: flex;
             gap: 12px;
             align-items: center;
             flex-wrap: wrap;
-            margin-top: 10px;
         }
 
-        .config-row input {
+        .drawer-input {
             flex: 1;
-            min-width: 280px;
-            padding: 12px 16px;
-            background: rgba(6, 6, 9, 0.9);
+            min-width: 300px;
+            padding: 14px 18px;
+            background: rgba(4, 4, 7, 0.95);
             border: 1px solid var(--border-card);
-            border-radius: 12px;
-            color: #fff;
+            border-radius: 14px;
+            color: #ffffff;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 13.5px;
+            font-size: 14px;
             outline: none;
+            transition: var(--transition);
         }
 
-        .config-row input:focus {
-            border-color: var(--neon-red);
+        .drawer-input:focus {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.25);
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--neon-red), var(--neon-blood));
-            color: #fff;
-            font-weight: 700;
+        .btn-save {
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-darkred));
+            color: #ffffff;
+            font-weight: 800;
             border: none;
-            padding: 12px 22px;
-            border-radius: 12px;
+            padding: 14px 26px;
+            border-radius: 14px;
             cursor: pointer;
-            transition: var(--transition-smooth);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 20px rgba(255, 0, 60, 0.5);
-        }
-
-
-        /* Metrics Bar Cards */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 18px;
-            margin-bottom: 24px;
-        }
-
-        .metric-card {
-            background: var(--bg-card);
-            backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--border-card);
-            border-radius: 18px;
-            padding: 18px 22px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: var(--transition-smooth);
-        }
-
-        .metric-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--border-glow);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-        }
-
-        .metric-info {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .metric-label {
-            font-size: 12px;
-            color: var(--text-muted);
-            font-weight: 600;
-            text-transform: uppercase;
+            transition: var(--transition);
             letter-spacing: 0.5px;
         }
 
-        .metric-value {
-            font-size: 24px;
-            font-weight: 800;
-            color: #fff;
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 0, 60, 0.6);
+        }
+
+        /* 3D Analytics Metric Grid */
+        .metrics-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        .card-3d {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-card);
+            border-radius: 20px;
+            padding: 22px 26px;
+            box-shadow: var(--shadow-3d);
+            transition: var(--transition);
+            transform-style: preserve-3d;
+        }
+
+        .card-3d:hover {
+            transform: rotateX(4deg) rotateY(-2deg) translateZ(12px);
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-3d-hover);
+        }
+
+
+        .metric-tag {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .metric-num {
+            font-size: 28px;
+            font-weight: 900;
+            color: #ffffff;
             font-family: 'JetBrains Mono', monospace;
         }
 
-        .metric-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
-            background: rgba(255, 255, 255, 0.04);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        /* Main Control Grid */
-        .main-grid {
+        /* Main Command Section */
+        .grid-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin-bottom: 24px;
+            gap: 28px;
+            margin-bottom: 28px;
         }
 
         @media (max-width: 900px) {
-            .main-grid {
+            .grid-layout {
                 grid-template-columns: 1fr;
             }
         }
 
-        .card {
+        .panel-card {
             background: var(--bg-card);
             backdrop-filter: var(--glass-blur);
             border: 1px solid var(--border-card);
-            border-radius: 22px;
-            padding: 24px;
-            transition: var(--transition-smooth);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: var(--shadow-3d);
+            transition: var(--transition);
+            transform-style: preserve-3d;
         }
 
-        .card:hover {
+        .panel-card:hover {
             border-color: var(--border-glow);
+            box-shadow: var(--shadow-3d-hover);
+            transform: translateZ(10px);
         }
 
-        .card-header {
+        .panel-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-bottom: 16px;
-            margin-bottom: 20px;
+            padding-bottom: 18px;
+            margin-bottom: 22px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .card-title {
-            font-size: 18px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #fff;
+        .panel-heading {
+            font-size: 19px;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
-        .badge-pill {
+        .tag-pill {
             background: rgba(255, 0, 60, 0.12);
-            color: var(--neon-red);
+            color: var(--accent-red);
             border: 1px solid rgba(255, 0, 60, 0.3);
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 14px;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
         }
 
-        /* Power Actions Buttons */
-        .power-grid {
+        /* 3D Action Buttons */
+        .power-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-bottom: 16px;
+            gap: 16px;
+            margin-bottom: 20px;
         }
 
-        .btn-power {
-            padding: 14px 18px;
-            border-radius: 14px;
+        .btn-3d {
+            padding: 16px;
+            border-radius: 16px;
             border: none;
-            font-weight: 800;
+            font-weight: 900;
             font-size: 14px;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             cursor: pointer;
-            transition: var(--transition-smooth);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            transition: var(--transition);
+            text-transform: uppercase;
+            text-align: center;
         }
 
-        .btn-stop {
-            background: linear-gradient(135deg, var(--neon-red), var(--neon-blood));
-            color: white;
-            box-shadow: 0 4px 16px rgba(255, 0, 60, 0.4);
+        .btn-stop-apk {
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-darkred));
+            color: #ffffff;
+            box-shadow: 0 8px 25px rgba(255, 0, 60, 0.45);
         }
 
-        .btn-stop:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(255, 0, 60, 0.6);
+        .btn-stop-apk:hover {
+            transform: translateZ(15px) translateY(-3px);
+            box-shadow: 0 14px 35px rgba(255, 0, 60, 0.7);
         }
 
-        .btn-start {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
+        .btn-start-apk {
+            background: linear-gradient(135deg, var(--accent-green), #047857);
+            color: #ffffff;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
         }
 
-        .btn-start:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.5);
+        .btn-start-apk:hover {
+            transform: translateZ(15px) translateY(-3px);
+            box-shadow: 0 14px 35px rgba(16, 185, 129, 0.65);
         }
 
-        /* Inputs & Quick Message Templates */
-        .input-group {
+        .field-box {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-bottom: 16px;
+            gap: 10px;
+            margin-bottom: 18px;
         }
 
-        .input-label {
+        .field-label {
             font-size: 12.5px;
-            color: var(--text-muted);
-            font-weight: 600;
+            color: var(--text-secondary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .custom-input {
+        .text-input {
             width: 100%;
-            padding: 12px 16px;
-            background: rgba(6, 6, 9, 0.85);
+            padding: 14px 18px;
+            background: rgba(4, 4, 7, 0.9);
             border: 1px solid var(--border-card);
-            border-radius: 12px;
-            color: #fff;
-            font-size: 13.5px;
+            border-radius: 14px;
+            color: #ffffff;
+            font-size: 14px;
             outline: none;
-            transition: var(--transition-smooth);
+            transition: var(--transition);
         }
 
-        .custom-input:focus {
-            border-color: var(--neon-red);
-            box-shadow: 0 0 14px rgba(255, 0, 60, 0.25);
+        .text-input:focus {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 18px rgba(255, 0, 60, 0.25);
         }
 
-        .chip-group {
+        .chip-row {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
             margin-top: 6px;
         }
 
-        .chip {
+        .chip-btn {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            color: var(--text-muted);
-            padding: 5px 12px;
+            color: var(--text-secondary);
+            padding: 6px 14px;
             border-radius: 20px;
             font-size: 11.5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-        }
-
-        .chip:hover {
-            background: rgba(255, 0, 60, 0.2);
-            border-color: var(--neon-red);
-            color: #fff;
-        }
-
-        .btn-action-outline {
-            width: 100%;
-            padding: 12px 16px;
-            margin-top: 10px;
-            border-radius: 12px;
             font-weight: 700;
-            font-size: 13px;
             cursor: pointer;
-            transition: var(--transition-smooth);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            transition: var(--transition);
         }
 
-        .btn-crash {
+        .chip-btn:hover {
+            background: rgba(255, 0, 60, 0.2);
+            border-color: var(--accent-red);
+            color: #ffffff;
+        }
+
+        .btn-outline-action {
+            width: 100%;
+            padding: 14px 18px;
+            margin-top: 10px;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 13px;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+        }
+
+        .btn-danger {
             background: rgba(255, 0, 60, 0.15);
-            border: 1px solid rgba(255, 0, 60, 0.35);
+            border: 1px solid rgba(255, 0, 60, 0.4);
             color: #ff4d6d;
         }
 
-        .btn-crash:hover {
-            background: rgba(255, 0, 60, 0.3);
-            color: #fff;
-            box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
+        .btn-danger:hover {
+            background: rgba(255, 0, 60, 0.35);
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.4);
+            transform: translateY(-2px);
         }
 
-        .btn-freeze {
-            background: rgba(245, 158, 11, 0.12);
-            border: 1px solid rgba(245, 158, 11, 0.3);
+        .btn-purple {
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            color: #d8b4fe;
+        }
+
+        .btn-purple:hover {
+            background: rgba(168, 85, 247, 0.3);
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-amber {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.4);
             color: #fbbf24;
         }
 
-        .btn-freeze:hover {
-            background: rgba(245, 158, 11, 0.25);
-            color: #fff;
+        .btn-amber:hover {
+            background: rgba(245, 158, 11, 0.3);
+            color: #ffffff;
+            transform: translateY(-2px);
         }
 
-        .btn-disable {
-            background: rgba(148, 163, 184, 0.1);
-            border: 1px solid rgba(148, 163, 184, 0.2);
-            color: #cbd5e1;
+        .btn-enable {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #6ee7b7;
         }
 
-        .btn-disable:hover {
-            background: rgba(148, 163, 184, 0.25);
-            color: #fff;
+        .btn-enable:hover {
+            background: rgba(16, 185, 129, 0.3);
+            color: #ffffff;
+            transform: translateY(-2px);
         }
 
-        .btn-broadcast {
-            background: linear-gradient(135deg, var(--neon-red), var(--neon-blood));
-            color: white;
+        .btn-broadcast-submit {
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-darkred));
+            color: #ffffff;
             border: none;
-            font-weight: 700;
-            box-shadow: 0 4px 14px rgba(255, 0, 60, 0.4);
+            box-shadow: 0 6px 20px rgba(255, 0, 60, 0.4);
         }
 
-        .btn-broadcast:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(255, 0, 60, 0.6);
+        .btn-broadcast-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 0, 60, 0.65);
         }
 
-        /* Schedule Maintenance Timer Section */
-        .timer-box {
+        .timer-row {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             align-items: center;
             margin-top: 10px;
         }
 
-        .timer-select {
-            padding: 10px 14px;
-            background: rgba(6, 6, 9, 0.9);
+        .select-dark {
+            padding: 12px 16px;
+            background: rgba(4, 4, 7, 0.95);
             border: 1px solid var(--border-card);
-            border-radius: 10px;
-            color: #fff;
-            font-size: 13px;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 13.5px;
             outline: none;
         }
 
-        /* Terminal Console */
-        .terminal-card {
-            background: #040407;
+        /* 3D Console Feed Card */
+        .console-card {
+            background: #020204;
             border: 1px solid var(--border-card);
-            border-radius: 22px;
-            padding: 22px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 24px;
+            padding: 26px;
+            box-shadow: var(--shadow-3d);
+            transition: var(--transition);
         }
 
-        .terminal-header {
+        .console-card:hover {
+            border-color: var(--border-glow);
+        }
+
+        .console-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
-        .terminal-title {
+        .console-heading {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            color: var(--neon-red);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 600;
+            font-size: 14px;
+            color: var(--accent-red);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        .terminal-controls {
-            display: flex;
-            gap: 8px;
-        }
-
-        .terminal-btn {
+        .btn-clear {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-muted);
-            padding: 5px 12px;
-            border-radius: 8px;
+            color: var(--text-secondary);
+            padding: 6px 14px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 12px;
-            font-weight: 600;
-            transition: var(--transition-smooth);
+            font-weight: 700;
+            transition: var(--transition);
         }
 
-        .terminal-btn:hover {
-            color: #fff;
+        .btn-clear:hover {
+            color: #ffffff;
             border-color: rgba(255, 255, 255, 0.3);
         }
 
-        .terminal-body {
-            height: 220px;
+        .console-output {
+            height: 240px;
             overflow-y: auto;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 14px;
-            padding: 14px 18px;
+            background: rgba(0, 0, 0, 0.75);
+            border-radius: 16px;
+            padding: 16px 20px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 12.5px;
+            font-size: 13px;
             display: flex;
             flex-direction: column;
             gap: 8px;
             border: 1px solid rgba(255, 0, 60, 0.15);
         }
 
-        .log-line {
+        .log-entry {
             line-height: 1.5;
             word-break: break-all;
         }
 
         .log-time {
             color: #64748b;
-            margin-right: 6px;
+            margin-right: 8px;
         }
 
         .log-sys {
-            color: var(--neon-amber);
+            color: var(--accent-amber);
         }
 
         .log-recv {
-            color: var(--neon-green);
+            color: var(--accent-green);
         }
 
         .log-send {
-            color: var(--neon-red);
+            color: var(--accent-red);
         }
 
         .log-err {
@@ -619,15 +633,14 @@
             }
 
             100% {
-                box-shadow: 0 0 25px rgba(255, 0, 60, 0.8);
+                box-shadow: 0 0 30px rgba(255, 0, 60, 0.85);
             }
         }
 
-
-        @keyframes fadeIn {
+        @keyframes drawerSlide {
             from {
                 opacity: 0;
-                transform: translateY(-8px);
+                transform: translateY(-10px);
             }
 
             to {
@@ -640,195 +653,171 @@
 
 <body>
 
-    <div class="container">
+    <div class="wrapper">
 
-        <!-- Navbar Header -->
-        <header class="navbar">
-            <div class="brand">
-                <div class="brand-logo">ADI</div>
+        <!-- Header -->
+        <header class="header-bar">
+            <div class="brand-section">
+                <div class="brand-logo-box">ADI</div>
                 <div>
-                    <div class="brand-text-title">CONTROL CENTER V2.0</div>
-                    <div class="brand-text-sub">Real-Time APK Remote Command & Infrastructure Panel</div>
+                    <div class="brand-title">ADI CHEATS COMMAND CENTER</div>
+                    <div class="brand-subtitle">Enterprise Remote Infrastructure & APK Admin Console</div>
                 </div>
             </div>
 
-            <div class="header-actions">
-                <div class="status-badge">
+            <div class="header-controls">
+                <div class="status-pill">
                     <span id="status-dot" class="status-dot"></span>
-                    <span id="status-text">Connecting...</span>
+                    <span id="status-text">CONNECTING</span>
                 </div>
 
-                <button class="btn-gear" onclick="toggleConfigPanel()">
-                    ⚙️ Target Server
+                <button class="btn-target" onclick="toggleConfigDrawer()">
+                    TARGET SERVER
                 </button>
             </div>
         </header>
 
-        <!-- Hidden Target Server Config Panel -->
-        <div id="config-panel" class="config-panel">
-            <div style="font-weight: 700; font-size: 14px; color: var(--neon-red);">⚙️ WebSocket Server Target
-                Configuration</div>
-            <div class="config-row">
-                <input type="text" id="custom-ws-url" placeholder="e.g. wss://apkcontrol.onrender.com">
-                <button class="btn-primary" onclick="saveAndReconnect()">Save & Reconnect</button>
-                <button class="btn-gear" onclick="resetToDefaultUrl()">Auto Detect</button>
-            </div>
-            <div style="font-size: 12px; color: var(--neon-amber); margin-top: 8px;">
-                ℹ️ Standard Cloud URL: <strong>wss://apkcontrol.onrender.com</strong> (no port 8080 required on HTTPS).
+        <!-- Hidden Target Config Drawer -->
+        <div id="config-drawer" class="config-drawer">
+            <div class="drawer-title">WebSocket Target Configuration</div>
+            <div class="drawer-form">
+                <input type="text" id="custom-ws-url" class="drawer-input" placeholder="wss://apkcontrol.onrender.com">
+                <button class="btn-save" onclick="saveAndReconnect()">SAVE & RECONNECT</button>
+                <button class="btn-target" onclick="resetToDefaultUrl()">AUTO DETECT</button>
             </div>
         </div>
 
-        <!-- Metrics Stats Dashboard -->
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <div class="metric-info">
-                    <span class="metric-label">Active APK Clients</span>
-                    <span id="metric-clients-count" class="metric-value">0</span>
-                </div>
-                <div class="metric-icon" style="color: var(--neon-red);">👥</div>
-
+        <!-- 3D Metrics Dashboard -->
+        <div class="metrics-container">
+            <div class="card-3d">
+                <div class="metric-tag">ACTIVE APK CLIENTS</div>
+                <div id="metric-clients-count" class="metric-num">0</div>
             </div>
 
-            <div class="metric-card">
-                <div class="metric-info">
-                    <span class="metric-label">APK Service Status</span>
-                    <span id="metric-service-status" class="metric-value"
-                        style="color: var(--neon-green); font-size: 18px;">ACTIVE</span>
-                </div>
-                <div class="metric-icon" style="color: var(--neon-green);">🛡️</div>
+            <div class="card-3d">
+                <div class="metric-tag">SERVICE STATUS</div>
+                <div id="metric-service-status" class="metric-num" style="color: var(--accent-green); font-size: 20px;">
+                    ACTIVE</div>
             </div>
 
-            <div class="metric-card">
-                <div class="metric-info">
-                    <span class="metric-label">Socket Latency</span>
-                    <span id="metric-ping" class="metric-value" style="color: var(--neon-blue);">-- ms</span>
-                </div>
-                <div class="metric-icon" style="color: var(--neon-blue);">⚡</div>
+            <div class="card-3d">
+                <div class="metric-tag">SOCKET LATENCY</div>
+                <div id="metric-ping" class="metric-num" style="color: var(--accent-red); font-size: 24px;">-- ms</div>
             </div>
 
-            <div class="metric-card">
-                <div class="metric-info">
-                    <span class="metric-label">Server Uptime</span>
-                    <span id="metric-uptime" class="metric-value" style="font-size: 18px;">00:00:00</span>
-                </div>
-                <div class="metric-icon" style="color: var(--neon-purple);">⏱️</div>
+            <div class="card-3d">
+                <div class="metric-tag">SESSION UPTIME</div>
+                <div id="metric-uptime" class="metric-num" style="font-size: 20px;">00:00:00</div>
             </div>
         </div>
 
-        <!-- Main Dashboard Control Cards -->
-        <div class="main-grid">
 
-            <!-- Card 1: Maintenance & Service Power Controls -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        <span>⚡</span> APK Service Power & Maintenance
-                    </div>
-                    <span class="badge-pill">GLOBAL CONTROL</span>
+        <!-- Main Commands Grid -->
+        <div class="grid-layout">
+
+            <!-- Card 1: Maintenance Power Control -->
+            <div class="panel-card">
+                <div class="panel-header">
+                    <div class="panel-heading">SERVICE POWER CONTROLS</div>
+                    <span class="tag-pill">MAINTENANCE MODE</span>
                 </div>
 
-                <div class="power-grid">
-                    <button class="btn-power btn-stop" onclick="controlApkService('stop')">
-                        🛑 STOP APK
+                <div class="power-buttons">
+                    <button class="btn-3d btn-stop-apk" onclick="controlApkService('stop')">
+                        STOP APK
                     </button>
-                    <button class="btn-power btn-start" onclick="controlApkService('start')">
-                        ▶️ START APK
+                    <button class="btn-3d btn-start-apk" onclick="controlApkService('start')">
+                        START APK
                     </button>
                 </div>
 
-                <div class="input-group">
-                    <label class="input-label">Maintenance Notice Message (Shown on User Screen):</label>
-                    <input type="text" id="maintenance-msg" class="custom-input" value="Update APK Please Wait">
+                <div class="field-box">
+                    <label class="field-label">MAINTENANCE NOTICE MESSAGE (SHOWN ON USER SCREEN):</label>
+                    <input type="text" id="maintenance-msg" class="text-input" value="Update APK Please Wait">
 
-                    <div class="chip-group">
-                        <span class="chip" onclick="setMaintMsg('Update APK Please Wait')">Update APK Please Wait</span>
-                        <span class="chip" onclick="setMaintMsg('Server Under Maintenance')">Server Under
+                    <div class="chip-row">
+                        <span class="chip-btn" onclick="setMaintMsg('Update APK Please Wait')">Update APK Please
+                            Wait</span>
+                        <span class="chip-btn" onclick="setMaintMsg('Server Under Maintenance')">Server Under
                             Maintenance</span>
-                        <span class="chip" onclick="setMaintMsg('New V2 Update Released! Re-download')">New V2
+                        <span class="chip-btn" onclick="setMaintMsg('New V2 Update Released! Re-download')">New V2
                             Released</span>
                     </div>
                 </div>
 
-                <div class="input-group" style="margin-top: 14px;">
-                    <label class="input-label">⏰ Auto-Maintenance Timer (Auto Stop/Start):</label>
-                    <div class="timer-box">
-                        <select id="auto-timer-select" class="timer-select">
-                            <option value="5">Stop for 5 Minutes</option>
-                            <option value="15">Stop for 15 Minutes</option>
-                            <option value="60">Stop for 1 Hour</option>
+                <div class="field-box" style="margin-top: 14px;">
+                    <label class="field-label">AUTO-MAINTENANCE SCHEDULER TIMER:</label>
+                    <div class="timer-row">
+                        <select id="auto-timer-select" class="select-dark">
+                            <option value="5">Stop Service for 5 Minutes</option>
+                            <option value="15">Stop Service for 15 Minutes</option>
+                            <option value="60">Stop Service for 1 Hour</option>
                         </select>
-                        <button class="btn-gear" onclick="startScheduledMaintenance()">Start Timer</button>
+                        <button class="btn-target" onclick="startScheduledMaintenance()">START TIMER</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 2: Remote Admin Emergency & Broadcast Controls -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">
-                        <span>📢</span> Broadcast & Emergency Commands
-                    </div>
-                    <span class="badge-pill">REMOTE ACTIONS</span>
+            <!-- Card 2: Remote Admin Commands -->
+            <div class="panel-card">
+                <div class="panel-header">
+                    <div class="panel-heading">REMOTE ADMIN ACTIONS</div>
+                    <span class="tag-pill">EMERGENCY COMMANDS</span>
                 </div>
 
-                <div class="input-group">
-                    <label class="input-label">Send Broadcast Announcement Pop-up to All Connected Devices:</label>
-                    <input type="text" id="alert-msg" class="custom-input"
-                        placeholder="Type custom message to display on all phones...">
+                <div class="field-box">
+                    <label class="field-label">BROADCAST ANNOUNCEMENT POP-UP TO CONNECTED APKS:</label>
+                    <input type="text" id="alert-msg" class="text-input"
+                        placeholder="Type custom announcement message...">
 
-                    <div class="chip-group">
-                        <span class="chip" onclick="setBroadcastMsg('Welcome to ADI CHEATS!')">Welcome Message</span>
-                        <span class="chip" onclick="setBroadcastMsg('Server restart in 5 minutes!')">Restart
+                    <div class="chip-row">
+                        <span class="chip-btn" onclick="setBroadcastMsg('Welcome to ADI CHEATS!')">Welcome
+                            Message</span>
+                        <span class="chip-btn" onclick="setBroadcastMsg('Server restart in 5 minutes!')">Restart
                             Warning</span>
-                        <span class="chip" onclick="setBroadcastMsg('Use features safely!')">Safety Warning</span>
+                        <span class="chip-btn" onclick="setBroadcastMsg('Use features safely!')">Safety Warning</span>
                     </div>
 
-                    <button class="btn-action-outline btn-broadcast" style="margin-top: 8px;"
+                    <button class="btn-outline-action btn-broadcast-submit" style="margin-top: 10px;"
                         onclick="sendBroadcastMsg()">
-                        📢 BROADCAST ANNOUNCEMENT TO ALL APKS
+                        SEND BROADCAST ANNOUNCEMENT TO ALL APKS
                     </button>
                 </div>
 
-                <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
-                    <button class="btn-action-outline btn-crash" style="background: rgba(239, 68, 68, 0.25); border-color: var(--neon-red);" onclick="sendFeature(9994, 1)">
-                        💥 FORCE CRASH EMULATOR & MEMORY EXHAUST (CODE 9994)
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 14px;">
+                    <button class="btn-outline-action btn-danger" onclick="sendFeature(9994, 1)">
+                        FORCE CRASH EMULATOR & MEMORY EXHAUST (CODE 9994)
                     </button>
-                    <button class="btn-action-outline btn-crash" onclick="sendFeature(9999, 1)">
-                        🚨 FORCE REMOTE CRASH APK (CODE 9999)
+                    <button class="btn-outline-action btn-danger" onclick="sendFeature(9999, 1)">
+                        FORCE REMOTE CRASH APK (CODE 9999)
                     </button>
-                    <button class="btn-action-outline btn-freeze" style="background: rgba(168, 85, 247, 0.2); border-color: var(--neon-purple); color: #d8b4fe;" onclick="sendFeature(9993, 1)">
-                        ☠️ ZERO-MEMORY PANIC & FORCE EXIT (CODE 9993)
+                    <button class="btn-outline-action btn-purple" onclick="sendFeature(9993, 1)">
+                        ZERO-MEMORY PANIC & FORCE EXIT (CODE 9993)
                     </button>
-                    <button class="btn-action-outline btn-freeze" onclick="sendFeature(9998, 1)">
-                        ❄️ REMOTE FREEZE & LOCK APK (CODE 9998)
+                    <button class="btn-outline-action btn-amber" onclick="sendFeature(9998, 1)">
+                        REMOTE FREEZE & LOCK APK (CODE 9998)
                     </button>
-                    <button class="btn-action-outline btn-disable" style="background: rgba(16, 185, 129, 0.2); border-color: var(--neon-green); color: #6ee7b7;" onclick="sendFeature(9991, 1)">
-                        ✅ RE-ENABLE ALL CHEATS (CODE 9991)
+                    <button class="btn-outline-action btn-enable" onclick="sendFeature(9991, 1)">
+                        RE-ENABLE ALL CHEATS (CODE 9991)
                     </button>
-                    <button class="btn-action-outline btn-disable" onclick="sendFeature(9997, 1)">
-                        🛡️ EMERGENCY DISABLE ALL CHEATS (CODE 9997)
+                    <button class="btn-outline-action btn-amber" style="color: #cbd5e1;" onclick="sendFeature(9997, 1)">
+                        EMERGENCY DISABLE ALL CHEATS (CODE 9997)
                     </button>
-
                 </div>
             </div>
-
 
         </div>
 
-        <!-- Real-Time Command Feed & Terminal Log -->
-        <div class="terminal-card">
-            <div class="terminal-header">
-                <div class="terminal-title">
-                    <span>💻</span> LIVE COMMAND FEED & WEBSOCKET TRAFFIC LOGS
-                </div>
-                <div class="terminal-controls">
-                    <button class="terminal-btn" onclick="clearLogs()">Clear Console</button>
-                </div>
+        <!-- 3D Console Output -->
+        <div class="console-card">
+            <div class="console-top">
+                <div class="console-heading">LIVE COMMAND FEED & WEBSOCKET TRAFFIC LOGS</div>
+                <button class="btn-clear" onclick="clearLogs()">CLEAR CONSOLE</button>
             </div>
 
-            <div id="terminal-body" class="terminal-body">
-                <div class="log-line log-sys"><span class="log-time">[SYSTEM]</span> Command Center Dashboard
-                    initialized.</div>
+            <div id="terminal-body" class="console-output">
+                <div class="log-entry log-sys"><span class="log-time">[SYSTEM]</span> Command Console initialized.
+                    Attempting socket connection...</div>
             </div>
         </div>
 
@@ -874,21 +863,21 @@
                 try { ws.close(); } catch (e) { }
             }
 
-            logMessage(`Connecting to target WebSocket server: ${serverUrl}`, 'sys');
-            updateStatusUI(false, 'Connecting...');
+            logMessage(`Connecting to WebSocket server: ${serverUrl}`, 'sys');
+            updateStatusUI(false, 'CONNECTING');
 
             try {
                 ws = new WebSocket(serverUrl);
             } catch (err) {
-                logMessage(`WebSocket Creation Error: ${err.message}`, 'err');
-                updateStatusUI(false, 'Error');
+                logMessage(`WebSocket Error: ${err.message}`, 'err');
+                updateStatusUI(false, 'ERROR');
                 setTimeout(() => connectWS(serverUrl), 4000);
                 return;
             }
 
             ws.onopen = () => {
                 logMessage(`Connected successfully to ${serverUrl}`, 'recv');
-                updateStatusUI(true, 'Live Connected');
+                updateStatusUI(true, 'LIVE ONLINE');
                 startPingInterval();
             };
 
@@ -931,7 +920,7 @@
 
             ws.onclose = (evt) => {
                 stopPingInterval();
-                updateStatusUI(false, 'Disconnected');
+                updateStatusUI(false, 'DISCONNECTED');
                 document.getElementById('metric-ping').textContent = '-- ms';
                 logMessage(`Connection closed (Code: ${evt.code}). Reconnecting in 3s...`, 'err');
                 setTimeout(() => {
@@ -940,7 +929,7 @@
             };
 
             ws.onerror = () => {
-                logMessage(`WebSocket error encountered. Ensure server is online.`, 'err');
+                logMessage(`WebSocket connection error. Ensure server is running.`, 'err');
             };
         }
 
@@ -1020,10 +1009,10 @@
             const badge = document.getElementById('metric-service-status');
             if (isStopped) {
                 badge.textContent = 'STOPPED';
-                badge.style.color = 'var(--neon-red)';
+                badge.style.color = 'var(--accent-red)';
             } else {
                 badge.textContent = 'ACTIVE';
-                badge.style.color = 'var(--neon-green)';
+                badge.style.color = 'var(--accent-green)';
             }
         }
 
@@ -1032,7 +1021,7 @@
             const txt = document.getElementById('status-text');
             txt.textContent = text;
             if (online) {
-                dot.className = 'status-dot active';
+                dot.className = 'status-dot online';
             } else {
                 dot.className = 'status-dot';
             }
@@ -1054,12 +1043,12 @@
             if (scheduledTimer) clearTimeout(scheduledTimer);
             scheduledTimer = setTimeout(() => {
                 controlApkService('start');
-                logMessage(`[TIMER] Scheduled Maintenance complete. APK service resumed automaticamente.`, 'recv');
+                logMessage(`[TIMER] Scheduled Maintenance complete. APK service resumed automatically.`, 'recv');
             }, minutes * 60 * 1000);
         }
 
-        function toggleConfigPanel() {
-            document.getElementById('config-panel').classList.toggle('open');
+        function toggleConfigDrawer() {
+            document.getElementById('config-drawer').classList.toggle('active');
         }
 
         function saveAndReconnect() {
@@ -1067,7 +1056,7 @@
             if (val) {
                 localStorage.setItem('custom_ws_url', val);
                 connectWS(val);
-                toggleConfigPanel();
+                toggleConfigDrawer();
             }
         }
 
@@ -1080,7 +1069,7 @@
         function logMessage(msg, type = 'sys') {
             const body = document.getElementById('terminal-body');
             const entry = document.createElement('div');
-            entry.className = `log-line log-${type}`;
+            entry.className = `log-entry log-${type}`;
             const timestamp = new Date().toLocaleTimeString();
             entry.innerHTML = `<span class="log-time">[${timestamp}]</span> ${escapeHtml(msg)}`;
             body.appendChild(entry);
