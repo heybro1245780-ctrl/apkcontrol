@@ -4,58 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADI CHEATS — Command Center</title>
-    <meta name="description" content="ADI CHEATS Multi-Tenant Remote Web Control Command Center">
+    <title>ADI CHEATS — Enterprise Command Center</title>
+    <meta name="description" content="ADI CHEATS Professional Multi-Tenant Remote Control Command Center">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
         rel="stylesheet">
 
     <style>
-        /* ─────────────────────────────── TOKENS ──────────────────────────────── */
+        /* ─────────────────────────────── COLOR PALETTE & DESIGN SYSTEM ──────────────────────────────── */
         :root {
-            --void: #03030a;
-            --surface-1: rgba(10, 8, 22, 0.92);
-            --surface-2: rgba(16, 12, 32, 0.88);
-            --surface-3: rgba(22, 16, 44, 0.95);
+            --bg-void: #030204;
+            --surface-1: rgba(13, 5, 8, 0.94);
+            --surface-2: rgba(20, 8, 13, 0.90);
+            --surface-3: rgba(30, 10, 17, 0.96);
 
-            --violet: #7c3aed;
-            --violet-light: #8b5cf6;
-            --violet-glow: rgba(124, 58, 237, 0.45);
-            --pink: #db2777;
-            --pink-glow: rgba(219, 39, 119, 0.4);
-            --cyan: #0891b2;
-            --cyan-light: #06b6d4;
-            --green: #059669;
-            --green-light: #10b981;
-            --amber: #d97706;
-            --amber-light: #f59e0b;
-            --red: #dc2626;
-            --red-light: #ef4444;
-            --blue: #2563eb;
-            --blue-light: #3b82f6;
+            --accent-red: #ff003c;
+            --accent-crimson: #e11d48;
+            --accent-darkred: #880808;
+            --accent-red-glow: rgba(255, 0, 60, 0.4);
 
-            --border-dim: rgba(139, 92, 246, 0.14);
-            --border-mid: rgba(139, 92, 246, 0.32);
-            --border-bright: rgba(139, 92, 246, 0.7);
+            --accent-green: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-blue: #3b82f6;
+            --accent-purple: #a855f7;
+            --accent-cyan: #06b6d4;
 
-            --text-1: #f0eeff;
-            --text-2: #94a3b8;
-            --text-3: #4b5563;
+            --border-dim: rgba(255, 0, 60, 0.16);
+            --border-mid: rgba(255, 0, 60, 0.38);
+            --border-bright: rgba(255, 0, 60, 0.75);
 
-            --blur-glass: blur(28px) saturate(200%);
-            --ease: cubic-bezier(0.16, 1, 0.3, 1);
-            --tr-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-            --tr: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --text-1: #ffffff;
+            --text-2: #a1a1aa;
+            --text-3: #52525b;
 
-            --shadow-sm: 0 4px 24px -4px rgba(0, 0, 0, 0.65);
-            --shadow-md: 0 12px 48px -8px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.04);
-            --shadow-glow: 0 0 48px rgba(124, 58, 237, 0.28), 0 16px 48px -8px rgba(0, 0, 0, 0.85);
-            --shadow-card: 0 8px 32px -6px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            --blur-glass: blur(28px) saturate(190%);
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --tr-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+            --tr: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+            --shadow-sm: 0 4px 20px -4px rgba(0, 0, 0, 0.8);
+            --shadow-md: 0 12px 48px -8px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.04);
+            --shadow-glow: 0 0 45px rgba(255, 0, 60, 0.35), 0 16px 48px -8px rgba(0, 0, 0, 0.95);
+            --shadow-card: 0 8px 32px -6px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.07);
         }
 
-        /* ─────────────────────────────── RESET ───────────────────────────────── */
+        /* ─────────────────────────────── BASE RESET ───────────────────────────────── */
         *,
         *::before,
         *::after {
@@ -65,8 +60,8 @@
         }
 
         body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background-color: var(--void);
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-void);
             min-height: 100vh;
             color: var(--text-1);
             overflow-x: hidden;
@@ -74,23 +69,23 @@
             perspective: 2000px;
         }
 
-        /* ─────────────────────── ANIMATED GRID BACKGROUND ──────────────────── */
+        /* ─────────────────────── ANIMATED RADIAL & GRID BACKGROUND ──────────────────── */
         body::before {
             content: '';
             position: fixed;
             inset: 0;
             background:
-                radial-gradient(ellipse 90% 60% at 50% -5%, rgba(124, 58, 237, 0.2) 0%, transparent 55%),
-                radial-gradient(ellipse 70% 50% at 100% 110%, rgba(219, 39, 119, 0.12) 0%, transparent 55%),
-                radial-gradient(ellipse 60% 70% at -10% 60%, rgba(8, 145, 178, 0.1) 0%, transparent 55%),
-                linear-gradient(rgba(139, 92, 246, 0.025) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(139, 92, 246, 0.025) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 100% 100%, 52px 52px, 52px 52px;
+                radial-gradient(ellipse 75% 45% at 50% -5%, rgba(255, 0, 60, 0.24) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 100% 100%, rgba(136, 8, 8, 0.2) 0%, transparent 55%),
+                radial-gradient(ellipse 50% 60% at 0% 50%, rgba(225, 29, 72, 0.14) 0%, transparent 55%),
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px;
             pointer-events: none;
             z-index: 0;
         }
 
-        /* ─────────────────────── FLOATING PARTICLES ─────────────────────────── */
+        /* ─────────────────────── FLOATING BACKGROUND PARTICLES ─────────────────────────── */
         .particles {
             position: fixed;
             inset: 0;
@@ -126,10 +121,10 @@
             }
         }
 
-        /* ─────────────────────────────── SCROLLBAR ───────────────────────────── */
+        /* ─────────────────────────────── CUSTOM SCROLLBAR ───────────────────────────── */
         ::-webkit-scrollbar {
-            width: 4px;
-            height: 4px;
+            width: 5px;
+            height: 5px;
         }
 
         ::-webkit-scrollbar-track {
@@ -142,12 +137,12 @@
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--violet-light);
+            background: var(--accent-red);
         }
 
-        /* ─────────────────────────────── SIDEBAR ─────────────────────────────── */
+        /* ─────────────────────────────── NAVIGATION SIDEBAR ─────────────────────────────── */
         .sidebar {
-            width: 70px;
+            width: 72px;
             min-height: 100vh;
             background: var(--surface-1);
             backdrop-filter: var(--blur-glass);
@@ -155,20 +150,20 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px 0 24px;
-            gap: 6px;
+            padding: 22px 0;
+            gap: 10px;
             position: fixed;
             left: 0;
             top: 0;
             bottom: 0;
             z-index: 200;
-            box-shadow: 4px 0 32px rgba(0, 0, 0, 0.5);
+            box-shadow: 4px 0 32px rgba(0, 0, 0, 0.85);
         }
 
         .sidebar-brand {
-            width: 42px;
-            height: 42px;
-            background: linear-gradient(135deg, var(--violet), var(--pink));
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-darkred));
             border-radius: 14px;
             display: flex;
             align-items: center;
@@ -176,10 +171,10 @@
             font-size: 15px;
             font-weight: 900;
             color: #fff;
-            letter-spacing: -0.5px;
-            margin-bottom: 24px;
-            box-shadow: 0 0 28px var(--violet-glow), 0 0 8px var(--pink-glow);
-            animation: brandPulse 4s ease-in-out infinite alternate;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 28px var(--accent-red-glow);
+            animation: brandPulse 3s ease-in-out infinite alternate;
             position: relative;
             flex-shrink: 0;
         }
@@ -189,17 +184,17 @@
             position: absolute;
             inset: -1px;
             border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             pointer-events: none;
         }
 
         @keyframes brandPulse {
             from {
-                box-shadow: 0 0 20px var(--violet-glow), 0 0 6px var(--pink-glow);
+                box-shadow: 0 0 18px rgba(255, 0, 60, 0.4);
             }
 
             to {
-                box-shadow: 0 0 40px rgba(124, 58, 237, 0.7), 0 0 20px var(--pink-glow), 0 0 60px rgba(124, 58, 237, 0.2);
+                box-shadow: 0 0 42px rgba(255, 0, 60, 0.85), 0 0 16px rgba(255, 255, 255, 0.4);
             }
         }
 
@@ -210,10 +205,6 @@
             border: 1px solid transparent;
             background: transparent;
             color: var(--text-3);
-            font-size: 13px;
-            font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            letter-spacing: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -234,49 +225,49 @@
         }
 
         .nav-item:hover {
-            background: rgba(124, 58, 237, 0.14);
+            background: rgba(255, 0, 60, 0.12);
             border-color: var(--border-dim);
-            color: var(--violet-light);
+            color: var(--accent-red);
         }
 
         .nav-item.active {
-            background: rgba(124, 58, 237, 0.2);
+            background: rgba(255, 0, 60, 0.2);
             border-color: var(--border-mid);
-            color: var(--violet-light);
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            color: var(--accent-red);
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .nav-item.active::before {
             content: '';
             position: absolute;
-            left: -12px;
+            left: -14px;
             top: 50%;
             transform: translateY(-50%);
             width: 3px;
             height: 22px;
-            background: var(--violet-light);
+            background: var(--accent-red);
             border-radius: 0 3px 3px 0;
-            box-shadow: 0 0 12px var(--violet-glow);
+            box-shadow: 0 0 12px var(--accent-red);
         }
 
         .nav-spacer {
             flex: 1;
         }
 
-        /* ─────────────────────────────── MAIN ────────────────────────────────── */
+        /* ─────────────────────────────── MAIN CONTENT WRAPPER ────────────────────────────────── */
         .main {
-            margin-left: 70px;
+            margin-left: 72px;
             flex: 1;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            padding: 22px;
-            gap: 18px;
+            padding: 24px;
+            gap: 20px;
             position: relative;
             z-index: 1;
         }
 
-        /* ─────────────────────────────── TOPBAR ──────────────────────────────── */
+        /* ─────────────────────────────── TOP BAR HEADER ──────────────────────────────── */
         .topbar {
             display: flex;
             align-items: center;
@@ -284,12 +275,12 @@
             background: var(--surface-1);
             backdrop-filter: var(--blur-glass);
             border: 1px solid var(--border-dim);
-            border-radius: 18px;
-            padding: 13px 22px;
+            border-radius: 20px;
+            padding: 14px 24px;
             box-shadow: var(--shadow-card);
             transition: var(--tr);
             transform-style: preserve-3d;
-            animation: slideDown 0.6s var(--ease) both;
+            animation: slideDown 0.6s var(--ease-out) both;
         }
 
         @keyframes slideDown {
@@ -313,20 +304,20 @@
         .topbar-left {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
         }
 
         .topbar-divider {
             width: 1px;
-            height: 30px;
+            height: 32px;
             background: var(--border-dim);
         }
 
         .brand-name {
-            font-size: 16px;
-            font-weight: 800;
-            letter-spacing: 0.3px;
-            background: linear-gradient(90deg, #ddd8ff, var(--violet-light), #a78bfa);
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            background: linear-gradient(90deg, #ffffff, #ff2a5f, var(--accent-red));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -335,9 +326,9 @@
 
         .brand-sub {
             font-size: 10px;
-            font-weight: 500;
+            font-weight: 600;
             color: var(--text-3);
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
             text-transform: uppercase;
             margin-top: 2px;
         }
@@ -346,49 +337,53 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 12px;
             font-weight: 600;
-            color: var(--text-3);
+            color: var(--text-2);
             letter-spacing: 1px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .topbar-right {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .status-badge {
             display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba(4, 4, 14, 0.95);
-            padding: 7px 15px;
+            background: rgba(4, 2, 4, 0.95);
+            padding: 8px 18px;
             border-radius: 40px;
             border: 1px solid var(--border-dim);
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: 0.8px;
             text-transform: uppercase;
             transition: var(--tr);
         }
 
         .status-badge.online {
-            border-color: rgba(16, 185, 129, 0.3);
-            box-shadow: 0 0 16px rgba(16, 185, 129, 0.12);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 0 16px rgba(16, 185, 129, 0.2);
         }
 
         .dot {
-            width: 7px;
-            height: 7px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
-            background: var(--red-light);
-            box-shadow: 0 0 8px var(--red-light);
+            background: var(--accent-red);
+            box-shadow: 0 0 10px var(--accent-red);
             animation: blinkDot 1.6s ease-in-out infinite;
             flex-shrink: 0;
         }
 
         .dot.online {
-            background: var(--green-light);
-            box-shadow: 0 0 10px var(--green-light);
+            background: var(--accent-green);
+            box-shadow: 0 0 12px var(--accent-green);
             animation: none;
         }
 
@@ -400,29 +395,40 @@
             }
 
             50% {
-                opacity: 0.2;
+                opacity: 0.25;
             }
         }
 
         .btn-header {
-            padding: 8px 16px;
-            border-radius: 10px;
+            padding: 9px 18px;
+            border-radius: 12px;
             border: 1px solid var(--border-dim);
-            background: rgba(124, 58, 237, 0.1);
+            background: rgba(255, 0, 60, 0.12);
             color: var(--text-1);
             font-size: 11px;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             letter-spacing: 0.5px;
             text-transform: uppercase;
             cursor: pointer;
             transition: var(--tr);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-header svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
         }
 
         .btn-header:hover {
-            background: rgba(124, 58, 237, 0.22);
-            border-color: var(--border-mid);
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+            background: rgba(255, 0, 60, 0.25);
+            border-color: var(--accent-red);
+            box-shadow: 0 0 24px rgba(255, 0, 60, 0.4);
             transform: translateY(-1px);
         }
 
@@ -432,9 +438,9 @@
             background: var(--surface-1);
             backdrop-filter: var(--blur-glass);
             border: 1px solid var(--border-mid);
-            border-radius: 16px;
-            padding: 18px;
-            animation: fadeSlide 0.3s var(--ease) both;
+            border-radius: 18px;
+            padding: 20px;
+            animation: fadeSlide 0.3s var(--ease-out) both;
         }
 
         @keyframes fadeSlide {
@@ -451,7 +457,7 @@
 
         .config-drawer.active {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             align-items: center;
         }
 
@@ -459,16 +465,16 @@
         .stats-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
-            animation: slideDown 0.6s 0.08s var(--ease) both;
+            gap: 16px;
+            animation: slideDown 0.6s 0.08s var(--ease-out) both;
         }
 
         .stat-card {
             background: var(--surface-1);
             backdrop-filter: var(--blur-glass);
             border: 1px solid var(--border-dim);
-            border-radius: 16px;
-            padding: 18px 20px;
+            border-radius: 18px;
+            padding: 20px 22px;
             position: relative;
             overflow: hidden;
             box-shadow: var(--shadow-sm);
@@ -483,9 +489,9 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 1.5px;
-            background: linear-gradient(90deg, transparent, var(--stat-color, var(--violet-light)), transparent);
-            opacity: 0.8;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--stat-color, var(--accent-red)), transparent);
+            opacity: 0.85;
         }
 
         .stat-card::after {
@@ -493,11 +499,11 @@
             position: absolute;
             bottom: -30%;
             right: -15%;
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
-            background: radial-gradient(circle, var(--stat-color, var(--violet-light)) 0%, transparent 70%);
-            opacity: 0.07;
+            background: radial-gradient(circle, var(--stat-color, var(--accent-red)) 0%, transparent 70%);
+            opacity: 0.08;
             transition: var(--tr);
         }
 
@@ -508,13 +514,13 @@
         }
 
         .stat-card:hover::after {
-            opacity: 0.14;
+            opacity: 0.16;
             transform: scale(1.3);
         }
 
         .stat-label {
             font-size: 10px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-3);
             text-transform: uppercase;
             letter-spacing: 1.2px;
@@ -522,8 +528,8 @@
         }
 
         .stat-val {
-            font-size: 36px;
-            font-weight: 800;
+            font-size: 38px;
+            font-weight: 900;
             line-height: 1;
             color: var(--text-1);
             font-variant-numeric: tabular-nums;
@@ -539,12 +545,12 @@
 
         .stat-icon-bg {
             position: absolute;
-            top: 14px;
-            right: 16px;
-            width: 34px;
-            height: 34px;
+            top: 16px;
+            right: 18px;
+            width: 36px;
+            height: 36px;
             border-radius: 10px;
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
             align-items: center;
@@ -552,23 +558,23 @@
         }
 
         .stat-icon-bg svg {
-            width: 16px;
-            height: 16px;
-            stroke: var(--stat-color, var(--violet-light));
+            width: 18px;
+            height: 18px;
+            stroke: var(--stat-color, var(--accent-red));
             fill: none;
             stroke-width: 1.8;
             stroke-linecap: round;
             stroke-linejoin: round;
-            opacity: 0.7;
+            opacity: 0.85;
         }
 
-        /* ─────────────────────────── CONTENT GRID ────────────────────────────── */
+        /* ─────────────────────────── CONTENT LAYOUT GRID ────────────────────────────── */
         .content-grid {
             display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 16px;
+            grid-template-columns: 350px 1fr;
+            gap: 18px;
             flex: 1;
-            animation: slideDown 0.6s 0.16s var(--ease) both;
+            animation: slideDown 0.6s 0.16s var(--ease-out) both;
         }
 
         /* ─────────────────────────── GLASS PANEL ─────────────────────────────── */
@@ -576,8 +582,8 @@
             background: var(--surface-1);
             backdrop-filter: var(--blur-glass);
             border: 1px solid var(--border-dim);
-            border-radius: 18px;
-            padding: 20px;
+            border-radius: 20px;
+            padding: 22px;
             box-shadow: var(--shadow-card);
             transition: var(--tr);
             transform-style: preserve-3d;
@@ -589,38 +595,38 @@
         }
 
         .panel-title {
-            font-size: 10px;
-            font-weight: 700;
+            font-size: 11px;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--violet-light);
-            margin-bottom: 14px;
+            color: var(--accent-red);
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
         .panel-title-note {
-            font-size: 9px;
+            font-size: 10px;
             font-weight: 500;
             color: var(--text-3);
             text-transform: none;
             letter-spacing: 0.3px;
-            opacity: 0.8;
+            opacity: 0.85;
         }
 
         .panel-badge {
             margin-left: auto;
             font-size: 10px;
-            font-weight: 700;
-            padding: 3px 9px;
+            font-weight: 800;
+            padding: 3px 10px;
             border-radius: 20px;
-            background: rgba(124, 58, 237, 0.15);
+            background: rgba(255, 0, 60, 0.15);
             border: 1px solid var(--border-dim);
-            color: var(--violet-light);
+            color: var(--accent-red);
         }
 
-        /* ─────────────────────────── SEARCH BOX ─────────────────────────────── */
+        /* ─────────────────────────── SEARCH & FILTER TABS ─────────────────────────────── */
         .search-box {
             position: relative;
             margin-bottom: 12px;
@@ -628,11 +634,11 @@
 
         .search-box svg {
             position: absolute;
-            left: 12px;
+            left: 14px;
             top: 50%;
             transform: translateY(-50%);
-            width: 14px;
-            height: 14px;
+            width: 15px;
+            height: 15px;
             stroke: var(--text-3);
             fill: none;
             stroke-width: 2;
@@ -642,76 +648,111 @@
 
         .search-input {
             width: 100%;
-            padding: 10px 12px 10px 34px;
-            background: rgba(4, 4, 12, 0.9);
+            padding: 11px 14px 11px 36px;
+            background: rgba(4, 2, 4, 0.9);
             border: 1px solid var(--border-dim);
-            border-radius: 11px;
+            border-radius: 12px;
             color: var(--text-1);
             font-size: 13px;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             outline: none;
             transition: var(--tr);
         }
 
         .search-input:focus {
             border-color: var(--border-mid);
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.25);
         }
 
         .search-input::placeholder {
             color: var(--text-3);
         }
 
-        /* ─────────────────────────── USER LIST ───────────────────────────────── */
+        .filter-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 14px;
+            background: rgba(4, 2, 4, 0.6);
+            padding: 4px;
+            border-radius: 10px;
+            border: 1px solid var(--border-dim);
+        }
+
+        .filter-tab {
+            flex: 1;
+            padding: 6px 10px;
+            border-radius: 7px;
+            border: none;
+            background: transparent;
+            color: var(--text-3);
+            font-size: 11px;
+            font-weight: 700;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            cursor: pointer;
+            transition: var(--tr-fast);
+            text-align: center;
+        }
+
+        .filter-tab:hover {
+            color: var(--text-2);
+        }
+
+        .filter-tab.active {
+            background: rgba(255, 0, 60, 0.18);
+            color: var(--accent-red);
+            border: 1px solid rgba(255, 0, 60, 0.3);
+        }
+
+        /* ─────────────────────────── USER DIRECTORY LIST ───────────────────────────────── */
         .user-list {
             display: flex;
             flex-direction: column;
-            gap: 7px;
+            gap: 8px;
             overflow-y: auto;
             padding-right: 2px;
-            max-height: calc(100vh - 400px);
+            max-height: calc(100vh - 440px);
         }
 
         .user-item {
-            background: rgba(8, 6, 18, 0.7);
+            background: rgba(10, 4, 6, 0.75);
             border: 1px solid var(--border-dim);
-            border-radius: 13px;
-            padding: 13px 15px;
+            border-radius: 14px;
+            padding: 14px 16px;
             cursor: pointer;
             transition: var(--tr);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             transform-style: preserve-3d;
         }
 
         .user-item:hover {
             border-color: var(--border-mid);
-            background: rgba(124, 58, 237, 0.07);
-            transform: translateX(3px) translateZ(4px);
+            background: rgba(255, 0, 60, 0.1);
+            transform: translateX(4px) translateZ(4px);
         }
 
         .user-item.active {
-            border-color: var(--violet-light);
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.16), rgba(139, 92, 246, 0.08));
-            box-shadow: 0 0 24px rgba(124, 58, 237, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            border-color: var(--accent-red);
+            background: linear-gradient(135deg, rgba(255, 0, 60, 0.22), rgba(136, 8, 8, 0.15));
+            box-shadow: 0 0 24px rgba(255, 0, 60, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             transform: translateZ(6px);
         }
 
         .user-avatar {
-            width: 34px;
-            height: 34px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, var(--violet), var(--pink));
+            width: 36px;
+            height: 36px;
+            border-radius: 11px;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-darkred));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            font-weight: 800;
+            font-size: 15px;
+            font-weight: 900;
             color: #fff;
             flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.35);
+            box-shadow: 0 4px 14px rgba(255, 0, 60, 0.4);
             letter-spacing: -0.5px;
         }
 
@@ -722,7 +763,7 @@
 
         .user-name {
             font-size: 13px;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--text-1);
             white-space: nowrap;
             overflow: hidden;
@@ -731,18 +772,18 @@
         }
 
         .user-sub-info {
-            font-size: 10px;
+            font-size: 11px;
             color: var(--text-3);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-        /* ─────────────────────────── STATUS TAGS ─────────────────────────────── */
+        /* ─────────────────────────── STATUS BADGE TAGS ─────────────────────────────── */
         .tag {
             font-size: 9px;
-            font-weight: 700;
-            padding: 3px 9px;
+            font-weight: 800;
+            padding: 4px 10px;
             border-radius: 20px;
             text-transform: uppercase;
             letter-spacing: 0.8px;
@@ -751,49 +792,49 @@
         }
 
         .tag-active {
-            background: rgba(16, 185, 129, 0.12);
-            color: var(--green-light);
-            border: 1px solid rgba(16, 185, 129, 0.35);
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+            border: 1px solid rgba(16, 185, 129, 0.4);
         }
 
         .tag-paused {
-            background: rgba(245, 158, 11, 0.12);
-            color: var(--amber-light);
-            border: 1px solid rgba(245, 158, 11, 0.35);
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-amber);
+            border: 1px solid rgba(245, 158, 11, 0.4);
         }
 
         .tag-stopped {
-            background: rgba(239, 68, 68, 0.12);
-            color: var(--red-light);
-            border: 1px solid rgba(239, 68, 68, 0.35);
+            background: rgba(255, 0, 60, 0.18);
+            color: var(--accent-red);
+            border: 1px solid rgba(255, 0, 60, 0.45);
         }
 
         .tag-locked {
-            background: rgba(124, 58, 237, 0.12);
-            color: var(--violet-light);
-            border: 1px solid rgba(124, 58, 237, 0.35);
+            background: rgba(168, 85, 247, 0.15);
+            color: var(--accent-purple);
+            border: 1px solid rgba(168, 85, 247, 0.4);
         }
 
         .tag-offline {
-            background: rgba(75, 85, 99, 0.12);
+            background: rgba(82, 82, 91, 0.15);
             color: var(--text-3);
-            border: 1px solid rgba(75, 85, 99, 0.35);
+            border: 1px solid rgba(82, 82, 91, 0.4);
         }
 
-        /* ─────────────────────────── RIGHT PANEL ─────────────────────────────── */
+        /* ─────────────────────────── RIGHT WORKSPACE COLUMN ─────────────────────────────── */
         .right-col {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 16px;
         }
 
-        /* ─────────────────────────── USER BANNER ─────────────────────────────── */
+        /* ─────────────────────────── SELECTED USER BANNER ─────────────────────────────── */
         .user-banner {
             background: var(--surface-1);
             backdrop-filter: var(--blur-glass);
             border: 1px solid var(--border-dim);
-            border-radius: 18px;
-            padding: 20px 24px;
+            border-radius: 20px;
+            padding: 22px 26px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -811,8 +852,8 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--violet-light), var(--pink), transparent);
-            opacity: 0.5;
+            background: linear-gradient(90deg, transparent, var(--accent-red), var(--accent-crimson), transparent);
+            opacity: 0.6;
         }
 
         .user-banner::after {
@@ -820,10 +861,10 @@
             position: absolute;
             top: -60%;
             right: -15%;
-            width: 220px;
-            height: 220px;
+            width: 240px;
+            height: 240px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.1), transparent 70%);
+            background: radial-gradient(circle, rgba(255, 0, 60, 0.12), transparent 70%);
             pointer-events: none;
             transition: var(--tr);
         }
@@ -842,69 +883,69 @@
         .banner-left {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 18px;
         }
 
         .banner-avatar {
-            width: 56px;
-            height: 56px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, var(--violet), var(--pink));
+            width: 58px;
+            height: 58px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-darkred));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 900;
             color: #fff;
-            box-shadow: 0 0 32px rgba(124, 58, 237, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 32px rgba(255, 0, 60, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             flex-shrink: 0;
             letter-spacing: -1px;
         }
 
         .banner-name {
-            font-size: 20px;
-            font-weight: 800;
-            background: linear-gradient(90deg, var(--text-1), var(--violet-light));
+            font-size: 22px;
+            font-weight: 900;
+            background: linear-gradient(90deg, #ffffff, #ff2a5f, var(--accent-red));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 7px;
+            margin-bottom: 8px;
             letter-spacing: -0.3px;
         }
 
         .banner-chips {
             display: flex;
-            gap: 7px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
         .chip {
             background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            padding: 4px 11px;
-            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 5px 12px;
+            border-radius: 9px;
             font-size: 11px;
             color: var(--text-2);
-            font-weight: 500;
+            font-weight: 600;
         }
 
-        /* ─────────────────────────── ACTION GRID ─────────────────────────────── */
+        /* ─────────────────────────── ACTION BUTTON GRID ─────────────────────────────── */
         .action-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(124px, 1fr));
-            gap: 9px;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 10px;
         }
 
         .action-btn {
-            background: rgba(10, 8, 22, 0.92);
+            background: rgba(12, 5, 8, 0.95);
             border: 1px solid var(--border-dim);
-            border-radius: 13px;
-            padding: 15px 10px;
+            border-radius: 14px;
+            padding: 16px 12px;
             color: var(--text-1);
             font-size: 11px;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             letter-spacing: 0.3px;
             cursor: pointer;
             transition: var(--tr);
@@ -924,21 +965,21 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 1px;
-            background: var(--btn-color, var(--violet-light));
+            height: 2px;
+            background: var(--btn-color, var(--accent-red));
             opacity: 0;
             transition: var(--tr);
         }
 
         .action-btn:hover {
             transform: translateY(-3px) translateZ(5px);
-            border-color: var(--btn-color, var(--violet-light));
-            box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.6),
-                0 0 20px -4px var(--btn-glow, rgba(124, 58, 237, 0.4));
+            border-color: var(--btn-color, var(--accent-red));
+            box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.7),
+                0 0 22px -4px var(--btn-glow, rgba(255, 0, 60, 0.45));
         }
 
         .action-btn:hover::before {
-            opacity: 0.6;
+            opacity: 0.9;
         }
 
         .action-btn:active {
@@ -946,10 +987,10 @@
         }
 
         .btn-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 9px;
-            background: rgba(255, 255, 255, 0.05);
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.07);
             display: flex;
             align-items: center;
@@ -958,9 +999,9 @@
         }
 
         .btn-icon svg {
-            width: 15px;
-            height: 15px;
-            stroke: var(--btn-color, var(--violet-light));
+            width: 16px;
+            height: 16px;
+            stroke: var(--btn-color, var(--accent-red));
             fill: none;
             stroke-width: 2;
             stroke-linecap: round;
@@ -968,70 +1009,65 @@
         }
 
         .action-btn:hover .btn-icon {
-            background: rgba(124, 58, 237, 0.1);
-            border-color: rgba(124, 58, 237, 0.2);
-            box-shadow: 0 0 12px var(--btn-glow, rgba(124, 58, 237, 0.3));
+            background: rgba(255, 0, 60, 0.12);
+            border-color: rgba(255, 0, 60, 0.25);
+            box-shadow: 0 0 14px var(--btn-glow, rgba(255, 0, 60, 0.35));
         }
 
-        /* color variants */
+        /* Color variants */
         .btn-green {
-            --btn-color: var(--green-light);
-            --btn-glow: rgba(16, 185, 129, 0.4);
+            --btn-color: var(--accent-green);
+            --btn-glow: rgba(16, 185, 129, 0.45);
         }
 
         .btn-amber {
-            --btn-color: var(--amber-light);
-            --btn-glow: rgba(245, 158, 11, 0.4);
+            --btn-color: var(--accent-amber);
+            --btn-glow: rgba(245, 158, 11, 0.45);
         }
 
         .btn-red {
-            --btn-color: var(--red-light);
-            --btn-glow: rgba(239, 68, 68, 0.4);
+            --btn-color: var(--accent-red);
+            --btn-glow: rgba(255, 0, 60, 0.5);
         }
 
-        .btn-violet {
-            --btn-color: var(--violet-light);
-            --btn-glow: rgba(124, 58, 237, 0.4);
+        .btn-purple {
+            --btn-color: var(--accent-purple);
+            --btn-glow: rgba(168, 85, 247, 0.45);
         }
 
         .btn-blue {
-            --btn-color: var(--blue-light);
-            --btn-glow: rgba(59, 130, 246, 0.4);
+            --btn-color: var(--accent-blue);
+            --btn-glow: rgba(59, 130, 246, 0.45);
         }
 
         .btn-cyan {
-            --btn-color: var(--cyan-light);
-            --btn-glow: rgba(6, 182, 212, 0.4);
+            --btn-color: var(--accent-cyan);
+            --btn-glow: rgba(6, 182, 212, 0.45);
         }
 
-        .btn-pink {
-            --btn-color: #ec4899;
-            --btn-glow: rgba(236, 72, 153, 0.4);
-        }
-
-        /* ─────────────────────────── INPUT ROW ───────────────────────────────── */
+        /* ─────────────────────────── INPUT ROWS ───────────────────────────────── */
         .input-row {
             display: flex;
-            gap: 9px;
-            margin-top: 12px;
+            gap: 10px;
+            margin-top: 14px;
         }
 
         .field-input {
             flex: 1;
-            padding: 11px 14px;
-            background: rgba(4, 4, 12, 0.92);
+            padding: 12px 16px;
+            background: rgba(4, 2, 4, 0.92);
             border: 1px solid var(--border-dim);
-            border-radius: 11px;
+            border-radius: 12px;
             color: var(--text-1);
             font-size: 13px;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             outline: none;
             transition: var(--tr);
         }
 
         .field-input:focus {
             border-color: var(--border-mid);
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.25);
         }
 
         .field-input::placeholder {
@@ -1039,14 +1075,14 @@
         }
 
         .btn-action-small {
-            padding: 11px 18px;
-            border-radius: 11px;
+            padding: 12px 20px;
+            border-radius: 12px;
             border: 1px solid var(--border-dim);
-            background: rgba(124, 58, 237, 0.12);
+            background: rgba(255, 0, 60, 0.14);
             color: var(--text-1);
             font-size: 11px;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             letter-spacing: 0.5px;
             text-transform: uppercase;
             cursor: pointer;
@@ -1055,19 +1091,44 @@
         }
 
         .btn-action-small:hover {
-            background: rgba(124, 58, 237, 0.24);
-            border-color: var(--border-mid);
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+            background: rgba(255, 0, 60, 0.28);
+            border-color: var(--accent-red);
+            box-shadow: 0 0 22px rgba(255, 0, 60, 0.4);
             transform: translateY(-1px);
         }
 
-        /* ─────────────────────────── CONSOLE ─────────────────────────────────── */
-        .console-out {
-            background: rgba(2, 2, 8, 0.97);
+        /* ─────────────────────────── CONSOLE LOG HEADER & OUTPUT ─────────────────────────────────── */
+        .console-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .btn-clear-logs {
+            padding: 4px 10px;
+            border-radius: 6px;
             border: 1px solid var(--border-dim);
-            border-radius: 12px;
-            padding: 14px 16px;
-            height: 175px;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-3);
+            font-size: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--tr-fast);
+        }
+
+        .btn-clear-logs:hover {
+            background: rgba(255, 0, 60, 0.15);
+            color: var(--accent-red);
+            border-color: rgba(255, 0, 60, 0.3);
+        }
+
+        .console-out {
+            background: rgba(2, 1, 3, 0.97);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 16px;
+            height: 185px;
             overflow-y: auto;
             font-family: 'JetBrains Mono', monospace;
             font-size: 12px;
@@ -1075,12 +1136,12 @@
             display: flex;
             flex-direction: column;
             gap: 6px;
-            box-shadow: inset 0 2px 16px rgba(0, 0, 0, 0.95);
+            box-shadow: inset 0 2px 18px rgba(0, 0, 0, 0.95);
         }
 
         .log-line {
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
 
         .log-ts {
@@ -1090,31 +1151,31 @@
         }
 
         .log-sys {
-            color: var(--blue-light);
+            color: var(--accent-blue);
         }
 
         .log-recv {
-            color: var(--green-light);
+            color: var(--accent-green);
         }
 
         .log-err {
-            color: var(--red-light);
+            color: var(--accent-red);
         }
 
         .log-warn {
-            color: var(--amber-light);
+            color: var(--accent-amber);
         }
 
-        /* ─────────────────────────── GLOBAL PANEL ────────────────────────────── */
+        /* ─────────────────────────── GLOBAL SAFETY CONTROL PANEL ────────────────────────────── */
         .global-panel {
-            background: rgba(18, 8, 8, 0.9);
+            background: rgba(24, 6, 10, 0.92);
             backdrop-filter: var(--blur-glass);
-            border: 1px solid rgba(220, 38, 38, 0.22);
-            border-radius: 18px;
-            padding: 20px 22px;
-            box-shadow: 0 0 48px rgba(220, 38, 38, 0.08), var(--shadow-card);
+            border: 1px solid rgba(255, 0, 60, 0.35);
+            border-radius: 20px;
+            padding: 22px 24px;
+            box-shadow: 0 0 48px rgba(255, 0, 60, 0.12), var(--shadow-card);
             transition: var(--tr);
-            animation: slideDown 0.6s 0.24s var(--ease) both;
+            animation: slideDown 0.6s 0.24s var(--ease-out) both;
             position: relative;
             overflow: hidden;
         }
@@ -1126,53 +1187,53 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--red-light), transparent);
-            opacity: 0.4;
+            background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
+            opacity: 0.5;
         }
 
         .global-panel:hover {
-            border-color: rgba(220, 38, 38, 0.42);
-            box-shadow: 0 0 56px rgba(220, 38, 38, 0.14), var(--shadow-card);
+            border-color: var(--accent-red);
+            box-shadow: 0 0 60px rgba(255, 0, 60, 0.2), var(--shadow-card);
         }
 
         .global-title {
-            font-size: 10px;
-            font-weight: 700;
+            font-size: 11px;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--red-light);
-            margin-bottom: 12px;
+            color: var(--accent-red);
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
         .global-title-note {
-            font-size: 9px;
+            font-size: 10px;
             font-weight: 500;
             color: var(--text-3);
             letter-spacing: 0.3px;
             text-transform: none;
-            opacity: 0.75;
+            opacity: 0.8;
         }
 
         .global-row {
             display: flex;
-            gap: 9px;
+            gap: 10px;
             flex-wrap: wrap;
             align-items: center;
         }
 
         .btn-global {
-            padding: 11px 18px;
-            border-radius: 11px;
+            padding: 12px 20px;
+            border-radius: 12px;
             border: 1px solid var(--border-dim);
-            background: rgba(10, 8, 20, 0.92);
+            background: rgba(12, 5, 8, 0.95);
             color: var(--text-1);
             font-size: 11px;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.4px;
+            font-weight: 800;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
             cursor: pointer;
             transition: var(--tr);
@@ -1180,38 +1241,38 @@
         }
 
         .btn-global-amber:hover {
-            border-color: var(--amber-light);
-            box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+            border-color: var(--accent-amber);
+            box-shadow: 0 0 22px rgba(245, 158, 11, 0.35);
             transform: translateY(-2px);
         }
 
         .btn-global-red:hover {
-            border-color: var(--red-light);
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+            border-color: var(--accent-red);
+            box-shadow: 0 0 22px rgba(255, 0, 60, 0.45);
             transform: translateY(-2px);
         }
 
         .btn-global-green:hover {
-            border-color: var(--green-light);
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+            border-color: var(--accent-green);
+            box-shadow: 0 0 22px rgba(16, 185, 129, 0.35);
             transform: translateY(-2px);
         }
 
-        /* ─────────────────────────── EMPTY STATE ─────────────────────────────── */
+        /* ─────────────────────────── EMPTY STATE COMPONENT ─────────────────────────────── */
         .empty-state {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 36px 20px;
+            padding: 40px 20px;
             color: var(--text-3);
             text-align: center;
         }
 
         .empty-icon {
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border-radius: 12px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -1222,8 +1283,8 @@
         }
 
         .empty-icon svg {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             stroke: var(--text-3);
             fill: none;
             stroke-width: 1.8;
@@ -1238,7 +1299,7 @@
         .section-line {
             height: 1px;
             background: var(--border-dim);
-            margin: 12px 0;
+            margin: 14px 0;
         }
 
         /* ─────────────────────────── RESPONSIVENESS ──────────────────────────── */
@@ -1248,7 +1309,7 @@
             }
 
             .content-grid {
-                grid-template-columns: 280px 1fr;
+                grid-template-columns: 290px 1fr;
             }
         }
 
@@ -1275,33 +1336,21 @@
             }
         }
 
-        /* ─────────────────────────── ENTRANCE ANIMS ──────────────────────────── */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        /* ─────────────────────────── ENTRANCE ANIMATIONS ──────────────────── */
         .anim-1 {
-            animation: slideDown 0.6s 0.00s var(--ease) both;
+            animation: slideDown 0.6s 0.00s var(--ease-out) both;
         }
 
         .anim-2 {
-            animation: slideDown 0.6s 0.08s var(--ease) both;
+            animation: slideDown 0.6s 0.08s var(--ease-out) both;
         }
 
         .anim-3 {
-            animation: slideDown 0.6s 0.16s var(--ease) both;
+            animation: slideDown 0.6s 0.16s var(--ease-out) both;
         }
 
         .anim-4 {
-            animation: slideDown 0.6s 0.24s var(--ease) both;
+            animation: slideDown 0.6s 0.24s var(--ease-out) both;
         }
 
         /* ─────────────────────────── 3D TILT EFFECT ─────────────────────────── */
@@ -1315,14 +1364,14 @@
 
 <body>
 
-    <!-- Particles -->
+    <!-- Floating Background Particles Container -->
     <div class="particles" id="particles"></div>
 
-    <!-- ── SIDEBAR ── -->
+    <!-- ── NAVIGATION SIDEBAR ── -->
     <aside class="sidebar">
         <div class="sidebar-brand">ADI</div>
 
-        <button class="nav-item active" title="Dashboard">
+        <button class="nav-item active" title="Command Dashboard">
             <svg viewBox="0 0 24 24">
                 <rect x="3" y="3" width="7" height="7" rx="1" />
                 <rect x="14" y="3" width="7" height="7" rx="1" />
@@ -1331,7 +1380,7 @@
             </svg>
         </button>
 
-        <button class="nav-item" title="Users">
+        <button class="nav-item" title="Users Directory" onclick="document.getElementById('user-search').focus()">
             <svg viewBox="0 0 24 24">
                 <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
                 <circle cx="9" cy="7" r="4" />
@@ -1340,7 +1389,8 @@
             </svg>
         </button>
 
-        <button class="nav-item" title="Logs">
+        <button class="nav-item" title="Activity Console"
+            onclick="document.getElementById('user-console').scrollIntoView({behavior:'smooth'})">
             <svg viewBox="0 0 24 24">
                 <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
                 <polyline points="14 2 14 8 20 8" />
@@ -1350,13 +1400,7 @@
             </svg>
         </button>
 
-        <button class="nav-item" title="Analytics">
-            <svg viewBox="0 0 24 24">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-            </svg>
-        </button>
-
-        <button class="nav-item" title="Settings">
+        <button class="nav-item" title="Server Settings" onclick="toggleConfigDrawer()">
             <svg viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="3" />
                 <path
@@ -1366,24 +1410,24 @@
 
         <div class="nav-spacer"></div>
 
-        <button class="nav-item" title="Disconnect">
+        <button class="nav-item" title="Reconnect Server" onclick="saveAndReconnect()">
             <svg viewBox="0 0 24 24">
-                <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
-                <polyline points="16 17 21 12 16 7" />
-                <line x1="21" y1="12" x2="9" y2="12" />
+                <path d="M23 4v6h-6" />
+                <path d="M1 20v-6h6" />
+                <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
             </svg>
         </button>
     </aside>
 
-    <!-- ── MAIN CONTENT ── -->
+    <!-- ── MAIN CONTAINER ── -->
     <div class="main">
 
-        <!-- Topbar -->
+        <!-- Topbar Header -->
         <header class="topbar anim-1 tilt">
             <div class="topbar-left">
-                <div class="brand-text">
+                <div>
                     <div class="brand-name">ADI CHEATS COMMAND CENTER</div>
-                    <div class="brand-sub">Multi-Tenant Isolated Control Dashboard</div>
+                    <div class="brand-sub">Enterprise Multi-Tenant Remote Management</div>
                 </div>
                 <div class="topbar-divider"></div>
                 <div class="live-clock" id="live-clock">--:--:--</div>
@@ -1393,19 +1437,27 @@
                     <div class="dot" id="status-dot"></div>
                     <span id="status-text">CONNECTING</span>
                 </div>
-                <button class="btn-header" onclick="toggleConfigDrawer()">Server Config</button>
+                <button class="btn-header" onclick="toggleConfigDrawer()">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
+                    </svg>
+                    Config
+                </button>
             </div>
         </header>
 
         <!-- Config Drawer -->
         <div id="config-drawer" class="config-drawer">
-            <input type="text" id="custom-ws-url" class="field-input" placeholder="wss://your-server.com">
-            <button class="btn-action-small" onclick="saveAndReconnect()">Reconnect</button>
+            <input type="text" id="custom-ws-url" class="field-input" placeholder="wss://your-server.com"
+                onkeydown="if(event.key==='Enter')saveAndReconnect()">
+            <button class="btn-action-small" onclick="saveAndReconnect()">Save & Reconnect</button>
         </div>
 
         <!-- Stats Row -->
         <div class="stats-row anim-2">
-            <div class="stat-card tilt" style="--stat-color: var(--violet-light)">
+            <div class="stat-card tilt" style="--stat-color: var(--accent-red)">
                 <div class="stat-icon-bg">
                     <svg viewBox="0 0 24 24">
                         <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
@@ -1414,36 +1466,36 @@
                         <path d="M16 3.13a4 4 0 010 7.75" />
                     </svg>
                 </div>
-                <div class="stat-label">Total Users</div>
+                <div class="stat-label">Total Registered Users</div>
                 <div class="stat-val" id="stat-total">0</div>
-                <div class="stat-desc">Registered devices</div>
+                <div class="stat-desc">Tracked active client IDs</div>
             </div>
-            <div class="stat-card tilt" style="--stat-color: var(--green-light)">
+            <div class="stat-card tilt" style="--stat-color: var(--accent-green)">
                 <div class="stat-icon-bg">
-                    <svg viewBox="0 0 24 24" style="--stat-color:var(--green-light)">
+                    <svg viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="10" />
                         <polyline points="12 6 12 12 16 14" />
                     </svg>
                 </div>
-                <div class="stat-label">Online Now</div>
+                <div class="stat-label">Online Connections</div>
                 <div class="stat-val" id="stat-online">0</div>
-                <div class="stat-desc">Active connections</div>
+                <div class="stat-desc">Live WebSocket sockets</div>
             </div>
-            <div class="stat-card tilt" style="--stat-color: var(--amber-light)">
+            <div class="stat-card tilt" style="--stat-color: var(--accent-amber)">
                 <div class="stat-icon-bg">
-                    <svg viewBox="0 0 24 24" style="--stat-color:var(--amber-light)">
+                    <svg viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="10" />
                         <line x1="10" y1="15" x2="10" y2="9" />
                         <line x1="14" y1="15" x2="14" y2="9" />
                     </svg>
                 </div>
-                <div class="stat-label">Paused / Locked</div>
+                <div class="stat-label">Paused / Suspended</div>
                 <div class="stat-val" id="stat-paused">0</div>
-                <div class="stat-desc">Suspended sessions</div>
+                <div class="stat-desc">Locked or paused sessions</div>
             </div>
-            <div class="stat-card tilt" style="--stat-color: var(--red-light)">
+            <div class="stat-card tilt" style="--stat-color: var(--text-3)">
                 <div class="stat-icon-bg">
-                    <svg viewBox="0 0 24 24" style="--stat-color:var(--red-light)">
+                    <svg viewBox="0 0 24 24">
                         <line x1="1" y1="1" x2="23" y2="23" />
                         <path d="M16.72 11.06A10.94 10.94 0 0119 12.55" />
                         <path d="M5 12.55a10.94 10.94 0 015.17-2.39" />
@@ -1453,19 +1505,19 @@
                         <line x1="12" y1="20" x2="12.01" y2="20" />
                     </svg>
                 </div>
-                <div class="stat-label">Offline</div>
+                <div class="stat-label">Offline Devices</div>
                 <div class="stat-val" id="stat-offline">0</div>
-                <div class="stat-desc">Disconnected devices</div>
+                <div class="stat-desc">Disconnected sockets</div>
             </div>
         </div>
 
-        <!-- Content Grid -->
+        <!-- Main Workspace Content Grid -->
         <div class="content-grid anim-3">
 
-            <!-- Left: User Directory -->
+            <!-- Left Column: Users Directory Panel -->
             <div class="panel" style="display:flex;flex-direction:column;overflow:hidden;">
                 <div class="panel-title">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round">
                         <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
                         <circle cx="9" cy="7" r="4" />
@@ -1473,14 +1525,25 @@
                     Users Directory
                     <span class="panel-badge" id="user-count-badge">0</span>
                 </div>
+
+                <!-- Search Input Box -->
                 <div class="search-box">
                     <svg viewBox="0 0 24 24">
                         <circle cx="11" cy="11" r="8" />
                         <line x1="21" y1="21" x2="16.65" y2="16.65" />
                     </svg>
-                    <input type="text" id="user-search" class="search-input" placeholder="Search user or device ID…"
+                    <input type="text" id="user-search" class="search-input" placeholder="Search user ID, device, IP..."
                         oninput="filterUsers()">
                 </div>
+
+                <!-- Filter Tab Switchers -->
+                <div class="filter-tabs">
+                    <button class="filter-tab active" id="tab-all" onclick="setFilterTab('all')">All</button>
+                    <button class="filter-tab" id="tab-online" onclick="setFilterTab('online')">Online</button>
+                    <button class="filter-tab" id="tab-offline" onclick="setFilterTab('offline')">Offline</button>
+                </div>
+
+                <!-- User List View -->
                 <div id="user-list" class="user-list">
                     <div class="empty-state">
                         <div class="empty-icon">
@@ -1489,15 +1552,15 @@
                                 <path d="M12 5v14" />
                             </svg>
                         </div>
-                        <p>Waiting for connections…</p>
+                        <p>Waiting for connections...</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Right: Workspace -->
+            <!-- Right Column: Selected User Workspace Panel -->
             <div class="right-col">
 
-                <!-- User Banner -->
+                <!-- Selected User Banner -->
                 <div class="user-banner tilt">
                     <div class="banner-left">
                         <div id="selected-user-avatar" class="banner-avatar">?</div>
@@ -1513,10 +1576,10 @@
                     <span id="selected-user-status-badge" class="tag tag-offline">NO USER</span>
                 </div>
 
-                <!-- Controls -->
+                <!-- Individual Action Controls -->
                 <div class="panel">
                     <div class="panel-title">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round">
                             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
                         </svg>
@@ -1544,7 +1607,7 @@
                                 </svg></div>
                             Stop Session
                         </button>
-                        <button class="action-btn btn-violet" onclick="triggerUserAction('lock')">
+                        <button class="action-btn btn-purple" onclick="triggerUserAction('lock')">
                             <div class="btn-icon"><svg viewBox="0 0 24 24">
                                     <rect x="3" y="11" width="18" height="11" rx="2" />
                                     <path d="M7 11V7a5 5 0 0110 0v4" />
@@ -1577,27 +1640,35 @@
 
                     <div class="section-line"></div>
 
+                    <!-- Input Notification Row -->
                     <div class="input-row">
                         <input type="text" id="user-msg-input" class="field-input"
-                            placeholder="Notification message for this user…">
+                            placeholder="Notification message for this user..."
+                            onkeydown="if(event.key==='Enter')sendUserNotification()">
                         <button class="btn-action-small" onclick="sendUserNotification()">Send Notif</button>
                     </div>
+
+                    <!-- Extend Subscription Row -->
                     <div class="input-row" style="margin-top:8px;">
                         <input type="number" id="sub-days-input" class="field-input"
-                            placeholder="Extend subscription by days (e.g. 30)">
+                            placeholder="Extend subscription by days (e.g. 30)"
+                            onkeydown="if(event.key==='Enter')updateUserSubscription()">
                         <button class="btn-action-small" onclick="updateUserSubscription()">Update Sub</button>
                     </div>
                 </div>
 
-                <!-- Console -->
+                <!-- Console Log Activity Panel -->
                 <div class="panel">
-                    <div class="panel-title">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round">
-                            <polyline points="4 17 10 11 4 5" />
-                            <line x1="12" y1="19" x2="20" y2="19" />
-                        </svg>
-                        Isolated User Activity Log
+                    <div class="console-header">
+                        <div class="panel-title" style="margin-bottom:0;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round">
+                                <polyline points="4 17 10 11 4 5" />
+                                <line x1="12" y1="19" x2="20" y2="19" />
+                            </svg>
+                            Isolated User Activity Log
+                        </div>
+                        <button class="btn-clear-logs" onclick="clearConsoleLogs()">Clear View</button>
                     </div>
                     <div id="user-console" class="console-out">
                         <div class="log-line log-sys">
@@ -1610,10 +1681,10 @@
             </div>
         </div>
 
-        <!-- Global Safety Panel -->
+        <!-- Global Safety Control Panel -->
         <div class="global-panel anim-4">
             <div class="global-title">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                     stroke-linecap="round">
                     <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
                     <line x1="12" y1="9" x2="12" y2="13" />
@@ -1624,41 +1695,46 @@
             </div>
             <div class="global-row">
                 <input type="text" id="global-msg-input" class="field-input"
-                    placeholder="Global broadcast announcement…" style="flex:1;min-width:180px;">
+                    placeholder="Global broadcast announcement..." style="flex:1;min-width:180px;"
+                    onkeydown="if(event.key==='Enter')sendGlobalBroadcast()">
                 <button class="btn-global btn-global-amber" onclick="sendGlobalBroadcast()">Broadcast All</button>
                 <button class="btn-global btn-global-red" onclick="triggerGlobalStop()">Global Stop All</button>
                 <button class="btn-global btn-global-green" onclick="triggerGlobalStart()">Global Resume All</button>
             </div>
         </div>
 
-    </div><!-- /.main -->
+    </div>
 
     <script>
-        /* ── State ── */
+        /* ─────────────────────────── DASHBOARD CORE APPLICATION LOGIC ─────────────────────────── */
         let ws = null;
         let usersData = [];
         let selectedUserId = null;
+        let activeFilterTab = 'all';
 
-        /* ── Live Clock ── */
+        /* ── Live Clock System ── */
         function updateClock() {
             const now = new Date();
             const pad = n => String(n).padStart(2, '0');
-            document.getElementById('live-clock').textContent =
-                `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+            const clockEl = document.getElementById('live-clock');
+            if (clockEl) {
+                clockEl.textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+            }
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        /* ── Particles ── */
+        /* ── Particles System ── */
         (function spawnParticles() {
             const container = document.getElementById('particles');
-            const colors = ['124,58,237', '139,92,246', '219,39,119', '8,145,178', '16,185,129'];
-            for (let i = 0; i < 22; i++) {
+            if (!container) return;
+            const colors = ['255,0,60', '225,29,72', '136,8,8', '255,255,255'];
+            for (let i = 0; i < 26; i++) {
                 const el = document.createElement('div');
                 el.className = 'particle';
                 const size = Math.random() * 4 + 1.5;
                 const color = colors[Math.floor(Math.random() * colors.length)];
-                const op = (Math.random() * 0.25 + 0.08).toFixed(2);
+                const op = (Math.random() * 0.3 + 0.1).toFixed(2);
                 el.style.cssText = `
             left: ${Math.random() * 100}%;
             width: ${size}px; height: ${size}px;
@@ -1673,7 +1749,7 @@
             }
         })();
 
-        /* ── 3D Tilt ── */
+        /* ── 3D Card Tilt Interaction ── */
         document.querySelectorAll('.tilt').forEach(el => {
             el.addEventListener('mousemove', e => {
                 const r = el.getBoundingClientRect();
@@ -1686,7 +1762,7 @@
             });
         });
 
-        /* ── WS URL ── */
+        /* ── WebSocket Connection Helper ── */
         function getDefaultWsUrl() {
             const stored = localStorage.getItem('custom_ws_url');
             if (stored && stored.trim() !== '') return stored.trim();
@@ -1695,17 +1771,20 @@
             return `${protocol}//${window.location.host}`;
         }
 
-        /* ── Init ── */
+        /* ── Application Entry Point ── */
         function initDashboard() {
-            document.getElementById('custom-ws-url').value = getDefaultWsUrl();
+            const customWsInput = document.getElementById('custom-ws-url');
+            if (customWsInput) customWsInput.value = getDefaultWsUrl();
             connectWS(getDefaultWsUrl());
         }
 
-        /* ── WebSocket ── */
+        /* ── WebSocket Engine ── */
         function connectWS(serverUrl) {
             if (ws) { try { ws.close(); } catch (e) { } }
             updateStatusUI(false, 'CONNECTING');
-            try { ws = new WebSocket(serverUrl); } catch (err) {
+            try {
+                ws = new WebSocket(serverUrl);
+            } catch (err) {
                 updateStatusUI(false, 'ERROR');
                 setTimeout(() => connectWS(serverUrl), 4000);
                 return;
@@ -1734,7 +1813,7 @@
             };
         }
 
-        /* ── Stats ── */
+        /* ── Update Header & Card Statistics ── */
         function updateStats() {
             document.getElementById('stat-total').textContent = usersData.length;
             document.getElementById('stat-online').textContent = usersData.filter(u => u.online).length;
@@ -1742,37 +1821,67 @@
             document.getElementById('stat-offline').textContent = usersData.filter(u => !u.online).length;
         }
 
-        /* ── User List ── */
+        /* ── Filter Tab Controller ── */
+        function setFilterTab(tab) {
+            activeFilterTab = tab;
+            ['all', 'online', 'offline'].forEach(t => {
+                const el = document.getElementById(`tab-${t}`);
+                if (el) {
+                    if (t === tab) el.classList.add('active');
+                    else el.classList.remove('active');
+                }
+            });
+            renderUserList();
+        }
+
+        /* ── Render User Directory List ── */
         function renderUserList() {
             const container = document.getElementById('user-list');
             const badge = document.getElementById('user-count-badge');
-            const search = document.getElementById('user-search').value.toLowerCase();
-            const filtered = usersData.filter(u =>
-                u.id.toLowerCase().includes(search) ||
-                (u.deviceModel && u.deviceModel.toLowerCase().includes(search))
+            const searchVal = document.getElementById('user-search').value.toLowerCase();
+
+            let filtered = usersData.filter(u =>
+                u.id.toLowerCase().includes(searchVal) ||
+                (u.deviceModel && u.deviceModel.toLowerCase().includes(searchVal)) ||
+                (u.ip && u.ip.toLowerCase().includes(searchVal))
             );
+
+            if (activeFilterTab === 'online') {
+                filtered = filtered.filter(u => u.online);
+            } else if (activeFilterTab === 'offline') {
+                filtered = filtered.filter(u => !u.online);
+            }
+
             badge.textContent = filtered.length;
             if (filtered.length === 0) {
-                container.innerHTML = `<div class="empty-state"><div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><p>No users found.</p></div>`;
+                container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <p>No users found matching filter.</p>
+            </div>`;
                 return;
             }
+
             container.innerHTML = filtered.map(u => {
                 const isActive = u.id === selectedUserId ? 'active' : '';
                 const tagClass = getStatusTagClass(u.status, u.online);
                 const statusLabel = u.online ? u.status : 'Offline';
                 const initial = u.id.charAt(0).toUpperCase();
-                return `<div class="user-item ${isActive}" onclick="selectUser('${escapeHtml(u.id)}')">
-            <div class="user-avatar">${initial}</div>
-            <div class="user-info">
-                <div class="user-name">${escapeHtml(u.id)}</div>
-                <div class="user-sub-info">${escapeHtml(u.deviceModel)} &middot; ${u.ip}</div>
-            </div>
-            <span class="tag ${tagClass}">${statusLabel}</span>
-        </div>`;
+                return `
+            <div class="user-item ${isActive}" onclick="selectUser('${escapeHtml(u.id)}')">
+                <div class="user-avatar">${initial}</div>
+                <div class="user-info">
+                    <div class="user-name">${escapeHtml(u.id)}</div>
+                    <div class="user-sub-info">${escapeHtml(u.deviceModel || 'Unknown')} &middot; ${escapeHtml(u.ip || '0.0.0.0')}</div>
+                </div>
+                <span class="tag ${tagClass}">${statusLabel}</span>
+            </div>`;
             }).join('');
         }
 
-        /* ── Status Helpers ── */
+        /* ── Status Class Mapping ── */
         function getStatusTagClass(status, online) {
             if (!online) return 'tag-offline';
             switch (status) {
@@ -1784,7 +1893,7 @@
             }
         }
 
-        /* ── Select User ── */
+        /* ── Select User Function ── */
         function selectUser(userId) {
             selectedUserId = userId;
             renderUserList();
@@ -1792,17 +1901,21 @@
             if (user) renderSelectedUser(user);
         }
 
-        /* ── Render Banner & Console ── */
+        /* ── Render Banner & Console Logs ── */
         function renderSelectedUser(user) {
             document.getElementById('selected-user-avatar').textContent = user.id.charAt(0).toUpperCase();
             document.getElementById('selected-user-id').textContent = user.id;
-            document.getElementById('selected-user-device').textContent = `Device: ${user.deviceModel}`;
-            document.getElementById('selected-user-ip').textContent = `IP: ${user.ip}`;
-            const daysLeft = Math.max(0, Math.ceil((user.subscription.expiresAt - Date.now()) / 86400000));
+            document.getElementById('selected-user-device').textContent = `Device: ${user.deviceModel || 'Unknown'}`;
+            document.getElementById('selected-user-ip').textContent = `IP: ${user.ip || '0.0.0.0'}`;
+
+            const expiresAt = (user.subscription && user.subscription.expiresAt) ? user.subscription.expiresAt : Date.now();
+            const daysLeft = Math.max(0, Math.ceil((expiresAt - Date.now()) / 86400000));
             document.getElementById('selected-user-sub').textContent = `Sub: ${daysLeft}d left`;
+
             const badge = document.getElementById('selected-user-status-badge');
             badge.className = `tag ${getStatusTagClass(user.status, user.online)}`;
             badge.textContent = user.online ? user.status : 'Offline';
+
             const consoleEl = document.getElementById('user-console');
             if (user.logs && user.logs.length > 0) {
                 consoleEl.innerHTML = user.logs.map(l => `
@@ -1812,67 +1925,95 @@
             </div>`).join('');
                 consoleEl.scrollTop = consoleEl.scrollHeight;
             } else {
-                consoleEl.innerHTML = '<div class="log-line log-sys"><span class="log-ts">[SYSTEM]</span><span>No logs recorded for this user.</span></div>';
+                consoleEl.innerHTML = '<div class="log-line log-sys"><span class="log-ts">[SYSTEM]</span><span>No activity logs recorded for this user.</span></div>';
             }
         }
 
-        /* ── Actions ── */
+        /* ── Clear View Console Logs Helper ── */
+        function clearConsoleLogs() {
+            const consoleEl = document.getElementById('user-console');
+            if (consoleEl) {
+                consoleEl.innerHTML = '<div class="log-line log-sys"><span class="log-ts">[SYSTEM]</span><span>Console logs view cleared.</span></div>';
+            }
+        }
+
+        /* ── Action Triggers ── */
         function triggerUserAction(action) {
-            if (!selectedUserId) { alert('Please select a user first!'); return; }
-            ws.send(JSON.stringify({ type: 'user_action', targetUserId: selectedUserId, action }));
+            if (!selectedUserId) { alert('Please select a user from the directory first!'); return; }
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ type: 'user_action', targetUserId: selectedUserId, action }));
+            }
         }
 
         function sendUserNotification() {
-            if (!selectedUserId) { alert('Select a user first!'); return; }
+            if (!selectedUserId) { alert('Select a user from the directory first!'); return; }
             const input = document.getElementById('user-msg-input');
             const text = input.value.trim();
             if (!text) return;
-            ws.send(JSON.stringify({ type: 'user_action', targetUserId: selectedUserId, action: 'send_notification', text }));
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ type: 'user_action', targetUserId: selectedUserId, action: 'send_notification', text }));
+            }
             input.value = '';
         }
 
         function updateUserSubscription() {
-            if (!selectedUserId) { alert('Select a user first!'); return; }
+            if (!selectedUserId) { alert('Select a user from the directory first!'); return; }
             const days = parseInt(document.getElementById('sub-days-input').value);
             if (isNaN(days)) return;
-            ws.send(JSON.stringify({ type: 'user_action', targetUserId: selectedUserId, action: 'subscription', subDays: days }));
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ type: 'user_action', targetUserId: selectedUserId, action: 'subscription', subDays: days }));
+            }
         }
 
         function sendGlobalBroadcast() {
             const input = document.getElementById('global-msg-input');
             const text = input.value.trim();
             if (!text) return;
-            ws.send(JSON.stringify({ type: 'global_action', action: 'global_broadcast', text }));
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ type: 'global_action', action: 'global_broadcast', text }));
+            }
             input.value = '';
         }
 
         function triggerGlobalStop() {
-            if (confirm('Stop ALL users globally? This affects every connected device.')) {
-                ws.send(JSON.stringify({ type: 'global_action', action: 'global_stop', message: 'Emergency System Maintenance' }));
+            if (confirm('Stop ALL users globally? This action affects all connected devices.')) {
+                if (ws && ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify({ type: 'global_action', action: 'global_stop', message: 'Emergency System Maintenance' }));
+                }
             }
         }
 
         function triggerGlobalStart() {
-            ws.send(JSON.stringify({ type: 'global_action', action: 'global_start' }));
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ type: 'global_action', action: 'global_start' }));
+            }
         }
 
-        /* ── UI Utils ── */
+        /* ── UI Utilities ── */
         function filterUsers() { renderUserList(); }
 
         function updateStatusUI(online, text) {
-            document.getElementById('status-text').textContent = text;
-            document.getElementById('status-dot').className = online ? 'dot online' : 'dot';
-            const badge = document.getElementById('status-badge');
-            badge.className = online ? 'status-badge online' : 'status-badge';
+            const statusTextEl = document.getElementById('status-text');
+            const statusDotEl = document.getElementById('status-dot');
+            const statusBadgeEl = document.getElementById('status-badge');
+
+            if (statusTextEl) statusTextEl.textContent = text;
+            if (statusDotEl) statusDotEl.className = online ? 'dot online' : 'dot';
+            if (statusBadgeEl) statusBadgeEl.className = online ? 'status-badge online' : 'status-badge';
         }
 
         function toggleConfigDrawer() {
-            document.getElementById('config-drawer').classList.toggle('active');
+            const drawer = document.getElementById('config-drawer');
+            if (drawer) drawer.classList.toggle('active');
         }
 
         function saveAndReconnect() {
             const val = document.getElementById('custom-ws-url').value.trim();
-            if (val) { localStorage.setItem('custom_ws_url', val); connectWS(val); toggleConfigDrawer(); }
+            if (val) {
+                localStorage.setItem('custom_ws_url', val);
+                connectWS(val);
+                toggleConfigDrawer();
+            }
         }
 
         function escapeHtml(text) {
