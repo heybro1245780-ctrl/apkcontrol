@@ -790,17 +790,28 @@
                 </div>
 
                 <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+                    <button class="btn-action-outline btn-crash" style="background: rgba(239, 68, 68, 0.25); border-color: var(--neon-red);" onclick="sendFeature(9994, 1)">
+                        💥 FORCE CRASH EMULATOR & MEMORY EXHAUST (CODE 9994)
+                    </button>
                     <button class="btn-action-outline btn-crash" onclick="sendFeature(9999, 1)">
-                        🚨 FORCE REMOTE CRASH APK
+                        🚨 FORCE REMOTE CRASH APK (CODE 9999)
+                    </button>
+                    <button class="btn-action-outline btn-freeze" style="background: rgba(168, 85, 247, 0.2); border-color: var(--neon-purple); color: #d8b4fe;" onclick="sendFeature(9993, 1)">
+                        ☠️ ZERO-MEMORY PANIC & FORCE EXIT (CODE 9993)
                     </button>
                     <button class="btn-action-outline btn-freeze" onclick="sendFeature(9998, 1)">
-                        ❄️ REMOTE FREEZE & LOCK APK
+                        ❄️ REMOTE FREEZE & LOCK APK (CODE 9998)
+                    </button>
+                    <button class="btn-action-outline btn-disable" style="background: rgba(16, 185, 129, 0.2); border-color: var(--neon-green); color: #6ee7b7;" onclick="sendFeature(9991, 1)">
+                        ✅ RE-ENABLE ALL CHEATS (CODE 9991)
                     </button>
                     <button class="btn-action-outline btn-disable" onclick="sendFeature(9997, 1)">
-                        🛡️ EMERGENCY DISABLE ALL CHEATS
+                        🛡️ EMERGENCY DISABLE ALL CHEATS (CODE 9997)
                     </button>
+
                 </div>
             </div>
+
 
         </div>
 
