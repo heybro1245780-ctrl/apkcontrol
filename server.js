@@ -7,20 +7,24 @@ const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
-// Serve static dashboard HTML
+// Serve static files from root directory
 app.use(express.static(__dirname));
 
-app.get('/', (req, res) => {
+// Serve dashboard on root and all fallbacks
+app.get(['/', '/index.html', '/dashboard', '*'], (req, res) => {
     res.sendFile(path.join(__dirname, 'web_control_dashboard.html'));
 });
 
+
 let clients = new Set();
 let currentFeatureStates = {};
+let lastApkStatus = { isStopped: false, message: 'Update APK Please Wait' };
 
 function broadcastStats() {
     const statsMsg = JSON.stringify({
         type: 'stats',
         onlineCount: clients.size,
+        apkStatus: lastApkStatus,
         timestamp: Date.now()
     });
     for (let client of clients) {
@@ -39,6 +43,7 @@ wss.on('connection', (ws, req) => {
     ws.send(JSON.stringify({
         type: 'init_state',
         states: currentFeatureStates,
+        apkStatus: lastApkStatus,
         onlineCount: clients.size
     }));
 
@@ -56,14 +61,20 @@ wss.on('connection', (ws, req) => {
 
             console.log('[>] Command received:', data);
 
-            // Cache feature states for state sync
+            // Cache feature states and APK maintenance status
             if (data.type === 'feature' && data.code !== undefined) {
                 currentFeatureStates[data.code] = data.value;
+            } else if (data.type === 'apk_status') {
+                lastApkStatus.isStopped = (data.action === 'stop' || data.value === 1);
+                if (data.message) {
+                    lastApkStatus.message = data.message;
+                }
             } else if (data.type === 'preset') {
                 if (data.states && typeof data.states === 'object') {
                     Object.assign(currentFeatureStates, data.states);
                 }
             }
+
 
             // Broadcast command to all other connected instances
             for (let client of clients) {

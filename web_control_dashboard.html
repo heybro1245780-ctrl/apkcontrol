@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADI CHEATS - Ultra Control Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --bg-color: #080c14;
@@ -79,7 +82,9 @@
             font-weight: 700;
             background: linear-gradient(90deg, #ffffff, var(--accent-cyan));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
+
             letter-spacing: 0.5px;
         }
 
@@ -177,7 +182,9 @@
             transition: opacity 0.2s;
         }
 
-        .btn-apply:hover { opacity: 0.9; }
+        .btn-apply:hover {
+            opacity: 0.9;
+        }
 
         /* Quick Controls & Search Bar */
         .toolbar {
@@ -212,6 +219,7 @@
             border-color: rgba(239, 68, 68, 0.4);
             background: rgba(239, 68, 68, 0.1);
         }
+
         .preset-btn.rage:hover {
             background: rgba(239, 68, 68, 0.25);
             box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
@@ -221,6 +229,7 @@
             border-color: rgba(16, 185, 129, 0.4);
             background: rgba(16, 185, 129, 0.1);
         }
+
         .preset-btn.legit:hover {
             background: rgba(16, 185, 129, 0.25);
             box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
@@ -229,6 +238,7 @@
         .preset-btn.reset {
             border-color: rgba(156, 163, 175, 0.4);
         }
+
         .preset-btn.reset:hover {
             background: rgba(156, 163, 175, 0.2);
         }
@@ -357,7 +367,10 @@
         .slider {
             position: absolute;
             cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background-color: #374151;
             transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 24px;
@@ -373,14 +386,14 @@
             background-color: white;
             transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 50%;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
         }
 
-        input:checked + .slider {
+        input:checked+.slider {
             background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
         }
 
-        input:checked + .slider:before {
+        input:checked+.slider:before {
             transform: translateX(22px);
         }
 
@@ -407,6 +420,7 @@
             color: white;
             box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3);
         }
+
         .btn-crash:hover {
             transform: translateY(-1px);
             box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
@@ -417,6 +431,7 @@
             color: white;
             box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
         }
+
         .btn-freeze:hover {
             transform: translateY(-1px);
             box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
@@ -427,6 +442,7 @@
             color: #e5e7eb;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
         .btn-disable:hover {
             background: rgba(75, 85, 99, 1);
         }
@@ -447,7 +463,10 @@
             font-size: 13px;
             outline: none;
         }
-        .msg-box input:focus { border-color: var(--accent-blue); }
+
+        .msg-box input:focus {
+            border-color: var(--accent-blue);
+        }
 
         .btn-send-msg {
             background: linear-gradient(135deg, var(--accent-blue), #2563eb);
@@ -489,7 +508,10 @@
             font-size: 12px;
         }
 
-        .clear-log-btn:hover { color: #fff; border-color: rgba(255, 255, 255, 0.3); }
+        .clear-log-btn:hover {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
 
         .terminal-body {
             height: 160px;
@@ -510,24 +532,56 @@
             word-break: break-all;
         }
 
-        .log-time { color: #6b7280; }
-        .log-type-send { color: var(--accent-cyan); }
-        .log-type-recv { color: var(--accent-green); }
-        .log-type-sys { color: var(--accent-amber); }
-        .log-type-err { color: var(--accent-red); }
+        .log-time {
+            color: #6b7280;
+        }
+
+        .log-type-send {
+            color: var(--accent-cyan);
+        }
+
+        .log-type-recv {
+            color: var(--accent-green);
+        }
+
+        .log-type-sys {
+            color: var(--accent-amber);
+        }
+
+        .log-type-err {
+            color: var(--accent-red);
+        }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-6px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 768px) {
-            body { padding: 14px; }
-            .header { flex-direction: column; align-items: flex-start; gap: 14px; }
-            .toolbar { grid-template-columns: 1fr; }
+            body {
+                padding: 14px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+            }
+
+            .toolbar {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- Top Navigation / Status Header -->
@@ -602,7 +656,8 @@
                     <span class="feature-name">Aimbot Lock</span>
                     <span class="feature-code">CODE: 501</span>
                 </div>
-                <label class="switch"><input type="checkbox" id="code-501" onchange="sendFeature(501, this.checked)"><span class="slider"></span></label>
+                <label class="switch"><input type="checkbox" id="code-501"
+                        onchange="sendFeature(501, this.checked)"><span class="slider"></span></label>
             </div>
 
             <div class="feature-item" data-name="silent aim aimkill">
@@ -610,7 +665,8 @@
                     <span class="feature-name">Silent Aim / AimKill</span>
                     <span class="feature-code">CODE: 502</span>
                 </div>
-                <label class="switch"><input type="checkbox" id="code-502" onchange="sendFeature(502, this.checked)"><span class="slider"></span></label>
+                <label class="switch"><input type="checkbox" id="code-502"
+                        onchange="sendFeature(502, this.checked)"><span class="slider"></span></label>
             </div>
 
             <div class="feature-item" data-name="target all enemies">
@@ -618,7 +674,8 @@
                     <span class="feature-name">Target All Enemies</span>
                     <span class="feature-code">CODE: 528</span>
                 </div>
-                <label class="switch"><input type="checkbox" id="code-528" onchange="sendFeature(528, this.checked)"><span class="slider"></span></label>
+                <label class="switch"><input type="checkbox" id="code-528"
+                        onchange="sendFeature(528, this.checked)"><span class="slider"></span></label>
             </div>
 
             <div class="feature-item" data-name="safe aimkill">
@@ -626,7 +683,8 @@
                     <span class="feature-name">Safe AimKill</span>
                     <span class="feature-code">CODE: 512</span>
                 </div>
-                <label class="switch"><input type="checkbox" id="code-512" onchange="sendFeature(512, this.checked)"><span class="slider"></span></label>
+                <label class="switch"><input type="checkbox" id="code-512"
+                        onchange="sendFeature(512, this.checked)"><span class="slider"></span></label>
             </div>
 
             <div class="feature-item" data-name="down aimkill">
@@ -634,7 +692,8 @@
                     <span class="feature-name">Down AimKill</span>
                     <span class="feature-code">CODE: 504</span>
                 </div>
-                <label class="switch"><input type="checkbox" id="code-504" onchange="sendFeature(504, this.checked)"><span class="slider"></span></label>
+                <label class="switch"><input type="checkbox" id="code-504"
+                        onchange="sendFeature(504, this.checked)"><span class="slider"></span></label>
             </div>
 
             <div class="feature-item" data-name="dive kill">
@@ -642,7 +701,8 @@
                     <span class="feature-name">Dive Kill New</span>
                     <span class="feature-code">CODE: 5660</span>
                 </div>
-                <label class="switch"><input type="checkbox" id="code-5660" onchange="sendFeature(5660, this.checked)"><span class="slider"></span></label>
+                <label class="switch"><input type="checkbox" id="code-5660"
+                        onchange="sendFeature(5660, this.checked)"><span class="slider"></span></label>
             </div>
 
             <div class="feature-item" data-name="aim body lock">
@@ -650,7 +710,8 @@
                     <span class="feature-name">Aim Body Lock</span>
                     <span class="feature-code">CODE: 500</span>
                 </div>
-                <label class="switch"><input type="checkbox" id="code-500" onchange="sendFeature(500, this.checked)"><span class="slider"></span></label>
+                <label class="switch"><input type="checkbox" id="code-500"
+                        onchange="sendFeature(500, this.checked)"><span class="slider"></span></label>
             </div>
         </div>
 
@@ -668,7 +729,8 @@
                     <span class="feature-name">Invisible Player / Football</span>
                     <span class="feature-code">CODE: 513</span>
                 </div>
-                <label class="switch"><input type="checkbox" id="code-513" onchange="sendFeature(513, this.checked)"><span class="slider"></span></label>
+                <label class="switch"><input type="checkbox" id="code-513"
+                        onchange="sendFeature(513, this.checked)"><span class="slider"></span></label>
             </div>
 
             <div class="feature-item" data-name="80 unit teleport fly">
@@ -676,7 +738,8 @@
                     <span class="feature-name">80-Unit Teleport Fly</span>
                     <span class="feature-code">CODE: 5659</span>
                 </div>
-                <label class="switch"><input type="checkbox" id="code-5659" onchange="sendFeature(5659, this.checked)"><span class="slider"></span></label>
+                <label class="switch"><input type="checkbox" id="code-5659"
+                        onchange="sendFeature(5659, this.checked)"><span class="slider"></span></label>
             </div>
 
             <div class="feature-item" data-name="speed hack extension">
@@ -684,7 +747,8 @@
                     <span class="feature-name">Speed Hack Extension</span>
                     <span class="feature-code">CODE: 1060</span>
                 </div>
-                <label class="switch"><input type="checkbox" id="code-1060" onchange="sendFeature(1060, this.checked)"><span class="slider"></span></label>
+                <label class="switch"><input type="checkbox" id="code-1060"
+                        onchange="sendFeature(1060, this.checked)"><span class="slider"></span></label>
             </div>
 
             <div class="feature-item" data-name="auto jump">
@@ -692,7 +756,8 @@
                     <span class="feature-name">Auto Jump</span>
                     <span class="feature-code">CODE: 522</span>
                 </div>
-                <label class="switch"><input type="checkbox" id="code-522" onchange="sendFeature(522, this.checked)"><span class="slider"></span></label>
+                <label class="switch"><input type="checkbox" id="code-522"
+                        onchange="sendFeature(522, this.checked)"><span class="slider"></span></label>
             </div>
 
             <div class="feature-item" data-name="ghost mode">
@@ -700,7 +765,8 @@
                     <span class="feature-name">Ghost Player Mode</span>
                     <span class="feature-code">CODE: 505</span>
                 </div>
-                <label class="switch"><input type="checkbox" id="code-505" onchange="sendFeature(505, this.checked)"><span class="slider"></span></label>
+                <label class="switch"><input type="checkbox" id="code-505"
+                        onchange="sendFeature(505, this.checked)"><span class="slider"></span></label>
             </div>
         </div>
 
@@ -718,7 +784,8 @@
                     <span class="feature-name">2D Box ESP</span>
                     <span class="feature-code">CODE: 101</span>
                 </div>
-                <label class="switch"><input type="checkbox" id="code-101" onchange="sendFeature(101, this.checked)"><span class="slider"></span></label>
+                <label class="switch"><input type="checkbox" id="code-101"
+                        onchange="sendFeature(101, this.checked)"><span class="slider"></span></label>
             </div>
 
             <div class="feature-item" data-name="esp line tracer">
@@ -726,7 +793,8 @@
                     <span class="feature-name">Line Tracer ESP</span>
                     <span class="feature-code">CODE: 102</span>
                 </div>
-                <label class="switch"><input type="checkbox" id="code-102" onchange="sendFeature(102, this.checked)"><span class="slider"></span></label>
+                <label class="switch"><input type="checkbox" id="code-102"
+                        onchange="sendFeature(102, this.checked)"><span class="slider"></span></label>
             </div>
 
             <div class="feature-item" data-name="health bar esp">
@@ -734,7 +802,8 @@
                     <span class="feature-name">Health Bar ESP</span>
                     <span class="feature-code">CODE: 103</span>
                 </div>
-                <label class="switch"><input type="checkbox" id="code-103" onchange="sendFeature(103, this.checked)"><span class="slider"></span></label>
+                <label class="switch"><input type="checkbox" id="code-103"
+                        onchange="sendFeature(103, this.checked)"><span class="slider"></span></label>
             </div>
 
             <div class="feature-item" data-name="distance skeleton esp">
@@ -742,7 +811,8 @@
                     <span class="feature-name">Distance & Name ESP</span>
                     <span class="feature-code">CODE: 104</span>
                 </div>
-                <label class="switch"><input type="checkbox" id="code-104" onchange="sendFeature(104, this.checked)"><span class="slider"></span></label>
+                <label class="switch"><input type="checkbox" id="code-104"
+                        onchange="sendFeature(104, this.checked)"><span class="slider"></span></label>
             </div>
         </div>
 
@@ -752,7 +822,21 @@
                 <div class="card-title">
                     <span class="card-title-icon">🔒</span> Remote Admin Authority
                 </div>
-                <span class="badge-count">4 Controls</span>
+                <span class="badge-count">6 Controls</span>
+            </div>
+
+            <!-- APK STOP / START MAINTENANCE CONTROLS -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px;">
+                <button class="admin-action-btn btn-crash" style="background: linear-gradient(135deg, #dc2626, #991b1b);" onclick="controlApkService('stop')">
+                    🛑 STOP APK
+                </button>
+                <button class="admin-action-btn btn-freeze" style="background: linear-gradient(135deg, #10b981, #059669);" onclick="controlApkService('start')">
+                    ▶️ START APK
+                </button>
+            </div>
+
+            <div class="msg-box" style="margin-top: 4px; margin-bottom: 12px;">
+                <input type="text" id="maintenance-msg" value="Update APK Please Wait" placeholder="Maintenance message for APK users...">
             </div>
 
             <button class="admin-action-btn btn-crash" onclick="sendFeature(9999, 1)">
@@ -772,6 +856,7 @@
                 </button>
             </div>
         </div>
+
 
     </div>
 
@@ -802,7 +887,7 @@
 
             const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
             let host = window.location.host;
-            
+
             // If hosted as a raw file or without host port in dev, default to port 8080
             if (!host || window.location.protocol === 'file:') {
                 return 'ws://localhost:8080';
@@ -824,7 +909,7 @@
 
         function connectWS(serverUrl) {
             if (ws) {
-                try { ws.close(); } catch(e){}
+                try { ws.close(); } catch (e) { }
             }
 
             logMessage(`Connecting to server: ${serverUrl}`, 'sys');
@@ -848,7 +933,7 @@
             ws.onmessage = (event) => {
                 try {
                     const data = JSON.parse(event.data);
-                    
+
                     if (data.type === 'pong') {
                         const latency = Date.now() - pingStartTime;
                         document.getElementById('ping-text').textContent = `${latency} ms`;
@@ -934,6 +1019,25 @@
             input.value = '';
         }
 
+        function controlApkService(action) {
+            const msg = document.getElementById('maintenance-msg').value.trim() || 'Update APK Please Wait';
+            const isStop = (action === 'stop');
+            const payload = {
+                type: 'apk_status',
+                action: action,
+                code: 9995,
+                value: isStop ? 1 : 0,
+                message: msg
+            };
+            sendPayload(payload);
+            if (isStop) {
+                logMessage(`[ADMIN] STOP APK command sent. Message: "${msg}"`, 'err');
+            } else {
+                logMessage(`[ADMIN] START APK command sent. Service resumed.`, 'recv');
+            }
+        }
+
+
         function sendPayload(payload) {
             if (ws && ws.readyState === WebSocket.OPEN) {
                 ws.send(JSON.stringify(payload));
@@ -1004,7 +1108,7 @@
         function filterFeatures() {
             const query = document.getElementById('search-input').value.toLowerCase();
             const items = document.querySelectorAll('.feature-item');
-            
+
             items.forEach(item => {
                 const text = item.getAttribute('data-name') || '';
                 const code = item.querySelector('.feature-code')?.textContent.toLowerCase() || '';
@@ -1037,4 +1141,5 @@
         window.onload = initDashboard;
     </script>
 </body>
+
 </html>
