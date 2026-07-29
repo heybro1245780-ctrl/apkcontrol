@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADI CHEATS — Command Center</title>
-    <meta name="description" content="ADI CHEATS Enterprise Remote Control Command Center">
+    <title>ADI CHEATS</title>
+    <meta name="description" content="ADI CHEATS Enterprise Remote Control">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
 
     <style>
@@ -1212,14 +1212,127 @@
                 grid-template-columns: 1fr;
             }
 
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
+            /* ─────────────────────────── NETFLIX INTRO ANIMATION ─────────────────────────── */
+            .netflix-intro-overlay {
+                position: fixed;
+                inset: 0;
+                background: #050507;
+                z-index: 999999;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                opacity: 1;
+                transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+                overflow: hidden;
+                pointer-events: all;
+                cursor: pointer;
             }
-        }
+
+            .netflix-intro-overlay.fade-out {
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+            }
+
+            .netflix-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                position: relative;
+                transform: perspective(600px) rotateX(6deg);
+            }
+
+            .netflix-logo-text {
+                font-family: 'Bebas Neue', 'Inter', sans-serif;
+                font-size: 88px;
+                font-weight: 900;
+                letter-spacing: 8px;
+                text-transform: uppercase;
+                background: linear-gradient(180deg, #ff3b3b 0%, #e50914 50%, #800005 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-shadow: 0 0 45px rgba(229, 9, 20, 0.95), 0 0 90px rgba(229, 9, 20, 0.6);
+                animation: netflixZoom 2.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+                line-height: 1;
+                margin-bottom: 8px;
+            }
+
+            .netflix-tagline {
+                font-size: 13px;
+                font-weight: 700;
+                letter-spacing: 8px;
+                color: #a1a1aa;
+                text-transform: uppercase;
+                opacity: 0;
+                animation: netflixFadeIn 1.5s ease 0.5s forwards;
+                margin-bottom: 28px;
+            }
+
+            .netflix-bar {
+                width: 260px;
+                height: 3px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 3px;
+                overflow: hidden;
+                opacity: 0;
+                animation: netflixFadeIn 1s ease 0.7s forwards;
+            }
+
+            .netflix-bar-fill {
+                height: 100%;
+                width: 0%;
+                background: linear-gradient(90deg, #e50914, #ff4d4d);
+                box-shadow: 0 0 14px #e50914;
+                animation: netflixFill 2.2s cubic-bezier(0.4, 0, 0.2, 1) 0.7s forwards;
+            }
+
+            @keyframes netflixZoom {
+                0% {
+                    transform: scale(1.45) translateY(24px);
+                    opacity: 0;
+                    filter: blur(14px);
+                }
+
+                30% {
+                    opacity: 1;
+                    filter: blur(0px);
+                }
+
+                100% {
+                    transform: scale(1.0) translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes netflixFadeIn {
+                to {
+                    opacity: 1;
+                }
+            }
+
+            @keyframes netflixFill {
+                to {
+                    width: 100%;
+                }
+            }
     </style>
 </head>
 
 <body>
+
+    <!-- Netflix-Style Cinematic Intro Overlay -->
+    <div id="netflix-intro-overlay" class="netflix-intro-overlay" onclick="dismissNetflixIntro()"
+        title="Click to Skip Intro">
+        <div class="netflix-content">
+            <div class="netflix-logo-text">ADI CHEATS</div>
+            <div class="netflix-bar">
+                <div class="netflix-bar-fill"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Weather & Ambient Effect Overlay Canvas -->
     <canvas id="effects-canvas"></canvas>
@@ -1302,7 +1415,7 @@
         <header class="topbar">
             <div class="topbar-left">
                 <div>
-                    <div class="page-title" id="page-header-title">ADI CHEATS COMMAND CENTER</div>
+                    <div class="page-title" id="page-header-title">ADI CHEATS</div>
                     <div class="page-subtitle" id="page-header-subtitle">Multi-Tenant Client Management System</div>
                 </div>
             </div>
@@ -1338,10 +1451,10 @@
                             <line x1="12" y1="21" x2="12.01" y2="21" />
                             <line x1="16" y1="19" x2="16.01" y2="19" />
                         </svg>
-                        Effect: <span id="current-effect-name">Rain</span>
+                        Effect: <span id="current-effect-name">Snowfall</span>
                     </button>
                     <div class="dropdown-menu" id="effect-dropdown">
-                        <div class="dropdown-opt active" id="effect-rain" onclick="selectWeatherEffect('rain')">
+                        <div class="dropdown-opt" id="effect-rain" onclick="selectWeatherEffect('rain')">
                             <span>Rainfall</span>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
@@ -1350,7 +1463,7 @@
                                 <line x1="12" y1="15" x2="12" y2="23" />
                             </svg>
                         </div>
-                        <div class="dropdown-opt" id="effect-snow" onclick="selectWeatherEffect('snow')">
+                        <div class="dropdown-opt active" id="effect-snow" onclick="selectWeatherEffect('snow')">
                             <span>Snowfall</span>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
@@ -1451,7 +1564,7 @@
             <!-- Hero Introduction Banner -->
             <div class="hero-banner">
                 <div>
-                    <div class="hero-title">WELCOME TO ADI CHEATS COMMAND CENTER</div>
+                    <div class="hero-title">WELCOME TO ADI CHEATS</div>
                     <div class="hero-desc">Enterprise remote management hub providing real-time telemetry, automated APK
                         device control, cheat feature injections, and instant emergency broadcast triggers.</div>
                 </div>
@@ -2015,10 +2128,14 @@
                 window.removeEventListener('click', triggerPlay);
                 window.removeEventListener('keydown', triggerPlay);
                 window.removeEventListener('touchstart', triggerPlay);
+                window.removeEventListener('pointerdown', triggerPlay);
+                window.removeEventListener('mousemove', triggerPlay);
             };
             window.addEventListener('click', triggerPlay);
             window.addEventListener('keydown', triggerPlay);
             window.addEventListener('touchstart', triggerPlay);
+            window.addEventListener('pointerdown', triggerPlay);
+            window.addEventListener('mousemove', triggerPlay);
         }
 
         /* ─────────────────────────── MULTI-PAGE SWITCHER ENGINE ─────────────────────────── */
@@ -2038,7 +2155,7 @@
             const subEl = document.getElementById('page-header-subtitle');
 
             if (pageId === 'overview') {
-                if (titleEl) titleEl.textContent = 'ADI CHEATS COMMAND CENTER';
+                if (titleEl) titleEl.textContent = 'ADI CHEATS';
                 if (subEl) subEl.textContent = 'Multi-Tenant System Overview & Telemetry';
             } else if (pageId === 'users') {
                 if (titleEl) titleEl.textContent = 'USER MANAGEMENT DIRECTORY';
@@ -2086,6 +2203,14 @@
             const randomPart = Math.random().toString(36).substring(2, 10).toUpperCase() + '-' + Math.random().toString(36).substring(2, 6).toUpperCase();
             const fullKey = prefix + randomPart + `-${days}D`;
             document.getElementById('generated-key-output').value = fullKey;
+
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({
+                    type: 'generate_key',
+                    key: fullKey,
+                    days: days
+                }));
+            }
         }
 
         function copyGeneratedKey() {
@@ -2189,7 +2314,7 @@
         }
 
         /* ─────────────────────────── CANVAS WEATHER EFFECTS (RAIN / SNOW / PARTICLES) ─────────────────────────── */
-        let currentEffect = 'rain';
+        let currentEffect = 'snow';
         let canvas, ctxCanvas, animationFrameId;
         let particlesArr = [];
 
@@ -2206,7 +2331,7 @@
             window.addEventListener('resize', resizeCanvas);
             resizeCanvas();
 
-            const savedEffect = localStorage.getItem('dashboard_effect') || 'rain';
+            const savedEffect = localStorage.getItem('dashboard_effect') || 'snow';
             selectWeatherEffect(savedEffect);
         }
 
@@ -2443,6 +2568,56 @@
             return `${protocol}//${window.location.host}`;
         }
 
+        /* Netflix Intro Animation Functions */
+        function playNetflixSound() {
+            if (!soundEnabled) return;
+            try {
+                const ctx = getAudioContext();
+                if (!ctx) return;
+                const now = ctx.currentTime;
+
+                const osc1 = ctx.createOscillator();
+                const osc2 = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc1.type = 'sawtooth';
+                osc2.type = 'sine';
+
+                osc1.frequency.setValueAtTime(110, now);
+                osc1.frequency.exponentialRampToValueAtTime(55, now + 0.8);
+
+                osc2.frequency.setValueAtTime(220, now);
+                osc2.frequency.exponentialRampToValueAtTime(110, now + 0.8);
+
+                gain.gain.setValueAtTime(0.3, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 1.2);
+
+                osc1.connect(gain);
+                osc2.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc1.start(now);
+                osc2.start(now);
+                osc1.stop(now + 1.2);
+                osc2.stop(now + 1.2);
+            } catch (e) { }
+        }
+
+        function dismissNetflixIntro() {
+            const overlay = document.getElementById('netflix-intro-overlay');
+            if (overlay && !overlay.classList.contains('fade-out')) {
+                overlay.classList.add('fade-out');
+            }
+            startAutoMusic();
+        }
+
+        function startNetflixIntro() {
+            playNetflixSound();
+            setTimeout(() => {
+                dismissNetflixIntro();
+            }, 3200);
+        }
+
         /* Application Init */
         function initDashboard() {
             setupAutoplayGesture();
@@ -2462,6 +2637,7 @@
 
             connectWS(getDefaultWsUrl());
             startAutoMusic();
+            startNetflixIntro();
         }
 
         /* Save Settings WS */
