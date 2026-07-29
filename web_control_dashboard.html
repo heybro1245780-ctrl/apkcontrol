@@ -4,411 +4,456 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADI CHEATS - Ultra Control Dashboard</title>
+    <title>ADI CHEATS - Next-Gen Control Center</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            --bg-color: #080c14;
-            --card-bg: rgba(17, 24, 39, 0.75);
-            --card-border: rgba(56, 189, 248, 0.15);
-            --card-border-hover: rgba(56, 189, 248, 0.4);
-            --accent-cyan: #00f2fe;
-            --accent-blue: #3b82f6;
-            --accent-green: #10b981;
-            --accent-purple: #8b5cf6;
-            --accent-red: #ef4444;
-            --accent-amber: #f59e0b;
-            --text-main: #f3f4f6;
-            --text-sub: #9ca3af;
-            --glass-blur: blur(12px);
+            --bg-dark: #060609;
+            --bg-card: rgba(18, 12, 16, 0.85);
+            --bg-card-hover: rgba(28, 16, 22, 0.95);
+            --border-card: rgba(239, 68, 68, 0.2);
+            --border-glow: rgba(255, 0, 60, 0.5);
+
+            --neon-red: #ff003c;
+            --neon-crimson: #dc2626;
+            --neon-blood: #991b1b;
+            --neon-amber: #f59e0b;
+            --neon-green: #10b981;
+            --neon-purple: #c084fc;
+
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-sub: #64748b;
+
+            --glass-blur: blur(16px);
+            --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Outfit', sans-serif;
             user-select: none;
         }
 
         body {
-            background: radial-gradient(circle at 50% 0%, #111827 0%, #080c14 100%);
+            background-color: var(--bg-dark);
+            background-image:
+                radial-gradient(circle at 50% 0%, rgba(255, 0, 60, 0.15) 0%, transparent 65%),
+                radial-gradient(circle at 100% 100%, rgba(153, 27, 27, 0.12) 0%, transparent 50%),
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
             min-height: 100vh;
             color: var(--text-main);
             padding: 24px;
             overflow-x: hidden;
         }
 
-        /* Top Header */
-        .header {
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Top Header Navigation */
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px 28px;
-            background: var(--card-bg);
+            padding: 16px 26px;
+            background: var(--bg-card);
             backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
+            border: 1px solid var(--border-card);
+            border-radius: 20px;
             margin-bottom: 24px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: var(--transition-smooth);
         }
 
-        .title-group {
+        .navbar:hover {
+            border-color: var(--border-glow);
+        }
+
+        .brand {
             display: flex;
             align-items: center;
             gap: 14px;
         }
 
-        .logo-icon {
-            width: 42px;
-            height: 42px;
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-            border-radius: 12px;
+        .brand-logo {
+            width: 46px;
+            height: 46px;
+            background: linear-gradient(135deg, var(--neon-red), var(--neon-blood));
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
+            font-weight: 900;
             font-size: 20px;
-            color: #000;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.5);
+            animation: pulseGlow 3s infinite alternate;
         }
 
-        .title {
+        .brand-text-title {
             font-size: 22px;
-            font-weight: 700;
-            background: linear-gradient(90deg, #ffffff, var(--accent-cyan));
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            background: linear-gradient(90deg, #ffffff, var(--neon-red));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-
-            letter-spacing: 0.5px;
         }
 
-        .header-meta {
+        .brand-text-sub {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .header-actions {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
-        .meta-pill {
+        .status-badge {
             display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba(31, 41, 55, 0.6);
-            padding: 8px 14px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(18, 12, 16, 0.8);
+            padding: 8px 16px;
+            border-radius: 30px;
+            border: 1px solid var(--border-card);
             font-size: 13px;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .status-dot {
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background-color: var(--accent-red);
-            box-shadow: 0 0 8px var(--accent-red);
-            transition: all 0.3s ease;
+            background: var(--neon-red);
+            box-shadow: 0 0 10px var(--neon-red);
+            transition: var(--transition-smooth);
         }
 
-        .status-dot.online {
-            background-color: var(--accent-green);
-            box-shadow: 0 0 10px var(--accent-green);
+        .status-dot.active {
+            background: var(--neon-green);
+            box-shadow: 0 0 12px var(--neon-green);
         }
 
-        .config-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--card-border);
+        .btn-gear {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-card);
             color: var(--text-main);
-            padding: 8px 14px;
-            border-radius: 20px;
+            padding: 8px 16px;
+            border-radius: 30px;
             cursor: pointer;
             font-size: 13px;
-            font-weight: 500;
-            transition: all 0.2s ease;
+            font-weight: 600;
+            transition: var(--transition-smooth);
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        .config-btn:hover {
-            background: rgba(0, 242, 254, 0.15);
-            border-color: var(--accent-cyan);
-            color: #fff;
+        .btn-gear:hover {
+            background: rgba(255, 0, 60, 0.15);
+            border-color: var(--neon-red);
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
         }
 
-        /* Connection Config Bar */
+        /* Config Modal / Slide-down */
         .config-panel {
             display: none;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 16px 20px;
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-glow);
+            border-radius: 18px;
+            padding: 20px 24px;
             margin-bottom: 24px;
-            gap: 12px;
-            align-items: center;
             animation: fadeIn 0.3s ease;
         }
 
-        .config-panel.active {
-            display: flex;
-            flex-wrap: wrap;
+        .config-panel.open {
+            display: block;
         }
 
-        .config-panel input {
+        .config-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .config-row input {
             flex: 1;
             min-width: 280px;
-            padding: 10px 14px;
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            padding: 12px 16px;
+            background: rgba(6, 6, 9, 0.9);
+            border: 1px solid var(--border-card);
+            border-radius: 12px;
             color: #fff;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
+            font-size: 13.5px;
+            outline: none;
         }
 
-        .btn-apply {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-            color: #000;
+        .config-row input:focus {
+            border-color: var(--neon-red);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neon-red), var(--neon-blood));
+            color: #fff;
             font-weight: 700;
             border: none;
-            padding: 10px 18px;
-            border-radius: 10px;
+            padding: 12px 22px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: var(--transition-smooth);
         }
 
-        .btn-apply:hover {
-            opacity: 0.9;
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(255, 0, 60, 0.5);
         }
 
-        /* Quick Controls & Search Bar */
-        .toolbar {
+
+        /* Metrics Bar Cards */
+        .metrics-grid {
             display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
             margin-bottom: 24px;
         }
 
-        .preset-bar {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .preset-btn {
-            background: rgba(31, 41, 55, 0.8);
-            border: 1px solid var(--card-border);
-            color: var(--text-main);
-            padding: 10px 18px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s ease;
+        .metric-card {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-card);
+            border-radius: 18px;
+            padding: 18px 22px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: space-between;
+            transition: var(--transition-smooth);
         }
 
-        .preset-btn.rage {
-            border-color: rgba(239, 68, 68, 0.4);
-            background: rgba(239, 68, 68, 0.1);
+        .metric-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--border-glow);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
         }
 
-        .preset-btn.rage:hover {
-            background: rgba(239, 68, 68, 0.25);
-            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+        .metric-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
 
-        .preset-btn.legit {
-            border-color: rgba(16, 185, 129, 0.4);
-            background: rgba(16, 185, 129, 0.1);
+        .metric-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .preset-btn.legit:hover {
-            background: rgba(16, 185, 129, 0.25);
-            box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+        .metric-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        .preset-btn.reset {
-            border-color: rgba(156, 163, 175, 0.4);
+        .metric-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .preset-btn.reset:hover {
-            background: rgba(156, 163, 175, 0.2);
-        }
-
-        .search-box {
-            position: relative;
-            min-width: 250px;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 10px 16px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            color: var(--text-main);
-            font-size: 14px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .search-box input:focus {
-            border-color: var(--accent-cyan);
-        }
-
-        /* Main Dashboard Grid */
-        .dashboard-grid {
+        /* Main Control Grid */
+        .main-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
             margin-bottom: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .card {
-            background: var(--card-bg);
+            background: var(--bg-card);
             backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--card-border);
-            border-radius: 18px;
-            padding: 20px;
-            transition: transform 0.2s ease, border-color 0.2s ease;
+            border: 1px solid var(--border-card);
+            border-radius: 22px;
+            padding: 24px;
+            transition: var(--transition-smooth);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
         .card:hover {
-            border-color: var(--card-border-hover);
+            border-color: var(--border-glow);
         }
 
         .card-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-bottom: 14px;
-            margin-bottom: 16px;
+            padding-bottom: 16px;
+            margin-bottom: 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .card-title {
-            font-size: 17px;
-            font-weight: 700;
+            font-size: 18px;
+            font-weight: 800;
             display: flex;
             align-items: center;
             gap: 10px;
             color: #fff;
         }
 
-        .card-title-icon {
-            font-size: 18px;
-        }
-
-        .badge-count {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 2px 8px;
-            border-radius: 10px;
+        .badge-pill {
+            background: rgba(255, 0, 60, 0.12);
+            color: var(--neon-red);
+            border: 1px solid rgba(255, 0, 60, 0.3);
+            padding: 3px 10px;
+            border-radius: 12px;
             font-size: 12px;
-            color: var(--text-sub);
+            font-weight: 700;
         }
 
-        /* Feature Toggles */
-        .feature-item {
+        /* Power Actions Buttons */
+        .power-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .btn-power {
+            padding: 14px 18px;
+            border-radius: 14px;
+            border: none;
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 10px 12px;
-            border-radius: 10px;
-            margin-bottom: 8px;
-            background: rgba(15, 23, 42, 0.4);
-            border: 1px solid transparent;
-            transition: all 0.2s ease;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .feature-item:hover {
-            background: rgba(31, 41, 55, 0.6);
-            border-color: rgba(255, 255, 255, 0.05);
+        .btn-stop {
+            background: linear-gradient(135deg, var(--neon-red), var(--neon-blood));
+            color: white;
+            box-shadow: 0 4px 16px rgba(255, 0, 60, 0.4);
         }
 
-        .feature-info {
+        .btn-stop:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 0, 60, 0.6);
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
+        }
+
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.5);
+        }
+
+        /* Inputs & Quick Message Templates */
+        .input-group {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 8px;
+            margin-bottom: 16px;
         }
 
-        .feature-name {
-            font-size: 14px;
-            font-weight: 500;
+        .input-label {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            font-weight: 600;
         }
 
-        .feature-code {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: var(--text-sub);
-        }
-
-        /* Toggle Switch */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 46px;
-            height: 24px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #374151;
-            transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 24px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 50%;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-        }
-
-        input:checked+.slider {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-        }
-
-        input:checked+.slider:before {
-            transform: translateX(22px);
-        }
-
-        /* Action Buttons */
-        .admin-action-btn {
+        .custom-input {
             width: 100%;
             padding: 12px 16px;
-            margin-top: 8px;
-            border: none;
+            background: rgba(6, 6, 9, 0.85);
+            border: 1px solid var(--border-card);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 13.5px;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .custom-input:focus {
+            border-color: var(--neon-red);
+            box-shadow: 0 0 14px rgba(255, 0, 60, 0.25);
+        }
+
+        .chip-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        .chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11.5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .chip:hover {
+            background: rgba(255, 0, 60, 0.2);
+            border-color: var(--neon-red);
+            color: #fff;
+        }
+
+        .btn-action-outline {
+            width: 100%;
+            padding: 12px 16px;
+            margin-top: 10px;
             border-radius: 12px;
             font-weight: 700;
             font-size: 13px;
-            letter-spacing: 0.5px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: var(--transition-smooth);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -416,146 +461,173 @@
         }
 
         .btn-crash {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3);
+            background: rgba(255, 0, 60, 0.15);
+            border: 1px solid rgba(255, 0, 60, 0.35);
+            color: #ff4d6d;
         }
 
         .btn-crash:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+            background: rgba(255, 0, 60, 0.3);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
         }
 
         .btn-freeze {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #fbbf24;
         }
 
         .btn-freeze:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+            background: rgba(245, 158, 11, 0.25);
+            color: #fff;
         }
 
         .btn-disable {
-            background: rgba(55, 65, 81, 0.8);
-            color: #e5e7eb;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(148, 163, 184, 0.1);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: #cbd5e1;
         }
 
         .btn-disable:hover {
-            background: rgba(75, 85, 99, 1);
+            background: rgba(148, 163, 184, 0.25);
+            color: #fff;
         }
 
-        .msg-box {
-            margin-top: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .msg-box input {
-            padding: 10px 14px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(15, 23, 42, 0.8);
+        .btn-broadcast {
+            background: linear-gradient(135deg, var(--neon-red), var(--neon-blood));
             color: white;
+            border: none;
+            font-weight: 700;
+            box-shadow: 0 4px 14px rgba(255, 0, 60, 0.4);
+        }
+
+        .btn-broadcast:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(255, 0, 60, 0.6);
+        }
+
+        /* Schedule Maintenance Timer Section */
+        .timer-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .timer-select {
+            padding: 10px 14px;
+            background: rgba(6, 6, 9, 0.9);
+            border: 1px solid var(--border-card);
+            border-radius: 10px;
+            color: #fff;
             font-size: 13px;
             outline: none;
         }
 
-        .msg-box input:focus {
-            border-color: var(--accent-blue);
-        }
-
-        .btn-send-msg {
-            background: linear-gradient(135deg, var(--accent-blue), #2563eb);
-            color: white;
-            font-weight: 600;
-        }
-
         /* Terminal Console */
         .terminal-card {
-            background: #090d16;
-            border: 1px solid var(--card-border);
-            border-radius: 18px;
-            padding: 20px;
+            background: #040407;
+            border: 1px solid var(--border-card);
+            border-radius: 22px;
+            padding: 22px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .terminal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .terminal-title {
             font-family: 'JetBrains Mono', monospace;
             font-size: 13px;
-            color: var(--accent-cyan);
+            color: var(--neon-red);
             display: flex;
             align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .terminal-controls {
+            display: flex;
             gap: 8px;
         }
 
-        .clear-log-btn {
-            background: transparent;
+        .terminal-btn {
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-sub);
-            padding: 4px 10px;
-            border-radius: 6px;
+            color: var(--text-muted);
+            padding: 5px 12px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 12px;
+            font-weight: 600;
+            transition: var(--transition-smooth);
         }
 
-        .clear-log-btn:hover {
+        .terminal-btn:hover {
             color: #fff;
             border-color: rgba(255, 255, 255, 0.3);
         }
 
         .terminal-body {
-            height: 160px;
+            height: 220px;
             overflow-y: auto;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            padding: 12px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 14px;
+            padding: 14px 18px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
+            font-size: 12.5px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            gap: 8px;
+            border: 1px solid rgba(255, 0, 60, 0.15);
         }
 
-        .log-entry {
-            line-height: 1.4;
+        .log-line {
+            line-height: 1.5;
             word-break: break-all;
         }
 
         .log-time {
-            color: #6b7280;
+            color: #64748b;
+            margin-right: 6px;
         }
 
-        .log-type-send {
-            color: var(--accent-cyan);
+        .log-sys {
+            color: var(--neon-amber);
         }
 
-        .log-type-recv {
-            color: var(--accent-green);
+        .log-recv {
+            color: var(--neon-green);
         }
 
-        .log-type-sys {
-            color: var(--accent-amber);
+        .log-send {
+            color: var(--neon-red);
         }
 
-        .log-type-err {
-            color: var(--accent-red);
+        .log-err {
+            color: #ff4d6d;
         }
+
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
+            }
+
+            100% {
+                box-shadow: 0 0 25px rgba(255, 0, 60, 0.8);
+            }
+        }
+
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-6px);
+                transform: translateY(-8px);
             }
 
             to {
@@ -563,144 +635,205 @@
                 transform: translateY(0);
             }
         }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 14px;
-            }
-
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 14px;
-            }
-
-            .toolbar {
-                grid-template-columns: 1fr;
-            }
-        }
     </style>
 </head>
 
 <body>
 
-    <!-- Top Navigation / Status Header -->
-    <header class="header">
-        <div class="title-group">
-            <div class="logo-icon">ADI</div>
-            <div>
-                <div class="title">REMOTE CONTROL DASHBOARD</div>
-                <div style="font-size: 12px; color: var(--text-sub);">Real-time APK Controller & Command Center</div>
-            </div>
-        </div>
+    <div class="container">
 
-        <div class="header-meta">
-            <div class="meta-pill">
-                <span id="status-dot" class="status-dot"></span>
-                <span id="connection-text">Disconnected</span>
-            </div>
-
-            <div class="meta-pill">
-                <span>👥 APK Clients:</span>
-                <span id="active-clients-count" style="color: var(--accent-cyan); font-weight: 700;">0</span>
-            </div>
-
-            <div class="meta-pill">
-                <span>⚡ Latency:</span>
-                <span id="ping-text" style="color: var(--accent-green); font-weight: 600;">-- ms</span>
-            </div>
-
-            <button class="config-btn" onclick="toggleConfigPanel()">
-                ⚙️ Server Settings
-            </button>
-        </div>
-    </header>
-
-    <!-- Hidden Server Configuration Panel -->
-    <div id="config-panel" class="config-panel">
-        <label style="font-size: 13px; color: var(--text-sub); width: 100%;">WebSocket Server Target URL:</label>
-        <input type="text" id="custom-ws-url" placeholder="e.g. ws://192.168.1.10:8080 or wss://your-domain.com">
-        <button class="btn-apply" onclick="saveAndReconnect()">Save & Reconnect</button>
-        <button class="config-btn" onclick="resetToDefaultUrl()">Auto Detect</button>
-        <div style="width: 100%; font-size: 12px; color: var(--accent-amber); margin-top: 4px;">
-            ℹ️ Tip: If hosted over HTTPS (SSL), your WebSocket URL must begin with <strong>wss://</strong>.
-        </div>
-    </div>
-
-    <!-- Remote Admin Dashboard Container -->
-    <div class="dashboard-grid" style="grid-template-columns: 1fr; max-width: 800px; margin: 0 auto 24px auto;">
-
-
-        <!-- Remote Admin Authority Card -->
-        <div class="card" data-category="admin">
-            <div class="card-header">
-                <div class="card-title">
-                    <span class="card-title-icon">🔒</span> Remote Admin Authority
+        <!-- Navbar Header -->
+        <header class="navbar">
+            <div class="brand">
+                <div class="brand-logo">ADI</div>
+                <div>
+                    <div class="brand-text-title">CONTROL CENTER V2.0</div>
+                    <div class="brand-text-sub">Real-Time APK Remote Command & Infrastructure Panel</div>
                 </div>
-                <span class="badge-count">6 Controls</span>
             </div>
 
-            <!-- APK STOP / START MAINTENANCE CONTROLS -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px;">
-                <button class="admin-action-btn btn-crash"
-                    style="background: linear-gradient(135deg, #dc2626, #991b1b);" onclick="controlApkService('stop')">
-                    🛑 STOP APK
-                </button>
-                <button class="admin-action-btn btn-freeze"
-                    style="background: linear-gradient(135deg, #10b981, #059669);" onclick="controlApkService('start')">
-                    ▶️ START APK
+            <div class="header-actions">
+                <div class="status-badge">
+                    <span id="status-dot" class="status-dot"></span>
+                    <span id="status-text">Connecting...</span>
+                </div>
+
+                <button class="btn-gear" onclick="toggleConfigPanel()">
+                    ⚙️ Target Server
                 </button>
             </div>
+        </header>
 
-            <div class="msg-box" style="margin-top: 4px; margin-bottom: 12px;">
-                <input type="text" id="maintenance-msg" value="Update APK Please Wait"
-                    placeholder="Maintenance message for APK users...">
+        <!-- Hidden Target Server Config Panel -->
+        <div id="config-panel" class="config-panel">
+            <div style="font-weight: 700; font-size: 14px; color: var(--neon-red);">⚙️ WebSocket Server Target
+                Configuration</div>
+            <div class="config-row">
+                <input type="text" id="custom-ws-url" placeholder="e.g. wss://apkcontrol.onrender.com">
+                <button class="btn-primary" onclick="saveAndReconnect()">Save & Reconnect</button>
+                <button class="btn-gear" onclick="resetToDefaultUrl()">Auto Detect</button>
             </div>
-
-            <button class="admin-action-btn btn-crash" onclick="sendFeature(9999, 1)">
-                🚨 FORCE REMOTE CRASH APK
-            </button>
-            <button class="admin-action-btn btn-freeze" onclick="sendFeature(9998, 1)">
-                ❄️ REMOTE FREEZE & LOCK APK
-            </button>
-            <button class="admin-action-btn btn-disable" onclick="sendFeature(9997, 1)">
-                🛡️ DISABLE ALL CHEATS
-            </button>
-
-            <div class="msg-box">
-                <input type="text" id="alert-msg" placeholder="Enter broadcast message text...">
-                <button class="admin-action-btn btn-send-msg" onclick="sendBroadcastMsg()">
-                    📢 BROADCAST TO ALL APKS
-                </button>
+            <div style="font-size: 12px; color: var(--neon-amber); margin-top: 8px;">
+                ℹ️ Standard Cloud URL: <strong>wss://apkcontrol.onrender.com</strong> (no port 8080 required on HTTPS).
             </div>
         </div>
 
+        <!-- Metrics Stats Dashboard -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-info">
+                    <span class="metric-label">Active APK Clients</span>
+                    <span id="metric-clients-count" class="metric-value">0</span>
+                </div>
+                <div class="metric-icon" style="color: var(--neon-red);">👥</div>
 
-    </div>
-
-    <!-- Live Terminal Activity Feed -->
-    <div class="terminal-card">
-        <div class="terminal-header">
-            <div class="terminal-title">
-                <span>💻</span> REAL-TIME COMMAND FEED & SOCKET LOGS
             </div>
-            <button class="clear-log-btn" onclick="clearLogs()">Clear Console</button>
+
+            <div class="metric-card">
+                <div class="metric-info">
+                    <span class="metric-label">APK Service Status</span>
+                    <span id="metric-service-status" class="metric-value"
+                        style="color: var(--neon-green); font-size: 18px;">ACTIVE</span>
+                </div>
+                <div class="metric-icon" style="color: var(--neon-green);">🛡️</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-info">
+                    <span class="metric-label">Socket Latency</span>
+                    <span id="metric-ping" class="metric-value" style="color: var(--neon-blue);">-- ms</span>
+                </div>
+                <div class="metric-icon" style="color: var(--neon-blue);">⚡</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-info">
+                    <span class="metric-label">Server Uptime</span>
+                    <span id="metric-uptime" class="metric-value" style="font-size: 18px;">00:00:00</span>
+                </div>
+                <div class="metric-icon" style="color: var(--neon-purple);">⏱️</div>
+            </div>
         </div>
-        <div id="terminal-body" class="terminal-body">
-            <div class="log-entry log-type-sys">[SYSTEM] Dashboard initialized. Attempting WebSocket connection...</div>
+
+        <!-- Main Dashboard Control Cards -->
+        <div class="main-grid">
+
+            <!-- Card 1: Maintenance & Service Power Controls -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span>⚡</span> APK Service Power & Maintenance
+                    </div>
+                    <span class="badge-pill">GLOBAL CONTROL</span>
+                </div>
+
+                <div class="power-grid">
+                    <button class="btn-power btn-stop" onclick="controlApkService('stop')">
+                        🛑 STOP APK
+                    </button>
+                    <button class="btn-power btn-start" onclick="controlApkService('start')">
+                        ▶️ START APK
+                    </button>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Maintenance Notice Message (Shown on User Screen):</label>
+                    <input type="text" id="maintenance-msg" class="custom-input" value="Update APK Please Wait">
+
+                    <div class="chip-group">
+                        <span class="chip" onclick="setMaintMsg('Update APK Please Wait')">Update APK Please Wait</span>
+                        <span class="chip" onclick="setMaintMsg('Server Under Maintenance')">Server Under
+                            Maintenance</span>
+                        <span class="chip" onclick="setMaintMsg('New V2 Update Released! Re-download')">New V2
+                            Released</span>
+                    </div>
+                </div>
+
+                <div class="input-group" style="margin-top: 14px;">
+                    <label class="input-label">⏰ Auto-Maintenance Timer (Auto Stop/Start):</label>
+                    <div class="timer-box">
+                        <select id="auto-timer-select" class="timer-select">
+                            <option value="5">Stop for 5 Minutes</option>
+                            <option value="15">Stop for 15 Minutes</option>
+                            <option value="60">Stop for 1 Hour</option>
+                        </select>
+                        <button class="btn-gear" onclick="startScheduledMaintenance()">Start Timer</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Remote Admin Emergency & Broadcast Controls -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span>📢</span> Broadcast & Emergency Commands
+                    </div>
+                    <span class="badge-pill">REMOTE ACTIONS</span>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Send Broadcast Announcement Pop-up to All Connected Devices:</label>
+                    <input type="text" id="alert-msg" class="custom-input"
+                        placeholder="Type custom message to display on all phones...">
+
+                    <div class="chip-group">
+                        <span class="chip" onclick="setBroadcastMsg('Welcome to ADI CHEATS!')">Welcome Message</span>
+                        <span class="chip" onclick="setBroadcastMsg('Server restart in 5 minutes!')">Restart
+                            Warning</span>
+                        <span class="chip" onclick="setBroadcastMsg('Use features safely!')">Safety Warning</span>
+                    </div>
+
+                    <button class="btn-action-outline btn-broadcast" style="margin-top: 8px;"
+                        onclick="sendBroadcastMsg()">
+                        📢 BROADCAST ANNOUNCEMENT TO ALL APKS
+                    </button>
+                </div>
+
+                <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+                    <button class="btn-action-outline btn-crash" onclick="sendFeature(9999, 1)">
+                        🚨 FORCE REMOTE CRASH APK
+                    </button>
+                    <button class="btn-action-outline btn-freeze" onclick="sendFeature(9998, 1)">
+                        ❄️ REMOTE FREEZE & LOCK APK
+                    </button>
+                    <button class="btn-action-outline btn-disable" onclick="sendFeature(9997, 1)">
+                        🛡️ EMERGENCY DISABLE ALL CHEATS
+                    </button>
+                </div>
+            </div>
+
         </div>
+
+        <!-- Real-Time Command Feed & Terminal Log -->
+        <div class="terminal-card">
+            <div class="terminal-header">
+                <div class="terminal-title">
+                    <span>💻</span> LIVE COMMAND FEED & WEBSOCKET TRAFFIC LOGS
+                </div>
+                <div class="terminal-controls">
+                    <button class="terminal-btn" onclick="clearLogs()">Clear Console</button>
+                </div>
+            </div>
+
+            <div id="terminal-body" class="terminal-body">
+                <div class="log-line log-sys"><span class="log-time">[SYSTEM]</span> Command Center Dashboard
+                    initialized.</div>
+            </div>
+        </div>
+
     </div>
 
     <script>
         let ws = null;
         let pingStartTime = 0;
         let pingInterval = null;
+        let uptimeSeconds = 0;
+        let uptimeInterval = null;
+        let scheduledTimer = null;
 
-        // Auto-detect optimal WebSocket URL for any host environment
         function getDefaultWsUrl() {
             const stored = localStorage.getItem('custom_ws_url');
             if (stored && stored.trim() !== '') {
-                // Clean legacy stored URL if it incorrectly has :8080 on HTTPS domain
                 if (stored.startsWith('wss://') && stored.includes(':8080')) {
                     const cleaned = stored.replace(':8080', '');
                     localStorage.setItem('custom_ws_url', cleaned);
@@ -717,12 +850,12 @@
             return `${protocol}//${window.location.host}`;
         }
 
-
         function initDashboard() {
             const urlInput = document.getElementById('custom-ws-url');
             const targetUrl = getDefaultWsUrl();
             urlInput.value = targetUrl;
             connectWS(targetUrl);
+            startUptimeTimer();
         }
 
         function connectWS(serverUrl) {
@@ -730,21 +863,21 @@
                 try { ws.close(); } catch (e) { }
             }
 
-            logMessage(`Connecting to server: ${serverUrl}`, 'sys');
-            updateStatusUI('connecting', 'Connecting...');
+            logMessage(`Connecting to target WebSocket server: ${serverUrl}`, 'sys');
+            updateStatusUI(false, 'Connecting...');
 
             try {
                 ws = new WebSocket(serverUrl);
             } catch (err) {
-                logMessage(`WebSocket Creation Failed: ${err.message}`, 'err');
-                updateStatusUI('offline', 'Error');
+                logMessage(`WebSocket Creation Error: ${err.message}`, 'err');
+                updateStatusUI(false, 'Error');
                 setTimeout(() => connectWS(serverUrl), 4000);
                 return;
             }
 
             ws.onopen = () => {
                 logMessage(`Connected successfully to ${serverUrl}`, 'recv');
-                updateStatusUI('online', 'Live Connected');
+                updateStatusUI(true, 'Live Connected');
                 startPingInterval();
             };
 
@@ -754,54 +887,49 @@
 
                     if (data.type === 'pong') {
                         const latency = Date.now() - pingStartTime;
-                        document.getElementById('ping-text').textContent = `${latency} ms`;
+                        document.getElementById('metric-ping').textContent = `${latency} ms`;
                         return;
                     }
 
                     if (data.type === 'stats') {
                         if (data.onlineCount !== undefined) {
-                            document.getElementById('active-clients-count').textContent = data.onlineCount;
+                            document.getElementById('metric-clients-count').textContent = data.onlineCount;
+                        }
+                        if (data.apkStatus) {
+                            updateServiceStatusBadge(data.apkStatus.isStopped);
                         }
                         return;
                     }
 
                     if (data.type === 'init_state') {
-                        logMessage(`Received feature state sync from server. Active clients: ${data.onlineCount || 1}`, 'recv');
+                        logMessage(`State sync received. Active client count: ${data.onlineCount || 0}`, 'recv');
                         if (data.onlineCount !== undefined) {
-                            document.getElementById('active-clients-count').textContent = data.onlineCount;
+                            document.getElementById('metric-clients-count').textContent = data.onlineCount;
                         }
-                        if (data.states) {
-                            syncUIStates(data.states);
+                        if (data.apkStatus) {
+                            updateServiceStatusBadge(data.apkStatus.isStopped);
                         }
                         return;
                     }
 
                     logMessage(`[RECEIVED] ${JSON.stringify(data)}`, 'recv');
-
-                    // If incoming feature sync packet
-                    if (data.type === 'feature' && data.code !== undefined) {
-                        const checkbox = document.getElementById(`code-${data.code}`);
-                        if (checkbox) {
-                            checkbox.checked = data.value === 1;
-                        }
-                    }
                 } catch (e) {
-                    logMessage(`Raw Message Received: ${event.data}`, 'recv');
+                    logMessage(`Raw Event Data: ${event.data}`, 'recv');
                 }
             };
 
             ws.onclose = (evt) => {
                 stopPingInterval();
-                updateStatusUI('offline', 'Disconnected');
-                document.getElementById('ping-text').textContent = '-- ms';
+                updateStatusUI(false, 'Disconnected');
+                document.getElementById('metric-ping').textContent = '-- ms';
                 logMessage(`Connection closed (Code: ${evt.code}). Reconnecting in 3s...`, 'err');
                 setTimeout(() => {
                     connectWS(getDefaultWsUrl());
                 }, 3000);
             };
 
-            ws.onerror = (err) => {
-                logMessage(`WebSocket connection error. Make sure server is running and accessible.`, 'err');
+            ws.onerror = () => {
+                logMessage(`WebSocket error encountered. Ensure server is online.`, 'err');
             };
         }
 
@@ -819,10 +947,35 @@
             if (pingInterval) clearInterval(pingInterval);
         }
 
-        function sendFeature(code, val) {
-            const numericVal = val ? 1 : 0;
-            const payload = { type: 'feature', code: code, value: numericVal };
+        function startUptimeTimer() {
+            if (uptimeInterval) clearInterval(uptimeInterval);
+            uptimeInterval = setInterval(() => {
+                uptimeSeconds++;
+                const hrs = String(Math.floor(uptimeSeconds / 3600)).padStart(2, '0');
+                const mins = String(Math.floor((uptimeSeconds % 3600) / 60)).padStart(2, '0');
+                const secs = String(uptimeSeconds % 60).padStart(2, '0');
+                document.getElementById('metric-uptime').textContent = `${hrs}:${mins}:${secs}`;
+            }, 1000);
+        }
+
+        function controlApkService(action) {
+            const msg = document.getElementById('maintenance-msg').value.trim() || 'Update APK Please Wait';
+            const isStop = (action === 'stop');
+            const payload = {
+                type: 'apk_status',
+                action: action,
+                code: 9995,
+                value: isStop ? 1 : 0,
+                message: msg
+            };
             sendPayload(payload);
+            updateServiceStatusBadge(isStop);
+
+            if (isStop) {
+                logMessage(`[ADMIN] STOP APK command issued. Notice: "${msg}"`, 'err');
+            } else {
+                logMessage(`[ADMIN] START APK command issued. Service resumed.`, 'recv');
+            }
         }
 
         function sendBroadcastMsg() {
@@ -837,75 +990,65 @@
             input.value = '';
         }
 
-        function controlApkService(action) {
-            const msg = document.getElementById('maintenance-msg').value.trim() || 'Update APK Please Wait';
-            const isStop = (action === 'stop');
-            const payload = {
-                type: 'apk_status',
-                action: action,
-                code: 9995,
-                value: isStop ? 1 : 0,
-                message: msg
-            };
+        function sendFeature(code, val) {
+            const payload = { type: 'feature', code: code, value: val };
             sendPayload(payload);
-            if (isStop) {
-                logMessage(`[ADMIN] STOP APK command sent. Message: "${msg}"`, 'err');
-            } else {
-                logMessage(`[ADMIN] START APK command sent. Service resumed.`, 'recv');
-            }
         }
-
 
         function sendPayload(payload) {
             if (ws && ws.readyState === WebSocket.OPEN) {
                 ws.send(JSON.stringify(payload));
                 logMessage(`[SENT] ${JSON.stringify(payload)}`, 'send');
             } else {
-                logMessage(`[FAILED] Cannot send, WebSocket is not connected!`, 'err');
-                alert('WebSocket is disconnected. Please verify server status.');
+                logMessage(`[FAILED] Cannot send payload, WebSocket disconnected.`, 'err');
+                alert('WebSocket is disconnected. Please check connection status.');
             }
         }
 
-        function applyPreset(mode) {
-            const presets = {
-                rage: { 501: 1, 502: 1, 528: 1, 513: 1, 5659: 1, 1060: 1, 101: 1, 102: 1 },
-                legit: { 501: 1, 512: 1, 101: 1, 103: 1, 502: 0, 5659: 0, 1060: 0, 513: 0 },
-                off: { 501: 0, 502: 0, 528: 0, 512: 0, 504: 0, 5660: 0, 500: 0, 513: 0, 5659: 0, 1060: 0, 522: 0, 505: 0, 101: 0, 102: 0, 103: 0, 104: 0 }
-            };
-
-            const selected = presets[mode];
-            if (!selected) return;
-
-            syncUIStates(selected);
-
-            const payload = { type: 'preset', mode: mode, states: selected };
-            sendPayload(payload);
-        }
-
-        function syncUIStates(statesObj) {
-            for (let code in statesObj) {
-                const el = document.getElementById(`code-${code}`);
-                if (el) {
-                    el.checked = statesObj[code] === 1;
-                }
+        function updateServiceStatusBadge(isStopped) {
+            const badge = document.getElementById('metric-service-status');
+            if (isStopped) {
+                badge.textContent = 'STOPPED';
+                badge.style.color = 'var(--neon-red)';
+            } else {
+                badge.textContent = 'ACTIVE';
+                badge.style.color = 'var(--neon-green)';
             }
         }
 
-        function updateStatusUI(state, text) {
+        function updateStatusUI(online, text) {
             const dot = document.getElementById('status-dot');
-            const txt = document.getElementById('connection-text');
+            const txt = document.getElementById('status-text');
             txt.textContent = text;
-
-            if (state === 'online') {
-                dot.className = 'status-dot online';
+            if (online) {
+                dot.className = 'status-dot active';
             } else {
                 dot.className = 'status-dot';
             }
         }
 
+        function setMaintMsg(text) {
+            document.getElementById('maintenance-msg').value = text;
+        }
+
+        function setBroadcastMsg(text) {
+            document.getElementById('alert-msg').value = text;
+        }
+
+        function startScheduledMaintenance() {
+            const minutes = parseInt(document.getElementById('auto-timer-select').value) || 5;
+            controlApkService('stop');
+            logMessage(`[TIMER] Scheduled Maintenance active. APK stopped for ${minutes} minutes.`, 'sys');
+
+            if (scheduledTimer) clearTimeout(scheduledTimer);
+            scheduledTimer = setTimeout(() => {
+                controlApkService('start');
+                logMessage(`[TIMER] Scheduled Maintenance complete. APK service resumed automaticamente.`, 'recv');
+            }, minutes * 60 * 1000);
+        }
+
         function toggleConfigPanel() {
-            const panel = document.getElementById('config-panel');
-            panel.classList.toggle('active');
+            document.getElementById('config-panel').classList.toggle('open');
         }
 
         function saveAndReconnect() {
@@ -923,25 +1066,10 @@
             saveAndReconnect();
         }
 
-        function filterFeatures() {
-            const query = document.getElementById('search-input').value.toLowerCase();
-            const items = document.querySelectorAll('.feature-item');
-
-            items.forEach(item => {
-                const text = item.getAttribute('data-name') || '';
-                const code = item.querySelector('.feature-code')?.textContent.toLowerCase() || '';
-                if (text.includes(query) || code.includes(query)) {
-                    item.style.display = 'flex';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-
         function logMessage(msg, type = 'sys') {
             const body = document.getElementById('terminal-body');
             const entry = document.createElement('div');
-            entry.className = `log-entry log-type-${type}`;
+            entry.className = `log-line log-${type}`;
             const timestamp = new Date().toLocaleTimeString();
             entry.innerHTML = `<span class="log-time">[${timestamp}]</span> ${escapeHtml(msg)}`;
             body.appendChild(entry);
