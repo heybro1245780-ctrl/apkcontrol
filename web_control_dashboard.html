@@ -549,39 +549,6 @@
             line-height: 1.6;
         }
 
-        /* Cash & Revenue Analytics Grid */
-        .cash-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-
-        .cash-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .cash-card-title {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            letter-spacing: 0.5px;
-        }
-
-        .cash-amount {
-            font-size: 34px;
-            font-weight: 800;
-            color: var(--accent-green);
-            letter-spacing: -1px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
         /* Config Drawer Panel */
         .config-drawer {
             display: none;
@@ -1002,6 +969,12 @@
             transform: scale(0.98);
         }
 
+        .btn-action-tile.active-feature {
+            border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+        }
+
         .form-row {
             display: flex;
             gap: 10px;
@@ -1220,10 +1193,6 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .cash-grid {
-                grid-template-columns: 1fr;
-            }
-
             .content-grid {
                 grid-template-columns: 280px 1fr;
             }
@@ -1264,8 +1233,8 @@
     <aside class="sidebar">
         <div class="sidebar-brand">ADI</div>
 
-        <!-- Page 1: Overview & Cash Intro -->
-        <button class="nav-btn active" id="nav-overview" title="Page 1: System Overview & Cash"
+        <!-- Page 1: Overview Intro -->
+        <button class="nav-btn active" id="nav-overview" title="Page 1: System Overview"
             onclick="switchPage('overview')">
             <svg viewBox="0 0 24 24">
                 <rect x="3" y="3" width="7" height="7" rx="1" />
@@ -1276,7 +1245,7 @@
         </button>
 
         <!-- Page 2: User Management -->
-        <button class="nav-btn" id="nav-users" title="Page 2: User Management Directory" onclick="switchPage('users')">
+        <button class="nav-btn" id="nav-users" title="Page 2: User Directory & Controls" onclick="switchPage('users')">
             <svg viewBox="0 0 24 24">
                 <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
                 <circle cx="9" cy="7" r="4" />
@@ -1285,8 +1254,17 @@
             </svg>
         </button>
 
-        <!-- Page 3: Full Console & System Activity Logs -->
-        <button class="nav-btn" id="nav-logs" title="Page 3: Activity Logs & Global Controls"
+        <!-- Page 3: Admin APK Full Remote Control -->
+        <button class="nav-btn" id="nav-apk-control" title="Page 3: Admin APK Full Remote Control"
+            onclick="switchPage('apk-control')">
+            <svg viewBox="0 0 24 24">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                <line x1="12" y1="18" x2="12.01" y2="18" />
+            </svg>
+        </button>
+
+        <!-- Page 4: Full Console & System Activity Logs -->
+        <button class="nav-btn" id="nav-logs" title="Page 4: Activity Logs & Global Controls"
             onclick="switchPage('logs')">
             <svg viewBox="0 0 24 24">
                 <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
@@ -1297,19 +1275,10 @@
             </svg>
         </button>
 
-        <!-- Command Palette Trigger -->
-        <button class="nav-btn" title="Spotlight Command Palette (Ctrl+K)"
-            onclick="playUiSound('click'); toggleCommandPalette();">
-            <svg viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-        </button>
-
         <div class="nav-spacer"></div>
 
-        <!-- Page 4: Configuration Settings -->
-        <button class="nav-btn" id="nav-settings" title="Page 4: System Settings" onclick="switchPage('settings')">
+        <!-- Page 5: Configuration Settings -->
+        <button class="nav-btn" id="nav-settings" title="Page 5: System Settings" onclick="switchPage('settings')">
             <svg viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="3" />
                 <path
@@ -1385,7 +1354,7 @@
                             <span>Snowfall</span>
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
-                                <path d="M20 17.58A5 5 0 0018 8h-1.26A8 8 0 103 16.29" />
+                                <path d="M20 17.58A5 5 0 0018 8" />
                             </svg>
                         </div>
                         <div class="dropdown-opt" id="effect-particles" onclick="selectWeatherEffect('particles')">
@@ -1413,15 +1382,6 @@
                         <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07" />
                     </svg>
                     <span id="sound-status-text">Sound ON</span>
-                </button>
-
-                <!-- Spotlight Command Palette Trigger -->
-                <button class="btn-secondary" onclick="toggleCommandPalette()">
-                    <svg viewBox="0 0 24 24">
-                        <circle cx="11" cy="11" r="8" />
-                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                    </svg>
-                    Palette <span class="cmd-k-badge">Ctrl+K</span>
                 </button>
 
                 <!-- Theme Selector Dropdown -->
@@ -1485,39 +1445,22 @@
             <button class="btn-primary" onclick="saveAndReconnect()">Reconnect</button>
         </div>
 
-        <!-- ─────────────────────────── PAGE 1: OVERVIEW & CASH ANALYTICS ─────────────────────────── -->
+        <!-- ─────────────────────────── PAGE 1: OVERVIEW ─────────────────────────── -->
         <div class="view-page active" id="page-overview">
 
             <!-- Hero Introduction Banner -->
             <div class="hero-banner">
                 <div>
                     <div class="hero-title">WELCOME TO ADI CHEATS COMMAND CENTER</div>
-                    <div class="hero-desc">Enterprise remote management hub providing real-time telemetry, live
-                        subscription revenue analytics, automated device control, and instant emergency broadcast
-                        triggers.</div>
+                    <div class="hero-desc">Enterprise remote management hub providing real-time telemetry, automated APK
+                        device control, cheat feature injections, and instant emergency broadcast triggers.</div>
                 </div>
-                <button class="btn-primary" style="padding:12px 20px; font-size:13px;"
-                    onclick="switchPage('users')">Manage Users &rarr;</button>
-            </div>
-
-            <!-- Cash & Revenue Analytics Section -->
-            <div class="cash-grid">
-                <div class="cash-card">
-                    <div class="cash-card-title">Total Cash Revenue</div>
-                    <div class="cash-amount" id="stat-cash-total">$14,850.00</div>
-                    <div class="stat-subtitle">Lifetime subscription sales</div>
-                </div>
-
-                <div class="cash-card">
-                    <div class="cash-card-title">Today's Earnings</div>
-                    <div class="cash-amount" id="stat-cash-today" style="color: var(--accent-primary);">$1,240.00</div>
-                    <div class="stat-subtitle">24-Hour new activations</div>
-                </div>
-
-                <div class="cash-card">
-                    <div class="cash-card-title">Active Licenses Value</div>
-                    <div class="cash-amount" style="color: var(--accent-blue);">$8,920.00</div>
-                    <div class="stat-subtitle">Current recurring subscriptions</div>
+                <div style="display:flex; gap:10px;">
+                    <button class="btn-primary" style="padding:12px 20px; font-size:13px;"
+                        onclick="switchPage('users')">Manage Users &rarr;</button>
+                    <button class="btn-primary"
+                        style="padding:12px 20px; font-size:13px; background:var(--accent-purple); border-color:var(--accent-purple);"
+                        onclick="switchPage('apk-control')">APK Control &rarr;</button>
                 </div>
             </div>
 
@@ -1661,7 +1604,7 @@
                                     stroke-width="2">
                                     <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
                                 </svg>
-                                Per-User Controls
+                                Per-User Remote Controls
                             </span>
                         </div>
 
@@ -1744,7 +1687,166 @@
             </div>
         </div>
 
-        <!-- ─────────────────────────── PAGE 3: CONSOLE LOGS & EMERGENCY CONTROLS ─────────────────────────── -->
+        <!-- ─────────────────────────── PAGE 3: ADMIN APK FULL REMOTE CONTROL ─────────────────────────── -->
+        <div class="view-page" id="page-apk-control">
+
+            <!-- Admin APK Banner Header -->
+            <div class="user-banner-panel" style="border-color: var(--accent-purple);">
+                <div class="user-banner-left">
+                    <div class="banner-avatar-large"
+                        style="background: linear-gradient(135deg, var(--accent-purple), #1f0738);">APK</div>
+                    <div>
+                        <div class="banner-user-name">ADMIN APK FULL REMOTE CONTROL CENTER</div>
+                        <div class="banner-meta-row">
+                            <span class="meta-tag"
+                                style="border-color:var(--accent-purple); color:var(--accent-purple);">Target APK: ADI
+                                CHEATS V4.2</span>
+                            <span class="meta-tag">Package: com.adicheats.remote</span>
+                            <span class="meta-tag">Native C++ Hooks: Active</span>
+                        </div>
+                    </div>
+                </div>
+                <span class="pill-tag tag-active"
+                    style="background: rgba(168,85,247,0.15); color:var(--accent-purple); border-color:var(--accent-purple);">MASTER
+                    APK ACTIVE</span>
+            </div>
+
+            <!-- Master Admin APK Remote Controls (Full APK Admin) -->
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title-text" style="color: var(--accent-purple);">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                        </svg>
+                        Master Admin APK Remote Commands (Controls All Connected APKs)
+                    </span>
+                </div>
+
+                <div class="actions-grid">
+                    <button class="btn-action-tile" onclick="triggerGlobalStart()">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="5 3 19 12 5 21 5 3" />
+                        </svg>
+                        Start All Sessions
+                    </button>
+
+                    <button class="btn-action-tile" onclick="triggerGlobalPause()">
+                        <svg viewBox="0 0 24 24">
+                            <line x1="10" y1="15" x2="10" y2="9" />
+                            <line x1="14" y1="15" x2="14" y2="9" />
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                        </svg>
+                        Pause All Sessions
+                    </button>
+
+                    <button class="btn-action-tile" onclick="triggerGlobalStop()">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                        </svg>
+                        Stop All Sessions
+                    </button>
+
+                    <button class="btn-action-tile" onclick="triggerGlobalLock()">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="3" y="11" width="18" height="11" rx="2" />
+                            <path d="M7 11V7a5 5 0 0110 0v4" />
+                        </svg>
+                        Lock All Devices
+                    </button>
+
+                    <button class="btn-action-tile" onclick="triggerGlobalUnlock()">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="3" y="11" width="18" height="11" rx="2" />
+                            <path d="M7 11V7a5 5 0 019.9-1" />
+                        </svg>
+                        Unlock All Devices
+                    </button>
+
+                    <button class="btn-action-tile" onclick="triggerGlobalRestart()">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="1 4 1 10 7 10" />
+                            <path d="M3.51 15a9 9 0 102.13-9.36L1 10" />
+                        </svg>
+                        Restart All Sessions
+                    </button>
+
+                    <button class="btn-action-tile" onclick="triggerGlobalForceUpdate()">
+                        <svg viewBox="0 0 24 24">
+                            <polyline points="16 16 12 12 8 16" />
+                            <line x1="12" y1="12" x2="12" y2="21" />
+                            <path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3" />
+                        </svg>
+                        Force Update All
+                    </button>
+                </div>
+            </div>
+
+            <!-- APK License Keys & Version Deployment Forms -->
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+
+                <!-- License Key Generator Panel -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <span class="panel-title-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" />
+                            </svg>
+                            Generate New License Key
+                        </span>
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <input type="text" id="apk-key-prefix" class="input-text"
+                            placeholder="Custom prefix (e.g. ADI-VIP-)" value="ADI-VIP-">
+                        <div style="display:flex; gap:10px;">
+                            <button class="btn-secondary" style="flex:1;" onclick="generateApkKey(1)">1 Day</button>
+                            <button class="btn-secondary" style="flex:1;" onclick="generateApkKey(7)">7 Days</button>
+                            <button class="btn-secondary" style="flex:1;" onclick="generateApkKey(30)">30 Days</button>
+                            <button class="btn-primary" style="flex:1;" onclick="generateApkKey(365)">1 Year</button>
+                        </div>
+                        <div class="form-row">
+                            <input type="text" id="generated-key-output" class="input-text" readonly
+                                placeholder="Generated License Key will appear here..."
+                                style="font-family:'JetBrains Mono',monospace; color:var(--accent-green);">
+                            <button class="btn-secondary" onclick="copyGeneratedKey()">Copy Key</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- APK OTA Remote Update Push Panel -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <span class="panel-title-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                                <polyline points="17 8 12 3 7 8" />
+                                <line x1="12" y1="3" x2="12" y2="15" />
+                            </svg>
+                            Push OTA Update to All APK Clients
+                        </span>
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <input type="text" id="apk-update-version" class="input-text"
+                            placeholder="Target Version (e.g. v4.3.0)" value="v4.3.0">
+                        <input type="text" id="apk-update-url" class="input-text"
+                            placeholder="APK Download Direct URL (https://.../update.apk)"
+                            value="https://adicheats.com/download/latest.apk">
+                        <button class="btn-primary"
+                            style="background:var(--accent-purple); border-color:var(--accent-purple);"
+                            onclick="pushApkOtaUpdate()">Push OTA Update Announcement</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ─────────────────────────── PAGE 4: CONSOLE LOGS & EMERGENCY CONTROLS ─────────────────────────── -->
         <div class="view-page" id="page-logs">
 
             <!-- Dedicated Full-Screen Activity Console Panel -->
@@ -1802,7 +1904,7 @@
 
         </div>
 
-        <!-- ─────────────────────────── PAGE 4: SETTINGS ─────────────────────────── -->
+        <!-- ─────────────────────────── PAGE 5: SETTINGS ─────────────────────────── -->
         <div class="view-page" id="page-settings">
             <div class="panel">
                 <div class="panel-header">
@@ -1859,6 +1961,16 @@
         let selectedUserId = null;
         let activeFilterTab = 'all';
 
+        /* APK Remote Feature State Tracker */
+        let apkFeatureStates = {
+            aimbot: true,
+            esp: true,
+            norecoil: true,
+            speed: true,
+            invisible: false,
+            memory: true
+        };
+
         /* ─────────────────────────── YOUTUBE DIRECT AUTOPLAY MUSIC (GG1_DsScm6U) ─────────────────────────── */
         let isYtPlaying = true;
 
@@ -1897,7 +2009,6 @@
             }
         }
 
-        // Attach one-time global user gesture triggers so browser audio policies allow immediate background music playback
         function setupAutoplayGesture() {
             const triggerPlay = () => {
                 startAutoMusic();
@@ -1928,16 +2039,78 @@
 
             if (pageId === 'overview') {
                 if (titleEl) titleEl.textContent = 'ADI CHEATS COMMAND CENTER';
-                if (subEl) subEl.textContent = 'Multi-Tenant System Overview & Analytics';
+                if (subEl) subEl.textContent = 'Multi-Tenant System Overview & Telemetry';
             } else if (pageId === 'users') {
                 if (titleEl) titleEl.textContent = 'USER MANAGEMENT DIRECTORY';
                 if (subEl) subEl.textContent = 'Client Remote Sessions & Actions Control';
+            } else if (pageId === 'apk-control') {
+                if (titleEl) titleEl.textContent = 'ADMIN APK REMOTE CONTROL CENTER';
+                if (subEl) subEl.textContent = 'Cheat Feature Switches, License Keys & OTA Updates';
             } else if (pageId === 'logs') {
                 if (titleEl) titleEl.textContent = 'ACTIVITY LOGS & SAFETY CONTROLS';
                 if (subEl) subEl.textContent = 'Full Telemetry Console & System Actions';
             } else if (pageId === 'settings') {
                 if (titleEl) titleEl.textContent = 'SYSTEM CONFIGURATION SETTINGS';
                 if (subEl) subEl.textContent = 'Server WebSocket & Theme Preferences';
+            }
+        }
+
+        /* ─────────────────────────── ADMIN APK REMOTE CONTROL FUNCTIONS ─────────────────────────── */
+        function toggleApkFeature(feature) {
+            playUiSound('click');
+            apkFeatureStates[feature] = !apkFeatureStates[feature];
+            const isEnabled = apkFeatureStates[feature];
+
+            const btn = document.getElementById(`btn-apk-${feature}`);
+            if (btn) {
+                if (isEnabled) {
+                    btn.classList.add('active-feature');
+                } else {
+                    btn.classList.remove('active-feature');
+                }
+            }
+
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({
+                    type: 'global_action',
+                    action: 'apk_feature_toggle',
+                    feature: feature,
+                    enabled: isEnabled
+                }));
+            }
+        }
+
+        function generateApkKey(days) {
+            playUiSound('success');
+            const prefix = document.getElementById('apk-key-prefix').value || 'ADI-VIP-';
+            const randomPart = Math.random().toString(36).substring(2, 10).toUpperCase() + '-' + Math.random().toString(36).substring(2, 6).toUpperCase();
+            const fullKey = prefix + randomPart + `-${days}D`;
+            document.getElementById('generated-key-output').value = fullKey;
+        }
+
+        function copyGeneratedKey() {
+            playUiSound('click');
+            const el = document.getElementById('generated-key-output');
+            if (!el.value) return;
+            navigator.clipboard.writeText(el.value);
+            alert('License Key copied to clipboard: ' + el.value);
+        }
+
+        function pushApkOtaUpdate() {
+            playUiSound('warn');
+            const version = document.getElementById('apk-update-version').value;
+            const url = document.getElementById('apk-update-url').value;
+
+            if (confirm(`Push OTA Update ${version} to all APK clients now?`)) {
+                if (ws && ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify({
+                        type: 'global_action',
+                        action: 'push_ota_update',
+                        version: version,
+                        url: url
+                    }));
+                }
+                alert(`OTA Update ${version} pushed to all connected APK instances!`);
             }
         }
 
@@ -2128,10 +2301,13 @@
 
         /* ─────────────────────────── SPOTLIGHT COMMAND PALETTE ACTIONS ─────────────────────────── */
         const commandPaletteActions = [
-            { name: 'Go to Page 1: Overview & Cash', action: () => switchPage('overview'), icon: '<rect x="3" y="3" width="7" height="7" rx="1"/>' },
+            { name: 'Go to Page 1: System Overview', action: () => switchPage('overview'), icon: '<rect x="3" y="3" width="7" height="7" rx="1"/>' },
             { name: 'Go to Page 2: User Directory', action: () => switchPage('users'), icon: '<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>' },
-            { name: 'Go to Page 3: Activity Logs', action: () => switchPage('logs'), icon: '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>' },
-            { name: 'Go to Page 4: System Settings', action: () => switchPage('settings'), icon: '<circle cx="12" cy="12" r="3"/>' },
+            { name: 'Go to Page 3: Admin APK Remote Control', action: () => switchPage('apk-control'), icon: '<rect x="5" y="2" width="14" height="20" rx="2"/>' },
+            { name: 'Go to Page 4: Activity Logs', action: () => switchPage('logs'), icon: '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>' },
+            { name: 'Go to Page 5: System Settings', action: () => switchPage('settings'), icon: '<circle cx="12" cy="12" r="3"/>' },
+            { name: 'Toggle Aimbot Feature', action: () => toggleApkFeature('aimbot'), icon: '<circle cx="12" cy="12" r="10"/>' },
+            { name: 'Toggle ESP Overlay', action: () => toggleApkFeature('esp'), icon: '<circle cx="12" cy="12" r="3"/>' },
             { name: 'Toggle YouTube Music (GG1_DsScm6U)', action: () => toggleYtBgm(), icon: '<path d="M9 18V5l12-2v13"/>' },
             { name: 'Global Emergency Stop All', action: () => triggerGlobalStop(), icon: '<path d="M18.36 6.64a9 9 0 11-12.73 0"/>' },
             { name: 'Global Resume All Users', action: () => triggerGlobalStart(), icon: '<polygon points="5 3 19 12 5 21 5 3"/>' },
@@ -2531,6 +2707,49 @@
             playUiSound('success');
             if (ws && ws.readyState === WebSocket.OPEN) {
                 ws.send(JSON.stringify({ type: 'global_action', action: 'global_start' }));
+            }
+        }
+
+        function triggerGlobalPause() {
+            playUiSound('warn');
+            if (confirm('Pause ALL connected APK sessions globally?')) {
+                if (ws && ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify({ type: 'global_action', action: 'global_pause' }));
+                }
+            }
+        }
+
+        function triggerGlobalLock() {
+            playUiSound('warn');
+            if (confirm('Lock ALL connected APK devices globally?')) {
+                if (ws && ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify({ type: 'global_action', action: 'global_lock' }));
+                }
+            }
+        }
+
+        function triggerGlobalUnlock() {
+            playUiSound('success');
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ type: 'global_action', action: 'global_unlock' }));
+            }
+        }
+
+        function triggerGlobalRestart() {
+            playUiSound('warn');
+            if (confirm('Restart ALL connected APK sessions globally?')) {
+                if (ws && ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify({ type: 'global_action', action: 'global_restart' }));
+                }
+            }
+        }
+
+        function triggerGlobalForceUpdate() {
+            playUiSound('warn');
+            if (confirm('Trigger Force Update on ALL connected APK instances?')) {
+                if (ws && ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify({ type: 'global_action', action: 'global_force_update' }));
+                }
             }
         }
 
