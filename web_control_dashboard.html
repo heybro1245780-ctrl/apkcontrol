@@ -43,7 +43,7 @@
             --radius-md: 8px;
             --radius-sm: 6px;
 
-            --transition: all 0.2s ease;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         [data-theme="midnight-blue"] {
@@ -205,7 +205,7 @@
             opacity: 0.55;
         }
 
-        /* Hidden YouTube Iframe Player */
+        /* Hidden YouTube Autoplay Iframe Player */
         #yt-player-frame {
             position: absolute;
             width: 1px;
@@ -277,7 +277,7 @@
             justify-content: center;
             cursor: pointer;
             transition: var(--transition);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .nav-btn svg {
@@ -502,6 +502,84 @@
             height: 12px;
             border-radius: 50%;
             border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* MULTI-PAGE VIEW PAGES ENGINE */
+        .view-page {
+            display: none;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex: 1;
+        }
+
+        .view-page.active {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Intro Welcome Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(18, 18, 21, 0.95));
+            border: 1px solid var(--border-red);
+            border-radius: var(--radius-lg);
+            padding: 28px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        /* Cash & Revenue Analytics Grid */
+        .cash-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .cash-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .cash-card-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        .cash-amount {
+            font-size: 34px;
+            font-weight: 800;
+            color: var(--accent-green);
+            letter-spacing: -1px;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         /* Config Drawer Panel */
@@ -1142,6 +1220,10 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
+            .cash-grid {
+                grid-template-columns: 1fr;
+            }
+
             .content-grid {
                 grid-template-columns: 280px 1fr;
             }
@@ -1173,16 +1255,18 @@
     <!-- Weather & Ambient Effect Overlay Canvas -->
     <canvas id="effects-canvas"></canvas>
 
-    <!-- Hidden Embedded YouTube Audio Player for Video GG1_DsScm6U -->
+    <!-- Hidden Embedded YouTube Autoplay Audio Player for Video GG1_DsScm6U -->
     <iframe id="yt-player-frame"
-        src="https://www.youtube-nocookie.com/embed/GG1_DsScm6U?enablejsapi=1&autoplay=0&loop=1&playlist=GG1_DsScm6U"
+        src="https://www.youtube-nocookie.com/embed/GG1_DsScm6U?enablejsapi=1&autoplay=1&mute=0&loop=1&playlist=GG1_DsScm6U"
         allow="autoplay"></iframe>
 
-    <!-- Sidebar Navigation -->
+    <!-- Sidebar Navigation (Multi-Page Switcher) -->
     <aside class="sidebar">
         <div class="sidebar-brand">ADI</div>
 
-        <button class="nav-btn active" title="Command Center Dashboard" onclick="playUiSound('click')">
+        <!-- Page 1: Overview & Cash Intro -->
+        <button class="nav-btn active" id="nav-overview" title="Page 1: System Overview & Cash"
+            onclick="switchPage('overview')">
             <svg viewBox="0 0 24 24">
                 <rect x="3" y="3" width="7" height="7" rx="1" />
                 <rect x="14" y="3" width="7" height="7" rx="1" />
@@ -1191,16 +1275,19 @@
             </svg>
         </button>
 
-        <button class="nav-btn" title="Command Palette (Ctrl+K)"
-            onclick="playUiSound('click'); toggleCommandPalette();">
+        <!-- Page 2: User Management -->
+        <button class="nav-btn" id="nav-users" title="Page 2: User Management Directory" onclick="switchPage('users')">
             <svg viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                <path d="M16 3.13a4 4 0 010 7.75" />
             </svg>
         </button>
 
-        <button class="nav-btn" title="Console Logs"
-            onclick="playUiSound('click'); document.getElementById('user-console').scrollIntoView({behavior:'smooth'});">
+        <!-- Page 3: Full Console & System Activity Logs -->
+        <button class="nav-btn" id="nav-logs" title="Page 3: Activity Logs & Global Controls"
+            onclick="switchPage('logs')">
             <svg viewBox="0 0 24 24">
                 <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
                 <polyline points="14 2 14 8 20 8" />
@@ -1210,15 +1297,25 @@
             </svg>
         </button>
 
-        <button class="nav-btn" title="Configuration" onclick="playUiSound('click'); toggleConfigDrawer();">
+        <!-- Command Palette Trigger -->
+        <button class="nav-btn" title="Spotlight Command Palette (Ctrl+K)"
+            onclick="playUiSound('click'); toggleCommandPalette();">
+            <svg viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+        </button>
+
+        <div class="nav-spacer"></div>
+
+        <!-- Page 4: Configuration Settings -->
+        <button class="nav-btn" id="nav-settings" title="Page 4: System Settings" onclick="switchPage('settings')">
             <svg viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="3" />
                 <path
                     d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
             </svg>
         </button>
-
-        <div class="nav-spacer"></div>
 
         <button class="nav-btn" title="Reconnect Server" onclick="playUiSound('click'); saveAndReconnect();">
             <svg viewBox="0 0 24 24">
@@ -1236,21 +1333,21 @@
         <header class="topbar">
             <div class="topbar-left">
                 <div>
-                    <div class="page-title">ADI CHEATS COMMAND CENTER</div>
-                    <div class="page-subtitle">Multi-Tenant Client Management System</div>
+                    <div class="page-title" id="page-header-title">ADI CHEATS COMMAND CENTER</div>
+                    <div class="page-subtitle" id="page-header-subtitle">Multi-Tenant Client Management System</div>
                 </div>
             </div>
             <div class="topbar-right">
 
                 <!-- YouTube Background Music Player Controller -->
-                <button class="btn-secondary" id="bgm-btn" onclick="toggleYtBgm()"
-                    title="Toggle Background Music (GG1_DsScm6U)">
+                <button class="btn-secondary" id="bgm-btn" style="border-color: var(--accent-green);"
+                    onclick="toggleYtBgm()" title="Toggle Background Music (GG1_DsScm6U)">
                     <svg viewBox="0 0 24 24" id="bgm-icon">
                         <path d="M9 18V5l12-2v13" />
                         <circle cx="6" cy="18" r="3" />
                         <circle cx="18" cy="16" r="3" />
                     </svg>
-                    <span id="bgm-text">Music: OFF</span>
+                    <span id="bgm-text">Music: ON</span>
                 </button>
 
                 <!-- Ping Latency Indicator -->
@@ -1388,273 +1485,352 @@
             <button class="btn-primary" onclick="saveAndReconnect()">Reconnect</button>
         </div>
 
-        <!-- Key Metrics Cards Row -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="stat-title">Total Users</span>
-                    <div class="stat-icon-wrapper">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                            <circle cx="9" cy="7" r="4" />
-                            <path d="M23 21v-2a4 4 0 00-3-3.87" />
-                            <path d="M16 3.13a4 4 0 010 7.75" />
-                        </svg>
-                    </div>
+        <!-- ─────────────────────────── PAGE 1: OVERVIEW & CASH ANALYTICS ─────────────────────────── -->
+        <div class="view-page active" id="page-overview">
+
+            <!-- Hero Introduction Banner -->
+            <div class="hero-banner">
+                <div>
+                    <div class="hero-title">WELCOME TO ADI CHEATS COMMAND CENTER</div>
+                    <div class="hero-desc">Enterprise remote management hub providing real-time telemetry, live
+                        subscription revenue analytics, automated device control, and instant emergency broadcast
+                        triggers.</div>
                 </div>
-                <div class="stat-value" id="stat-total">0</div>
-                <div class="stat-subtitle">Registered user records</div>
+                <button class="btn-primary" style="padding:12px 20px; font-size:13px;"
+                    onclick="switchPage('users')">Manage Users &rarr;</button>
             </div>
 
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="stat-title">Online Sockets</span>
-                    <div class="stat-icon-wrapper">
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10" />
-                            <polyline points="12 6 12 12 16 14" />
-                        </svg>
-                    </div>
+            <!-- Cash & Revenue Analytics Section -->
+            <div class="cash-grid">
+                <div class="cash-card">
+                    <div class="cash-card-title">Total Cash Revenue</div>
+                    <div class="cash-amount" id="stat-cash-total">$14,850.00</div>
+                    <div class="stat-subtitle">Lifetime subscription sales</div>
                 </div>
-                <div class="stat-value" id="stat-online" style="color: var(--accent-green);">0</div>
-                <div class="stat-subtitle">Active WebSocket instances</div>
+
+                <div class="cash-card">
+                    <div class="cash-card-title">Today's Earnings</div>
+                    <div class="cash-amount" id="stat-cash-today" style="color: var(--accent-primary);">$1,240.00</div>
+                    <div class="stat-subtitle">24-Hour new activations</div>
+                </div>
+
+                <div class="cash-card">
+                    <div class="cash-card-title">Active Licenses Value</div>
+                    <div class="cash-amount" style="color: var(--accent-blue);">$8,920.00</div>
+                    <div class="stat-subtitle">Current recurring subscriptions</div>
+                </div>
             </div>
 
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="stat-title">Suspended</span>
-                    <div class="stat-icon-wrapper">
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10" />
-                            <line x1="10" y1="15" x2="10" y2="9" />
-                            <line x1="14" y1="15" x2="14" y2="9" />
-                        </svg>
+            <!-- Key Metrics Cards Row -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Total Users</span>
+                        <div class="stat-icon-wrapper">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                                <path d="M16 3.13a4 4 0 010 7.75" />
+                            </svg>
+                        </div>
                     </div>
+                    <div class="stat-value" id="stat-total">0</div>
+                    <div class="stat-subtitle">Registered user records</div>
                 </div>
-                <div class="stat-value" id="stat-paused" style="color: var(--accent-amber);">0</div>
-                <div class="stat-subtitle">Paused or locked users</div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Online Sockets</span>
+                        <div class="stat-icon-wrapper">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="stat-value" id="stat-online" style="color: var(--accent-green);">0</div>
+                    <div class="stat-subtitle">Active WebSocket instances</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Suspended</span>
+                        <div class="stat-icon-wrapper">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="10" y1="15" x2="10" y2="9" />
+                                <line x1="14" y1="15" x2="14" y2="9" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="stat-value" id="stat-paused" style="color: var(--accent-amber);">0</div>
+                    <div class="stat-subtitle">Paused or locked users</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-title">Offline</span>
+                        <div class="stat-icon-wrapper">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="1" y1="1" x2="23" y2="23" />
+                                <path d="M16.72 11.06A10.94 10.94 0 0119 12.55" />
+                                <path d="M5 12.55a10.94 10.94 0 015.17-2.39" />
+                                <path d="M10.71 5.05A16 16 0 0122.56 9" />
+                                <path d="M1.42 9a15.91 15.91 0 014.7-2.88" />
+                                <path d="M8.53 16.11a6 6 0 016.95 0" />
+                                <line x1="12" y1="20" x2="12.01" y2="20" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="stat-value" id="stat-offline" style="color: var(--text-dark);">0</div>
+                    <div class="stat-subtitle">Disconnected clients</div>
+                </div>
             </div>
 
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="stat-title">Offline</span>
-                    <div class="stat-icon-wrapper">
+        </div>
+
+        <!-- ─────────────────────────── PAGE 2: USER MANAGEMENT ─────────────────────────── -->
+        <div class="view-page" id="page-users">
+            <div class="content-grid">
+
+                <!-- Directory Panel (Left) -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <span class="panel-title-text">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                            </svg>
+                            Users Directory
+                        </span>
+                        <span class="panel-badge" id="user-count-badge">0</span>
+                    </div>
+
+                    <div class="search-container">
                         <svg viewBox="0 0 24 24">
-                            <line x1="1" y1="1" x2="23" y2="23" />
-                            <path d="M16.72 11.06A10.94 10.94 0 0119 12.55" />
-                            <path d="M5 12.55a10.94 10.94 0 015.17-2.39" />
-                            <path d="M10.71 5.05A16 16 0 0122.56 9" />
-                            <path d="M1.42 9a15.91 15.91 0 014.7-2.88" />
-                            <path d="M8.53 16.11a6 6 0 016.95 0" />
-                            <line x1="12" y1="20" x2="12.01" y2="20" />
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
                         </svg>
+                        <input type="text" id="user-search" class="input-text"
+                            placeholder="Search user ID, device, IP..." oninput="filterUsers()">
+                    </div>
+
+                    <div class="filter-group">
+                        <button class="filter-btn active" id="tab-all" onclick="setFilterTab('all')">All</button>
+                        <button class="filter-btn" id="tab-online" onclick="setFilterTab('online')">Online</button>
+                        <button class="filter-btn" id="tab-offline" onclick="setFilterTab('offline')">Offline</button>
+                    </div>
+
+                    <div id="user-list" class="user-list-view">
+                        <div class="empty-view">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M5 12h14" />
+                                <path d="M12 5v14" />
+                            </svg>
+                            <div>Waiting for server connections...</div>
+                        </div>
                     </div>
                 </div>
-                <div class="stat-value" id="stat-offline" style="color: var(--text-dark);">0</div>
-                <div class="stat-subtitle">Disconnected clients</div>
+
+                <!-- Workspace Details Panel (Right) -->
+                <div class="workspace-stack">
+
+                    <!-- Active User Details Banner -->
+                    <div class="user-banner-panel">
+                        <div class="user-banner-left">
+                            <div id="selected-user-avatar" class="banner-avatar-large">?</div>
+                            <div>
+                                <div id="selected-user-id" class="banner-user-name">Select a User</div>
+                                <div class="banner-meta-row">
+                                    <span id="selected-user-device" class="meta-tag">Device: —</span>
+                                    <span id="selected-user-ip" class="meta-tag">IP: —</span>
+                                    <span id="selected-user-sub" class="meta-tag">Sub: —</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="selected-user-status-badge" class="pill-tag tag-offline">NO USER</span>
+                    </div>
+
+                    <!-- Per-User Admin Controls Panel -->
+                    <div class="panel">
+                        <div class="panel-header">
+                            <span class="panel-title-text">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                                </svg>
+                                Per-User Controls
+                            </span>
+                        </div>
+
+                        <div class="actions-grid">
+                            <button class="btn-action-tile" onclick="triggerUserAction('start')">
+                                <svg viewBox="0 0 24 24">
+                                    <polygon points="5 3 19 12 5 21 5 3" />
+                                </svg>
+                                Start Session
+                            </button>
+
+                            <button class="btn-action-tile" onclick="triggerUserAction('pause')">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="10" y1="15" x2="10" y2="9" />
+                                    <line x1="14" y1="15" x2="14" y2="9" />
+                                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                                </svg>
+                                Pause Session
+                            </button>
+
+                            <button class="btn-action-tile" onclick="triggerUserAction('stop')">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                                </svg>
+                                Stop Session
+                            </button>
+
+                            <button class="btn-action-tile" onclick="triggerUserAction('lock')">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0110 0v4" />
+                                </svg>
+                                Lock Device
+                            </button>
+
+                            <button class="btn-action-tile" onclick="triggerUserAction('unlock')">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 019.9-1" />
+                                </svg>
+                                Unlock Device
+                            </button>
+
+                            <button class="btn-action-tile" onclick="triggerUserAction('restart_session')">
+                                <svg viewBox="0 0 24 24">
+                                    <polyline points="1 4 1 10 7 10" />
+                                    <path d="M3.51 15a9 9 0 102.13-9.36L1 10" />
+                                </svg>
+                                Restart Session
+                            </button>
+
+                            <button class="btn-action-tile" onclick="triggerUserAction('force_update')">
+                                <svg viewBox="0 0 24 24">
+                                    <polyline points="16 16 12 12 8 16" />
+                                    <line x1="12" y1="12" x2="12" y2="21" />
+                                    <path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3" />
+                                </svg>
+                                Force Update
+                            </button>
+                        </div>
+
+                        <div style="height: 1px; background: var(--border-color); margin: 12px 0;"></div>
+
+                        <div class="form-row">
+                            <input type="text" id="user-msg-input" class="input-text"
+                                placeholder="Type notification text for selected user..."
+                                onkeydown="if(event.key==='Enter')sendUserNotification()">
+                            <button class="btn-primary" onclick="sendUserNotification()">Send Notification</button>
+                        </div>
+
+                        <div class="form-row">
+                            <input type="number" id="sub-days-input" class="input-text"
+                                placeholder="Extend subscription by days (e.g. 30)"
+                                onkeydown="if(event.key==='Enter')updateUserSubscription()">
+                            <button class="btn-primary" onclick="updateUserSubscription()">Update Subscription</button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
 
-        <!-- Main Workspace Grid -->
-        <div class="content-grid">
+        <!-- ─────────────────────────── PAGE 3: CONSOLE LOGS & EMERGENCY CONTROLS ─────────────────────────── -->
+        <div class="view-page" id="page-logs">
 
-            <!-- Directory Panel (Left) -->
-            <div class="panel">
+            <!-- Dedicated Full-Screen Activity Console Panel -->
+            <div class="panel" style="min-height: 380px;">
                 <div class="panel-header">
                     <span class="panel-title-text">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
-                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                            <circle cx="9" cy="7" r="4" />
+                            <polyline points="4 17 10 11 4 5" />
+                            <line x1="12" y1="19" x2="20" y2="19" />
                         </svg>
-                        Users Directory
+                        Full System Activity Log Console
                     </span>
-                    <span class="panel-badge" id="user-count-badge">0</span>
+                    <div style="display:flex; gap:6px;">
+                        <button class="btn-secondary" style="padding: 4px 10px; font-size: 11px;"
+                            onclick="exportConsoleLogs()">Export Logs</button>
+                        <button class="btn-secondary" style="padding: 4px 10px; font-size: 11px;"
+                            onclick="clearConsoleLogs()">Clear View</button>
+                    </div>
                 </div>
 
-                <div class="search-container">
+                <div id="user-console" class="console-box" style="height: 320px;">
+                    <div class="log-item log-sys">
+                        <span class="log-ts">[SYSTEM]</span>
+                        <span>Select a user from the directory to inspect logs.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System-Wide Global Controls -->
+            <div class="global-card">
+                <div class="global-card-title">
                     <svg viewBox="0 0 24 24">
-                        <circle cx="11" cy="11" r="8" />
-                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                        <line x1="12" y1="9" x2="12" y2="13" />
+                        <line x1="12" y1="17" x2="12.01" y2="17" />
                     </svg>
-                    <input type="text" id="user-search" class="input-text" placeholder="Search user ID, device, IP..."
-                        oninput="filterUsers()">
+                    System-Wide Emergency Safety Controls (Affects All Connected Users)
                 </div>
 
-                <div class="filter-group">
-                    <button class="filter-btn active" id="tab-all" onclick="setFilterTab('all')">All</button>
-                    <button class="filter-btn" id="tab-online" onclick="setFilterTab('online')">Online</button>
-                    <button class="filter-btn" id="tab-offline" onclick="setFilterTab('offline')">Offline</button>
-                </div>
-
-                <div id="user-list" class="user-list-view">
-                    <div class="empty-view">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M5 12h14" />
-                            <path d="M12 5v14" />
-                        </svg>
-                        <div>Waiting for server connections...</div>
-                    </div>
+                <div class="global-controls-row">
+                    <input type="text" id="global-msg-input" class="input-text" style="flex:1; min-width:200px;"
+                        placeholder="Global broadcast announcement message..."
+                        onkeydown="if(event.key==='Enter')sendGlobalBroadcast()">
+                    <button class="btn-secondary"
+                        style="border-color: rgba(245,158,11,0.4); color: var(--accent-amber);"
+                        onclick="sendGlobalBroadcast()">Broadcast Announcement</button>
+                    <button class="btn-primary" style="background: var(--accent-primary);"
+                        onclick="triggerGlobalStop()">Global Emergency Stop</button>
+                    <button class="btn-secondary"
+                        style="border-color: rgba(16,185,129,0.4); color: var(--accent-green);"
+                        onclick="triggerGlobalStart()">Global Resume All</button>
                 </div>
             </div>
 
-            <!-- Workspace Details Panel (Right) -->
-            <div class="workspace-stack">
-
-                <!-- Active User Details Banner -->
-                <div class="user-banner-panel">
-                    <div class="user-banner-left">
-                        <div id="selected-user-avatar" class="banner-avatar-large">?</div>
-                        <div>
-                            <div id="selected-user-id" class="banner-user-name">Select a User</div>
-                            <div class="banner-meta-row">
-                                <span id="selected-user-device" class="meta-tag">Device: —</span>
-                                <span id="selected-user-ip" class="meta-tag">IP: —</span>
-                                <span id="selected-user-sub" class="meta-tag">Sub: —</span>
-                            </div>
-                        </div>
-                    </div>
-                    <span id="selected-user-status-badge" class="pill-tag tag-offline">NO USER</span>
-                </div>
-
-                <!-- Per-User Admin Controls Panel -->
-                <div class="panel">
-                    <div class="panel-header">
-                        <span class="panel-title-text">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                            </svg>
-                            Per-User Controls
-                        </span>
-                    </div>
-
-                    <div class="actions-grid">
-                        <button class="btn-action-tile" onclick="triggerUserAction('start')">
-                            <svg viewBox="0 0 24 24">
-                                <polygon points="5 3 19 12 5 21 5 3" />
-                            </svg>
-                            Start Session
-                        </button>
-
-                        <button class="btn-action-tile" onclick="triggerUserAction('pause')">
-                            <svg viewBox="0 0 24 24">
-                                <line x1="10" y1="15" x2="10" y2="9" />
-                                <line x1="14" y1="15" x2="14" y2="9" />
-                                <rect x="3" y="3" width="18" height="18" rx="2" />
-                            </svg>
-                            Pause Session
-                        </button>
-
-                        <button class="btn-action-tile" onclick="triggerUserAction('stop')">
-                            <svg viewBox="0 0 24 24">
-                                <rect x="3" y="3" width="18" height="18" rx="2" />
-                            </svg>
-                            Stop Session
-                        </button>
-
-                        <button class="btn-action-tile" onclick="triggerUserAction('lock')">
-                            <svg viewBox="0 0 24 24">
-                                <rect x="3" y="11" width="18" height="11" rx="2" />
-                                <path d="M7 11V7a5 5 0 0110 0v4" />
-                            </svg>
-                            Lock Device
-                        </button>
-
-                        <button class="btn-action-tile" onclick="triggerUserAction('unlock')">
-                            <svg viewBox="0 0 24 24">
-                                <rect x="3" y="11" width="18" height="11" rx="2" />
-                                <path d="M7 11V7a5 5 0 019.9-1" />
-                            </svg>
-                            Unlock Device
-                        </button>
-
-                        <button class="btn-action-tile" onclick="triggerUserAction('restart_session')">
-                            <svg viewBox="0 0 24 24">
-                                <polyline points="1 4 1 10 7 10" />
-                                <path d="M3.51 15a9 9 0 102.13-9.36L1 10" />
-                            </svg>
-                            Restart Session
-                        </button>
-
-                        <button class="btn-action-tile" onclick="triggerUserAction('force_update')">
-                            <svg viewBox="0 0 24 24">
-                                <polyline points="16 16 12 12 8 16" />
-                                <line x1="12" y1="12" x2="12" y2="21" />
-                                <path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3" />
-                            </svg>
-                            Force Update
-                        </button>
-                    </div>
-
-                    <div style="height: 1px; background: var(--border-color); margin: 12px 0;"></div>
-
-                    <div class="form-row">
-                        <input type="text" id="user-msg-input" class="input-text"
-                            placeholder="Type notification text for selected user..."
-                            onkeydown="if(event.key==='Enter')sendUserNotification()">
-                        <button class="btn-primary" onclick="sendUserNotification()">Send Notification</button>
-                    </div>
-
-                    <div class="form-row">
-                        <input type="number" id="sub-days-input" class="input-text"
-                            placeholder="Extend subscription by days (e.g. 30)"
-                            onkeydown="if(event.key==='Enter')updateUserSubscription()">
-                        <button class="btn-primary" onclick="updateUserSubscription()">Update Subscription</button>
-                    </div>
-                </div>
-
-                <!-- Isolated User Activity Logs Panel -->
-                <div class="panel">
-                    <div class="panel-header">
-                        <span class="panel-title-text">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <polyline points="4 17 10 11 4 5" />
-                                <line x1="12" y1="19" x2="20" y2="19" />
-                            </svg>
-                            User Activity Console
-                        </span>
-                        <div style="display:flex; gap:6px;">
-                            <button class="btn-secondary" style="padding: 4px 10px; font-size: 11px;"
-                                onclick="exportConsoleLogs()">Export Logs</button>
-                            <button class="btn-secondary" style="padding: 4px 10px; font-size: 11px;"
-                                onclick="clearConsoleLogs()">Clear View</button>
-                        </div>
-                    </div>
-
-                    <div id="user-console" class="console-box">
-                        <div class="log-item log-sys">
-                            <span class="log-ts">[SYSTEM]</span>
-                            <span>Select a user from the directory to inspect logs.</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         </div>
 
-        <!-- System-Wide Global Controls -->
-        <div class="global-card">
-            <div class="global-card-title">
-                <svg viewBox="0 0 24 24">
-                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-                    <line x1="12" y1="9" x2="12" y2="13" />
-                    <line x1="12" y1="17" x2="12.01" y2="17" />
-                </svg>
-                System-Wide Emergency Safety Controls (Affects All Connected Users)
-            </div>
+        <!-- ─────────────────────────── PAGE 4: SETTINGS ─────────────────────────── -->
+        <div class="view-page" id="page-settings">
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title-text">System Settings & Server Connection</span>
+                </div>
 
-            <div class="global-controls-row">
-                <input type="text" id="global-msg-input" class="input-text" style="flex:1; min-width:200px;"
-                    placeholder="Global broadcast announcement message..."
-                    onkeydown="if(event.key==='Enter')sendGlobalBroadcast()">
-                <button class="btn-secondary" style="border-color: rgba(245,158,11,0.4); color: var(--accent-amber);"
-                    onclick="sendGlobalBroadcast()">Broadcast Announcement</button>
-                <button class="btn-primary" style="background: var(--accent-primary);"
-                    onclick="triggerGlobalStop()">Global Emergency Stop</button>
-                <button class="btn-secondary" style="border-color: rgba(16,185,129,0.4); color: var(--accent-green);"
-                    onclick="triggerGlobalStart()">Global Resume All</button>
+                <div style="display:flex; flex-direction:column; gap:16px;">
+                    <div>
+                        <label
+                            style="font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:6px; display:block;">WebSocket
+                            Server URL</label>
+                        <div class="form-row">
+                            <input type="text" id="settings-ws-url" class="input-text"
+                                placeholder="wss://your-server.com">
+                            <button class="btn-primary" onclick="saveSettingsWs()">Save & Reconnect</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label
+                            style="font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:6px; display:block;">Audio
+                            & Effects Quick Toggles</label>
+                        <div style="display:flex; gap:10px;">
+                            <button class="btn-secondary" onclick="toggleAudioState()">Toggle Web Audio Sounds</button>
+                            <button class="btn-secondary" onclick="toggleYtBgm()">Toggle BGM Music</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1683,8 +1859,23 @@
         let selectedUserId = null;
         let activeFilterTab = 'all';
 
-        /* ─────────────────────────── YOUTUBE BACKGROUND MUSIC PLAYER (GG1_DsScm6U) ─────────────────────────── */
-        let isYtPlaying = false;
+        /* ─────────────────────────── YOUTUBE DIRECT AUTOPLAY MUSIC (GG1_DsScm6U) ─────────────────────────── */
+        let isYtPlaying = true;
+
+        function startAutoMusic() {
+            const iframe = document.getElementById('yt-player-frame');
+            const textEl = document.getElementById('bgm-text');
+            const btnEl = document.getElementById('bgm-btn');
+            if (!iframe) return;
+
+            isYtPlaying = true;
+            try {
+                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            } catch (e) { }
+
+            if (textEl) textEl.textContent = 'Music: ON';
+            if (btnEl) btnEl.style.borderColor = 'var(--accent-green)';
+        }
 
         function toggleYtBgm() {
             playUiSound('click');
@@ -1703,6 +1894,50 @@
                 iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
                 if (textEl) textEl.textContent = 'Music: OFF';
                 if (btnEl) btnEl.style.borderColor = 'var(--border-color)';
+            }
+        }
+
+        // Attach one-time global user gesture triggers so browser audio policies allow immediate background music playback
+        function setupAutoplayGesture() {
+            const triggerPlay = () => {
+                startAutoMusic();
+                window.removeEventListener('click', triggerPlay);
+                window.removeEventListener('keydown', triggerPlay);
+                window.removeEventListener('touchstart', triggerPlay);
+            };
+            window.addEventListener('click', triggerPlay);
+            window.addEventListener('keydown', triggerPlay);
+            window.addEventListener('touchstart', triggerPlay);
+        }
+
+        /* ─────────────────────────── MULTI-PAGE SWITCHER ENGINE ─────────────────────────── */
+        function switchPage(pageId) {
+            playUiSound('click');
+
+            document.querySelectorAll('.view-page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.sidebar .nav-btn').forEach(b => b.classList.remove('active'));
+
+            const targetPage = document.getElementById(`page-${pageId}`);
+            const targetNav = document.getElementById(`nav-${pageId}`);
+
+            if (targetPage) targetPage.classList.add('active');
+            if (targetNav) targetNav.classList.add('active');
+
+            const titleEl = document.getElementById('page-header-title');
+            const subEl = document.getElementById('page-header-subtitle');
+
+            if (pageId === 'overview') {
+                if (titleEl) titleEl.textContent = 'ADI CHEATS COMMAND CENTER';
+                if (subEl) subEl.textContent = 'Multi-Tenant System Overview & Analytics';
+            } else if (pageId === 'users') {
+                if (titleEl) titleEl.textContent = 'USER MANAGEMENT DIRECTORY';
+                if (subEl) subEl.textContent = 'Client Remote Sessions & Actions Control';
+            } else if (pageId === 'logs') {
+                if (titleEl) titleEl.textContent = 'ACTIVITY LOGS & SAFETY CONTROLS';
+                if (subEl) subEl.textContent = 'Full Telemetry Console & System Actions';
+            } else if (pageId === 'settings') {
+                if (titleEl) titleEl.textContent = 'SYSTEM CONFIGURATION SETTINGS';
+                if (subEl) subEl.textContent = 'Server WebSocket & Theme Preferences';
             }
         }
 
@@ -1893,21 +2128,20 @@
 
         /* ─────────────────────────── SPOTLIGHT COMMAND PALETTE ACTIONS ─────────────────────────── */
         const commandPaletteActions = [
-            { name: 'Toggle YouTube Background Music (GG1_DsScm6U)', action: () => toggleYtBgm(), icon: '<path d="M9 18V5l12-2v13"/>' },
-            { name: 'Global Emergency Stop All', action: () => triggerGlobalStop(), icon: '<path d="M18.36 6.64a9 9 0 11-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/>' },
+            { name: 'Go to Page 1: Overview & Cash', action: () => switchPage('overview'), icon: '<rect x="3" y="3" width="7" height="7" rx="1"/>' },
+            { name: 'Go to Page 2: User Directory', action: () => switchPage('users'), icon: '<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>' },
+            { name: 'Go to Page 3: Activity Logs', action: () => switchPage('logs'), icon: '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>' },
+            { name: 'Go to Page 4: System Settings', action: () => switchPage('settings'), icon: '<circle cx="12" cy="12" r="3"/>' },
+            { name: 'Toggle YouTube Music (GG1_DsScm6U)', action: () => toggleYtBgm(), icon: '<path d="M9 18V5l12-2v13"/>' },
+            { name: 'Global Emergency Stop All', action: () => triggerGlobalStop(), icon: '<path d="M18.36 6.64a9 9 0 11-12.73 0"/>' },
             { name: 'Global Resume All Users', action: () => triggerGlobalStart(), icon: '<polygon points="5 3 19 12 5 21 5 3"/>' },
-            { name: 'Export Activity Logs', action: () => exportConsoleLogs(), icon: '<path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>' },
+            { name: 'Export Activity Logs', action: () => exportConsoleLogs(), icon: '<path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>' },
             { name: 'Weather Effect: Rainfall', action: () => selectWeatherEffect('rain'), icon: '<line x1="16" y1="13" x2="16" y2="21"/>' },
             { name: 'Weather Effect: Snowfall', action: () => selectWeatherEffect('snow'), icon: '<path d="M20 17.58A5 5 0 0018 8"/>' },
-            { name: 'Weather Effect: Particles', action: () => selectWeatherEffect('particles'), icon: '<circle cx="12" cy="12" r="3"/>' },
             { name: 'Switch Theme to Dark Crimson', action: () => selectTheme('dark-red'), icon: '<circle cx="12" cy="12" r="5"/>' },
             { name: 'Switch Theme to Midnight Blue', action: () => selectTheme('midnight-blue'), icon: '<circle cx="12" cy="12" r="5"/>' },
             { name: 'Switch Theme to Cyber Purple', action: () => selectTheme('cyber-purple'), icon: '<circle cx="12" cy="12" r="5"/>' },
-            { name: 'Switch Theme to Emerald Dark', action: () => selectTheme('emerald-dark'), icon: '<circle cx="12" cy="12" r="5"/>' },
-            { name: 'Switch Theme to Sunset Amber', action: () => selectTheme('sunset-amber'), icon: '<circle cx="12" cy="12" r="5"/>' },
-            { name: 'Switch Theme to Pure Stealth OLED', action: () => selectTheme('pure-oled'), icon: '<circle cx="12" cy="12" r="5"/>' },
-            { name: 'Clear Activity Logs View', action: () => clearConsoleLogs(), icon: '<polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>' },
-            { name: 'Reconnect WebSocket Server', action: () => saveAndReconnect(), icon: '<path d="M23 4v6h-6"/><path d="M1 20v-6h6"/>' }
+            { name: 'Clear Activity Logs View', action: () => clearConsoleLogs(), icon: '<polyline points="3 6 5 6 21 6"/>' }
         ];
 
         function toggleCommandPalette() {
@@ -2035,6 +2269,8 @@
 
         /* Application Init */
         function initDashboard() {
+            setupAutoplayGesture();
+
             const savedSound = localStorage.getItem('dashboard_sound');
             if (savedSound !== null) soundEnabled = (savedSound === '1');
             updateSoundBtnUI();
@@ -2044,7 +2280,21 @@
 
             const customWsInput = document.getElementById('custom-ws-url');
             if (customWsInput) customWsInput.value = getDefaultWsUrl();
+
+            const settingsInput = document.getElementById('settings-ws-url');
+            if (settingsInput) settingsInput.value = getDefaultWsUrl();
+
             connectWS(getDefaultWsUrl());
+            startAutoMusic();
+        }
+
+        /* Save Settings WS */
+        function saveSettingsWs() {
+            const val = document.getElementById('settings-ws-url').value.trim();
+            if (val) {
+                localStorage.setItem('custom_ws_url', val);
+                connectWS(val);
+            }
         }
 
         /* WebSocket Connection Management */
@@ -2121,7 +2371,7 @@
             if (activeFilterTab === 'online') {
                 filtered = filtered.filter(u => u.online);
             } else if (activeFilterTab === 'offline') {
-                filtered = filtered.filter(u => !u.online);
+                filtered = filtered.filter(u => !u.offline);
             }
 
             badge.textContent = filtered.length;
