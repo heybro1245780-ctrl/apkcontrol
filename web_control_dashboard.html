@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADI CHEATS - Ultra Control Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #080c14;
+            --card-bg: rgba(17, 24, 39, 0.75);
+            --card-border: rgba(56, 189, 248, 0.15);
+            --card-border-hover: rgba(56, 189, 248, 0.4);
+            --accent-cyan: #00f2fe;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
+            --text-main: #f3f4f6;
+            --text-sub: #9ca3af;
+            --glass-blur: blur(12px);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #111827 0%, #080c14 100%);
+            min-height: 100vh;
+            color: var(--text-main);
+            padding: 24px;
+            overflow-x: hidden;
+        }
+
+        /* Top Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 28px;
+            background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .title-group {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 20px;
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ffffff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.5px;
+        }
+
+        .header-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .meta-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(31, 41, 55, 0.6);
+            padding: 8px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--accent-red);
+            box-shadow: 0 0 8px var(--accent-red);
+            transition: all 0.3s ease;
+        }
+
+        .status-dot.online {
+            background-color: var(--accent-green);
+            box-shadow: 0 0 10px var(--accent-green);
+        }
+
+        .config-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .config-btn:hover {
+            background: rgba(0, 242, 254, 0.15);
+            border-color: var(--accent-cyan);
+            color: #fff;
+        }
+
+        /* Connection Config Bar */
+        .config-panel {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            gap: 12px;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .config-panel.active {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .config-panel input {
+            flex: 1;
+            min-width: 280px;
+            padding: 10px 14px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+
+        .btn-apply {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #000;
+            font-weight: 700;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-apply:hover { opacity: 0.9; }
+
+        /* Quick Controls & Search Bar */
+        .toolbar {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .preset-bar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .preset-btn {
+            background: rgba(31, 41, 55, 0.8);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .preset-btn.rage {
+            border-color: rgba(239, 68, 68, 0.4);
+            background: rgba(239, 68, 68, 0.1);
+        }
+        .preset-btn.rage:hover {
+            background: rgba(239, 68, 68, 0.25);
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .preset-btn.legit {
+            border-color: rgba(16, 185, 129, 0.4);
+            background: rgba(16, 185, 129, 0.1);
+        }
+        .preset-btn.legit:hover {
+            background: rgba(16, 185, 129, 0.25);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .preset-btn.reset {
+            border-color: rgba(156, 163, 175, 0.4);
+        }
+        .preset-btn.reset:hover {
+            background: rgba(156, 163, 175, 0.2);
+        }
+
+        .search-box {
+            position: relative;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 16px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--accent-cyan);
+        }
+
+        /* Main Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 20px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: var(--card-border-hover);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 14px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .card-title {
+            font-size: 17px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+        }
+
+        .card-title-icon {
+            font-size: 18px;
+        }
+
+        .badge-count {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            color: var(--text-sub);
+        }
+
+        /* Feature Toggles */
+        .feature-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .feature-item:hover {
+            background: rgba(31, 41, 55, 0.6);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .feature-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .feature-code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-sub);
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 46px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #374151;
+            transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
+
+        input:checked + .slider {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+
+        /* Action Buttons */
+        .admin-action-btn {
+            width: 100%;
+            padding: 12px 16px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-crash {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3);
+        }
+        .btn-crash:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-freeze {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+        }
+        .btn-freeze:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-disable {
+            background: rgba(55, 65, 81, 0.8);
+            color: #e5e7eb;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .btn-disable:hover {
+            background: rgba(75, 85, 99, 1);
+        }
+
+        .msg-box {
+            margin-top: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .msg-box input {
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.8);
+            color: white;
+            font-size: 13px;
+            outline: none;
+        }
+        .msg-box input:focus { border-color: var(--accent-blue); }
+
+        .btn-send-msg {
+            background: linear-gradient(135deg, var(--accent-blue), #2563eb);
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Terminal Console */
+        .terminal-card {
+            background: #090d16;
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 20px;
+        }
+
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .terminal-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .clear-log-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-sub);
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .clear-log-btn:hover { color: #fff; border-color: rgba(255, 255, 255, 0.3); }
+
+        .terminal-body {
+            height: 160px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .log-entry {
+            line-height: 1.4;
+            word-break: break-all;
+        }
+
+        .log-time { color: #6b7280; }
+        .log-type-send { color: var(--accent-cyan); }
+        .log-type-recv { color: var(--accent-green); }
+        .log-type-sys { color: var(--accent-amber); }
+        .log-type-err { color: var(--accent-red); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 14px; }
+            .header { flex-direction: column; align-items: flex-start; gap: 14px; }
+            .toolbar { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation / Status Header -->
+    <header class="header">
+        <div class="title-group">
+            <div class="logo-icon">ADI</div>
+            <div>
+                <div class="title">REMOTE CONTROL DASHBOARD</div>
+                <div style="font-size: 12px; color: var(--text-sub);">Real-time APK Controller & Command Center</div>
+            </div>
+        </div>
+
+        <div class="header-meta">
+            <div class="meta-pill">
+                <span id="status-dot" class="status-dot"></span>
+                <span id="connection-text">Disconnected</span>
+            </div>
+
+            <div class="meta-pill">
+                <span>👥 APK Clients:</span>
+                <span id="active-clients-count" style="color: var(--accent-cyan); font-weight: 700;">0</span>
+            </div>
+
+            <div class="meta-pill">
+                <span>⚡ Latency:</span>
+                <span id="ping-text" style="color: var(--accent-green); font-weight: 600;">-- ms</span>
+            </div>
+
+            <button class="config-btn" onclick="toggleConfigPanel()">
+                ⚙️ Server Settings
+            </button>
+        </div>
+    </header>
+
+    <!-- Hidden Server Configuration Panel -->
+    <div id="config-panel" class="config-panel">
+        <label style="font-size: 13px; color: var(--text-sub); width: 100%;">WebSocket Server Target URL:</label>
+        <input type="text" id="custom-ws-url" placeholder="e.g. ws://192.168.1.10:8080 or wss://your-domain.com">
+        <button class="btn-apply" onclick="saveAndReconnect()">Save & Reconnect</button>
+        <button class="config-btn" onclick="resetToDefaultUrl()">Auto Detect</button>
+        <div style="width: 100%; font-size: 12px; color: var(--accent-amber); margin-top: 4px;">
+            ℹ️ Tip: If hosted over HTTPS (SSL), your WebSocket URL must begin with <strong>wss://</strong>.
+        </div>
+    </div>
+
+    <!-- Quick Actions Toolbar & Search -->
+    <div class="toolbar">
+        <div class="preset-bar">
+            <button class="preset-btn rage" onclick="applyPreset('rage')">⚡ Rage Mode</button>
+            <button class="preset-btn legit" onclick="applyPreset('legit')">🛡️ Legit Mode</button>
+            <button class="preset-btn reset" onclick="applyPreset('off')">🛑 Disable All</button>
+        </div>
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="🔍 Search features..." oninput="filterFeatures()">
+        </div>
+    </div>
+
+    <!-- Dashboard Feature Cards -->
+    <div class="dashboard-grid">
+
+        <!-- Combat & Targeting Card -->
+        <div class="card" data-category="combat">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-title-icon">🎯</span> Combat & Targeting
+                </div>
+                <span class="badge-count">7 Features</span>
+            </div>
+
+            <div class="feature-item" data-name="aimbot lock">
+                <div class="feature-info">
+                    <span class="feature-name">Aimbot Lock</span>
+                    <span class="feature-code">CODE: 501</span>
+                </div>
+                <label class="switch"><input type="checkbox" id="code-501" onchange="sendFeature(501, this.checked)"><span class="slider"></span></label>
+            </div>
+
+            <div class="feature-item" data-name="silent aim aimkill">
+                <div class="feature-info">
+                    <span class="feature-name">Silent Aim / AimKill</span>
+                    <span class="feature-code">CODE: 502</span>
+                </div>
+                <label class="switch"><input type="checkbox" id="code-502" onchange="sendFeature(502, this.checked)"><span class="slider"></span></label>
+            </div>
+
+            <div class="feature-item" data-name="target all enemies">
+                <div class="feature-info">
+                    <span class="feature-name">Target All Enemies</span>
+                    <span class="feature-code">CODE: 528</span>
+                </div>
+                <label class="switch"><input type="checkbox" id="code-528" onchange="sendFeature(528, this.checked)"><span class="slider"></span></label>
+            </div>
+
+            <div class="feature-item" data-name="safe aimkill">
+                <div class="feature-info">
+                    <span class="feature-name">Safe AimKill</span>
+                    <span class="feature-code">CODE: 512</span>
+                </div>
+                <label class="switch"><input type="checkbox" id="code-512" onchange="sendFeature(512, this.checked)"><span class="slider"></span></label>
+            </div>
+
+            <div class="feature-item" data-name="down aimkill">
+                <div class="feature-info">
+                    <span class="feature-name">Down AimKill</span>
+                    <span class="feature-code">CODE: 504</span>
+                </div>
+                <label class="switch"><input type="checkbox" id="code-504" onchange="sendFeature(504, this.checked)"><span class="slider"></span></label>
+            </div>
+
+            <div class="feature-item" data-name="dive kill">
+                <div class="feature-info">
+                    <span class="feature-name">Dive Kill New</span>
+                    <span class="feature-code">CODE: 5660</span>
+                </div>
+                <label class="switch"><input type="checkbox" id="code-5660" onchange="sendFeature(5660, this.checked)"><span class="slider"></span></label>
+            </div>
+
+            <div class="feature-item" data-name="aim body lock">
+                <div class="feature-info">
+                    <span class="feature-name">Aim Body Lock</span>
+                    <span class="feature-code">CODE: 500</span>
+                </div>
+                <label class="switch"><input type="checkbox" id="code-500" onchange="sendFeature(500, this.checked)"><span class="slider"></span></label>
+            </div>
+        </div>
+
+        <!-- Exploits & Movement Card -->
+        <div class="card" data-category="movement">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-title-icon">⚡</span> Exploits & Movement
+                </div>
+                <span class="badge-count">5 Features</span>
+            </div>
+
+            <div class="feature-item" data-name="invisible player football">
+                <div class="feature-info">
+                    <span class="feature-name">Invisible Player / Football</span>
+                    <span class="feature-code">CODE: 513</span>
+                </div>
+                <label class="switch"><input type="checkbox" id="code-513" onchange="sendFeature(513, this.checked)"><span class="slider"></span></label>
+            </div>
+
+            <div class="feature-item" data-name="80 unit teleport fly">
+                <div class="feature-info">
+                    <span class="feature-name">80-Unit Teleport Fly</span>
+                    <span class="feature-code">CODE: 5659</span>
+                </div>
+                <label class="switch"><input type="checkbox" id="code-5659" onchange="sendFeature(5659, this.checked)"><span class="slider"></span></label>
+            </div>
+
+            <div class="feature-item" data-name="speed hack extension">
+                <div class="feature-info">
+                    <span class="feature-name">Speed Hack Extension</span>
+                    <span class="feature-code">CODE: 1060</span>
+                </div>
+                <label class="switch"><input type="checkbox" id="code-1060" onchange="sendFeature(1060, this.checked)"><span class="slider"></span></label>
+            </div>
+
+            <div class="feature-item" data-name="auto jump">
+                <div class="feature-info">
+                    <span class="feature-name">Auto Jump</span>
+                    <span class="feature-code">CODE: 522</span>
+                </div>
+                <label class="switch"><input type="checkbox" id="code-522" onchange="sendFeature(522, this.checked)"><span class="slider"></span></label>
+            </div>
+
+            <div class="feature-item" data-name="ghost mode">
+                <div class="feature-info">
+                    <span class="feature-name">Ghost Player Mode</span>
+                    <span class="feature-code">CODE: 505</span>
+                </div>
+                <label class="switch"><input type="checkbox" id="code-505" onchange="sendFeature(505, this.checked)"><span class="slider"></span></label>
+            </div>
+        </div>
+
+        <!-- ESP & Visuals Card -->
+        <div class="card" data-category="visuals">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-title-icon">👁️</span> Visuals & ESP
+                </div>
+                <span class="badge-count">4 Features</span>
+            </div>
+
+            <div class="feature-item" data-name="wallhack esp box">
+                <div class="feature-info">
+                    <span class="feature-name">2D Box ESP</span>
+                    <span class="feature-code">CODE: 101</span>
+                </div>
+                <label class="switch"><input type="checkbox" id="code-101" onchange="sendFeature(101, this.checked)"><span class="slider"></span></label>
+            </div>
+
+            <div class="feature-item" data-name="esp line tracer">
+                <div class="feature-info">
+                    <span class="feature-name">Line Tracer ESP</span>
+                    <span class="feature-code">CODE: 102</span>
+                </div>
+                <label class="switch"><input type="checkbox" id="code-102" onchange="sendFeature(102, this.checked)"><span class="slider"></span></label>
+            </div>
+
+            <div class="feature-item" data-name="health bar esp">
+                <div class="feature-info">
+                    <span class="feature-name">Health Bar ESP</span>
+                    <span class="feature-code">CODE: 103</span>
+                </div>
+                <label class="switch"><input type="checkbox" id="code-103" onchange="sendFeature(103, this.checked)"><span class="slider"></span></label>
+            </div>
+
+            <div class="feature-item" data-name="distance skeleton esp">
+                <div class="feature-info">
+                    <span class="feature-name">Distance & Name ESP</span>
+                    <span class="feature-code">CODE: 104</span>
+                </div>
+                <label class="switch"><input type="checkbox" id="code-104" onchange="sendFeature(104, this.checked)"><span class="slider"></span></label>
+            </div>
+        </div>
+
+        <!-- Remote Admin Authority Card -->
+        <div class="card" data-category="admin">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-title-icon">🔒</span> Remote Admin Authority
+                </div>
+                <span class="badge-count">4 Controls</span>
+            </div>
+
+            <button class="admin-action-btn btn-crash" onclick="sendFeature(9999, 1)">
+                🚨 FORCE REMOTE CRASH APK
+            </button>
+            <button class="admin-action-btn btn-freeze" onclick="sendFeature(9998, 1)">
+                ❄️ REMOTE FREEZE & LOCK APK
+            </button>
+            <button class="admin-action-btn btn-disable" onclick="sendFeature(9997, 1)">
+                🛡️ DISABLE ALL CHEATS
+            </button>
+
+            <div class="msg-box">
+                <input type="text" id="alert-msg" placeholder="Enter broadcast message text...">
+                <button class="admin-action-btn btn-send-msg" onclick="sendBroadcastMsg()">
+                    📢 BROADCAST TO ALL APKS
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Live Terminal Activity Feed -->
+    <div class="terminal-card">
+        <div class="terminal-header">
+            <div class="terminal-title">
+                <span>💻</span> REAL-TIME COMMAND FEED & SOCKET LOGS
+            </div>
+            <button class="clear-log-btn" onclick="clearLogs()">Clear Console</button>
+        </div>
+        <div id="terminal-body" class="terminal-body">
+            <div class="log-entry log-type-sys">[SYSTEM] Dashboard initialized. Attempting WebSocket connection...</div>
+        </div>
+    </div>
+
+    <script>
+        let ws = null;
+        let pingStartTime = 0;
+        let pingInterval = null;
+
+        // Auto-detect optimal WebSocket URL for any host environment
+        function getDefaultWsUrl() {
+            const stored = localStorage.getItem('custom_ws_url');
+            if (stored && stored.trim() !== '') {
+                return stored.trim();
+            }
+
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            let host = window.location.host;
+            
+            // If hosted as a raw file or without host port in dev, default to port 8080
+            if (!host || window.location.protocol === 'file:') {
+                return 'ws://localhost:8080';
+            }
+            if (!host.includes(':') && window.location.port === '') {
+                // If running on custom static domain without port specified, append standard socket path or :8080
+                return `${protocol}//${window.location.hostname}:8080`;
+            }
+
+            return `${protocol}//${host}`;
+        }
+
+        function initDashboard() {
+            const urlInput = document.getElementById('custom-ws-url');
+            const targetUrl = getDefaultWsUrl();
+            urlInput.value = targetUrl;
+            connectWS(targetUrl);
+        }
+
+        function connectWS(serverUrl) {
+            if (ws) {
+                try { ws.close(); } catch(e){}
+            }
+
+            logMessage(`Connecting to server: ${serverUrl}`, 'sys');
+            updateStatusUI('connecting', 'Connecting...');
+
+            try {
+                ws = new WebSocket(serverUrl);
+            } catch (err) {
+                logMessage(`WebSocket Creation Failed: ${err.message}`, 'err');
+                updateStatusUI('offline', 'Error');
+                setTimeout(() => connectWS(serverUrl), 4000);
+                return;
+            }
+
+            ws.onopen = () => {
+                logMessage(`Connected successfully to ${serverUrl}`, 'recv');
+                updateStatusUI('online', 'Live Connected');
+                startPingInterval();
+            };
+
+            ws.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    
+                    if (data.type === 'pong') {
+                        const latency = Date.now() - pingStartTime;
+                        document.getElementById('ping-text').textContent = `${latency} ms`;
+                        return;
+                    }
+
+                    if (data.type === 'stats') {
+                        if (data.onlineCount !== undefined) {
+                            document.getElementById('active-clients-count').textContent = data.onlineCount;
+                        }
+                        return;
+                    }
+
+                    if (data.type === 'init_state') {
+                        logMessage(`Received feature state sync from server. Active clients: ${data.onlineCount || 1}`, 'recv');
+                        if (data.onlineCount !== undefined) {
+                            document.getElementById('active-clients-count').textContent = data.onlineCount;
+                        }
+                        if (data.states) {
+                            syncUIStates(data.states);
+                        }
+                        return;
+                    }
+
+                    logMessage(`[RECEIVED] ${JSON.stringify(data)}`, 'recv');
+
+                    // If incoming feature sync packet
+                    if (data.type === 'feature' && data.code !== undefined) {
+                        const checkbox = document.getElementById(`code-${data.code}`);
+                        if (checkbox) {
+                            checkbox.checked = data.value === 1;
+                        }
+                    }
+                } catch (e) {
+                    logMessage(`Raw Message Received: ${event.data}`, 'recv');
+                }
+            };
+
+            ws.onclose = (evt) => {
+                stopPingInterval();
+                updateStatusUI('offline', 'Disconnected');
+                document.getElementById('ping-text').textContent = '-- ms';
+                logMessage(`Connection closed (Code: ${evt.code}). Reconnecting in 3s...`, 'err');
+                setTimeout(() => {
+                    connectWS(getDefaultWsUrl());
+                }, 3000);
+            };
+
+            ws.onerror = (err) => {
+                logMessage(`WebSocket connection error. Make sure server is running and accessible.`, 'err');
+            };
+        }
+
+        function startPingInterval() {
+            stopPingInterval();
+            pingInterval = setInterval(() => {
+                if (ws && ws.readyState === WebSocket.OPEN) {
+                    pingStartTime = Date.now();
+                    ws.send(JSON.stringify({ type: 'ping' }));
+                }
+            }, 5000);
+        }
+
+        function stopPingInterval() {
+            if (pingInterval) clearInterval(pingInterval);
+        }
+
+        function sendFeature(code, val) {
+            const numericVal = val ? 1 : 0;
+            const payload = { type: 'feature', code: code, value: numericVal };
+            sendPayload(payload);
+        }
+
+        function sendBroadcastMsg() {
+            const input = document.getElementById('alert-msg');
+            const text = input.value.trim();
+            if (!text) {
+                alert('Please enter a message to broadcast.');
+                return;
+            }
+            const payload = { type: 'message', text: text, code: 9996 };
+            sendPayload(payload);
+            input.value = '';
+        }
+
+        function sendPayload(payload) {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify(payload));
+                logMessage(`[SENT] ${JSON.stringify(payload)}`, 'send');
+            } else {
+                logMessage(`[FAILED] Cannot send, WebSocket is not connected!`, 'err');
+                alert('WebSocket is disconnected. Please verify server status.');
+            }
+        }
+
+        function applyPreset(mode) {
+            const presets = {
+                rage: { 501: 1, 502: 1, 528: 1, 513: 1, 5659: 1, 1060: 1, 101: 1, 102: 1 },
+                legit: { 501: 1, 512: 1, 101: 1, 103: 1, 502: 0, 5659: 0, 1060: 0, 513: 0 },
+                off: { 501: 0, 502: 0, 528: 0, 512: 0, 504: 0, 5660: 0, 500: 0, 513: 0, 5659: 0, 1060: 0, 522: 0, 505: 0, 101: 0, 102: 0, 103: 0, 104: 0 }
+            };
+
+            const selected = presets[mode];
+            if (!selected) return;
+
+            syncUIStates(selected);
+
+            const payload = { type: 'preset', mode: mode, states: selected };
+            sendPayload(payload);
+        }
+
+        function syncUIStates(statesObj) {
+            for (let code in statesObj) {
+                const el = document.getElementById(`code-${code}`);
+                if (el) {
+                    el.checked = statesObj[code] === 1;
+                }
+            }
+        }
+
+        function updateStatusUI(state, text) {
+            const dot = document.getElementById('status-dot');
+            const txt = document.getElementById('connection-text');
+            txt.textContent = text;
+
+            if (state === 'online') {
+                dot.className = 'status-dot online';
+            } else {
+                dot.className = 'status-dot';
+            }
+        }
+
+        function toggleConfigPanel() {
+            const panel = document.getElementById('config-panel');
+            panel.classList.toggle('active');
+        }
+
+        function saveAndReconnect() {
+            const val = document.getElementById('custom-ws-url').value.trim();
+            if (val) {
+                localStorage.setItem('custom_ws_url', val);
+                connectWS(val);
+                toggleConfigPanel();
+            }
+        }
+
+        function resetToDefaultUrl() {
+            localStorage.removeItem('custom_ws_url');
+            document.getElementById('custom-ws-url').value = getDefaultWsUrl();
+            saveAndReconnect();
+        }
+
+        function filterFeatures() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const items = document.querySelectorAll('.feature-item');
+            
+            items.forEach(item => {
+                const text = item.getAttribute('data-name') || '';
+                const code = item.querySelector('.feature-code')?.textContent.toLowerCase() || '';
+                if (text.includes(query) || code.includes(query)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function logMessage(msg, type = 'sys') {
+            const body = document.getElementById('terminal-body');
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-type-${type}`;
+            const timestamp = new Date().toLocaleTimeString();
+            entry.innerHTML = `<span class="log-time">[${timestamp}]</span> ${escapeHtml(msg)}`;
+            body.appendChild(entry);
+            body.scrollTop = body.scrollHeight;
+        }
+
+        function clearLogs() {
+            document.getElementById('terminal-body').innerHTML = '';
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        window.onload = initDashboard;
+    </script>
+</body>
+</html>
